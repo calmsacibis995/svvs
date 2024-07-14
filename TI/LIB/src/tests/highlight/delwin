@@ -1,0 +1,26 @@
+#
+# @(#)delwin	3.1 (SVVS) 12/1/86
+#
+# highlighting - delwin
+#
+
+abstract("highlight: delwin");
+start
+	# create a window, barber pole to it.
+	# then delete the window and refresh stdscr
+	testing("create, fill, adn delete a window. then refresh stdscr");
+	start
+	for (i = 10; i >= 1; i--)
+	{
+		win = newwin(i * 2, i * 2, 0, 0);
+		wmove(win, 0, 0);
+		wattrset(win, A_BOLD);
+		wbarber(win, i * 2, i * 2, 'A');
+		wrefresh(win);
+		expect();
+		wattrset(win, 0);
+		delwin(win);
+		refresh();
+	}
+	finis
+finis

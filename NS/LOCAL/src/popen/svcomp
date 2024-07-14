@@ -1,0 +1,24 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% pop0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/pop0 pop0.o %SVLIBS% %LIBS%
+rm pop0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% pop1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/pop1 pop1.o %SVLIBS% %LIBS%
+rm pop1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% pop2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/pop2 pop2.o %SVLIBS% %LIBS%
+rm pop2.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% pop3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/pop3 pop3.o %SVLIBS% %LIBS%
+rm pop3.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% popen.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/popen popen.o %SVLIBS% %LIBS%
+rm popen.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% popen0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/popen0 popen0.o %SVLIBS% %LIBS%
+rm popen0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% popen1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/popen1 popen1.o %SVLIBS% %LIBS%
+rm popen1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% popen2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/popen2 popen2.o %SVLIBS% %LIBS%
+rm popen2.o

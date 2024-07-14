@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% bsearch.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/bsearch bsearch.o %SVLIBS% %LIBS%
+rm bsearch.o

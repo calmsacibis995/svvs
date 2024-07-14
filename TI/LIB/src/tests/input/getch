@@ -1,0 +1,183 @@
+#
+# @(#)getch	3.2 (SVVS) 12/10/86
+#
+# input: getch, wgetch, mvgetch, mvwgetch
+#
+
+abstract("input: getch");
+start
+	prep("call 'cbreak()' to insure 'getch()'-type routines return");
+	prep("after a single character has been input");
+	start
+		cbreak();
+	finis
+
+	# put '12345' into input[]
+	prep("put '12345' onto the input buffer");
+	start
+	for (j = 0; j < 5; j++)
+	{
+		input[j] = j + '1';
+	}
+	finis
+
+	testing("get a character from stdscr five times and compare it.");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		# get a char from stdscr five times and compare it
+		# to the expected input in the input array
+		move(i, 0);
+		for (j = 0; j < 5; j ++)
+		{
+			keyboard("%c", input[j]);
+			ch = getch();
+			expect();
+			if (ch != input[j])
+			{
+				error("ch = /%c/", ch);
+				break;
+			}
+		}
+	}
+	finis
+	cleanup("clear and refresh");
+	start
+	clear();
+	refresh();
+	finis
+
+	# put 'LMNOP' into input[]
+	for (j = 0; j < 5; j++)
+	{
+		input[j] = 'L' + j;
+	}
+
+	testing("get a character from stdscr with mvgetch and compare it.");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		# get a char (mvgetch) from stdscr five times
+		# and compare it to the expected input
+		for (j = 0; j < 5; j++)
+		{
+			keyboard("%c", input[j]);
+			ch = mvgetch(i, j);
+			expect();
+			if (ch != 'L' + j)
+			{
+				error("ch = /%c/", ch);
+				break;
+			}
+		}
+	}
+	finis
+	clear();
+	refresh();
+
+	# input contains 'abcdefghij'
+	prep("put ten characters into input buffer. create two small windows.");
+	start
+	for (k = 0; k < 10; k++)
+	{
+		input[k] = k + 'a';
+	}
+	k = 0;
+	win1 = newwin(LINES / 4, COLS / 8, 0, 0);
+	win2 = newwin(LINES / 4, COLS / 8, LINES / 2, COLS / 4);
+	finis
+
+	testing("alternate getting a character from two windows with");
+	testing("wgetch and compare it.");
+	start 
+	for (i = 0; i < LINES / 4; i++)
+	{
+		# alternate getting chars from win1 and win2
+		# comparing the char received to what is expected
+		for (j = 0; j < 5; j++)
+		{
+			keyboard("%c", input[k]);
+
+			wmove(win1, i, j + 4);
+			ch = wgetch(win1);
+			expect();
+			if (ch != input[k])
+			{
+				error("ch = /%c/", ch);
+				break;
+			}
+				break;
+
+			k = (k + 1) % 10;
+
+			keyboard("%c", input[k]);
+
+			wmove(win2, i, j + 4);
+			ch = wgetch(win2);
+			expect();
+			if (ch != input[k])
+			{
+				error("ch = /%c/", ch);
+				break;
+			}
+				break;
+
+			k = (k + 1) % 10;
+		}
+	}
+	finis
+	cleanup("clear and refresh both windows");
+	start
+	wclear(win1);
+	wrefresh(win1);
+	wclear(win2);
+	wrefresh(win2);
+	finis
+
+	prep("put ten more characters into the input buffer");
+	start
+	for (k = 0; k < 10; k++)
+	{
+		input[k] = k + 'a';
+	}
+	k = 0;
+	finis
+
+	testing("alternate getting a character from two windows with");
+	testing("mvwgetch and compare it.");
+	start
+	for (i = 0; i < LINES / 4; i++)
+	{
+		# alternate getting chars from win1 and win2
+		# comparing the char received to what is expected
+		for (j = 0; j < 5; j++)
+		{
+			keyboard("%c", input[k]);
+
+			ch = mvwgetch(win1, i, j + 4);
+			expect();
+			if (ch != input[k])
+			{
+				error("ch = /%c/", ch);
+				break;
+			}
+				break;
+
+			k = (k + 1) % 10;
+
+			keyboard("%c", input[k]);
+
+			ch = mvwgetch(win2, i, j + 4);
+			expect();
+			if (ch != input[k])
+			{
+				error("ch = /%c/", ch);
+				break;
+			}
+				break;
+
+			k = (k + 1) % 10;
+		}
+	}
+	finis
+finis

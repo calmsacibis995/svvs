@@ -1,0 +1,2 @@
+tielib.a sv_tools.a sv_base.a sv_tie.a sv_sys.a 
+src/testtput svcomp

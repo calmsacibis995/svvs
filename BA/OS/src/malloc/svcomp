@@ -1,0 +1,30 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% calloc.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/calloc calloc.o %SVLIBS% %LIBS%
+rm calloc.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% calloc1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/calloc1 calloc1.o %SVLIBS% %LIBS%
+rm calloc1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% free.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/free free.o %SVLIBS% %LIBS%
+rm free.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mallinfo.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mallinfo mallinfo.o %SVLIBS% %LIBS%
+rm mallinfo.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% malloc.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/malloc malloc.o %SVLIBS% %LIBS%
+rm malloc.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% malloc0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/malloc0 malloc0.o %SVLIBS% %LIBS%
+rm malloc0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% malloc1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/malloc1 malloc1.o %SVLIBS% %LIBS%
+rm malloc1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mallopt.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mallopt mallopt.o %SVLIBS% %LIBS%
+rm mallopt.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% realloc.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/realloc realloc.o %SVLIBS% %LIBS%
+rm realloc.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% realloc1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/realloc1 realloc1.o %SVLIBS% %LIBS%
+rm realloc1.o

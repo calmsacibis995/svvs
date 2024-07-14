@@ -1,0 +1,3 @@
+ar -cr bless.a init.o apply.o extern.o print.o push.o function1.o function2.o function3.o error.o bless.o uses_sl.o
+mv bless.a %DEST%/lib/bless.a
+rm -f init.o apply.o extern.o print.o push.o function1.o function2.o function3.o error.o bless.o uses_sl.o

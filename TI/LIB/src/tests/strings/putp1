@@ -1,0 +1,66 @@
+#
+# @(#)putp1	3.1 (SVVS) 12/1/86
+#
+# ascii char sequences without padding using putp()
+#
+#NOFINALEXPECT
+
+abstract("strings: putp()");
+start
+	s = "";
+	ctrlq = 17;
+	ctrls = 19;
+	testing("putp of all ascii characters");
+	start
+		# put a single char with putp
+		for (i = 2; i < 127; i++)
+		{
+			# Ignore ^S, and ^q (xon, xoff)
+			if ( i == ctrlq || i == ctrls )
+				continue;
+			sprintf(tmp, "%s%c", s, i);
+			s = tmp;
+		}
+		putp(s);
+		expect_putp(s);
+	finis
+
+	# put two chars
+	testing("putp using all combinations of two printing characters");
+	start
+		for (i = 2; i < 60; i++)
+		{
+			# Ignore ^S, and ^q (xon, xoff)
+			if ( i == ctrlq || i == ctrls )
+				continue;
+
+			s = "";
+			for (j = 62; j < 127; j++)
+			{
+				sprintf(tmp, "%s%c%c", s, i, j);
+				s = tmp;
+			}
+			putp(s);
+			expect_putp(s);
+		}
+	finis
+
+	# put string of four chars
+	testing("putp of strings made up of four printing characters");
+	start
+		for(i = 2; i < 60; i++)
+		{
+			s = "";
+			# Ignore ^S, and ^q (xon, xoff)
+			if ( i == ctrlq || i == ctrls )
+				continue;
+			for (j = 62; j < 127; j++)
+			{
+				sprintf(tmp, "%s%c%c%c%c", s, i, j, j, i);
+				s = tmp;
+			}
+			putp(s);
+			expect_putp(s);
+		}
+	finis
+finis

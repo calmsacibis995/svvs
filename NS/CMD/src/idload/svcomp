@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% idload.c
+%COMP% %OPTS% -o %DEST%/NS/CMD/bin/idload idload.o %SVLIBS% %LIBS%
+rm idload.o

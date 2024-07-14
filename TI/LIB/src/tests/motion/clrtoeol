@@ -1,0 +1,43 @@
+#
+# @(#)clrtoeol	3.1 (SVVS) 12/1/86
+#
+# cursor motion:
+#
+abstract("cursor motion - clrtoeol");
+start
+	iterations = LINES / 2;
+	colnum = 0;
+
+	testing("in a loop, fill the screen and then clrtoeol");
+	testing("at different locations");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		move(0,0);
+	
+		barber('a');
+	
+		move(i * 2, colnum);
+	
+		clrtoeol();
+	
+		colnum = colnum + 2;
+		refresh();
+		expect();
+	}
+	finis
+
+	move(0,0);
+	barber('a');
+	testing("fill the screen, then use clrtoeol at different locations");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		move(i * 2, colnum);
+		clrtoeol();
+		colnum = colnum + 2;
+		refresh();
+		expect();
+	}
+	finis
+finis

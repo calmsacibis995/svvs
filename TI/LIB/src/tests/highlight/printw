@@ -1,0 +1,140 @@
+#
+# @(#)printw	3.1 (SVVS) 12/1/86
+#
+# highlighting - printw, wprintw etc.
+#
+
+abstract("highlight: printw");
+start
+	a = "a string";
+	j = 0;
+	# put the string once to each line - every other time 
+	# with the DIM attribute
+	testing("printw every other string in dim mode");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		if (i % 2)
+			attron(A_DIM);
+		move(i, j);
+		printw("%s %2d", a, i);
+		refresh();
+		expect();
+		if ((j + 23) < COLS)
+			j += 12;
+		else
+			j = 0;
+		attroff(A_DIM);
+	}
+	finis
+
+	clear();
+	refresh();
+	j = 0;
+	# start at the bottom line and put the position on the
+	# screen to each line once - every other string being
+	# in STANDOUT mode
+	testing("mvprintw the current position, every other in standout");
+	start
+	for (i = LINES - 1; i >= 0; i--)
+	{
+		if (i % 2)
+			attron(A_STANDOUT);
+		if ((j + 12) < COLS)
+			j += 6;
+		else
+			j = 0;
+		mvprintw(i, j, "%2d,%2d", i, j);
+		refresh();
+		attroff(A_STANDOUT);
+		expect();
+	}
+	finis
+
+	clear();
+	refresh();
+
+	prep("create two half-widht windows, side-by-side");
+	start
+	win1 = newwin(LINES, COLS / 2, 0, 0);
+	win2 = newwin(LINES, COLS / 2, 0, COLS / 2);
+	finis
+
+	# put the position in the window to two windows
+	# alternating UNDERLINE mode with no attributes.
+	# start at the bottom of win2 and the top of win1.
+	j = 0;
+	testing("put the position to each window, alternating underline mode");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		if (i % 2)
+		{
+			wattron(win1, A_UNDERLINE);
+			wattrset(win2, 0);
+		}
+		else
+		{
+			wattrset(win1, 0);
+			wattron(win2, A_UNDERLINE);
+		}
+		wmove(win1, i, j);
+		wprintw(win1, "%2d,%2d", i, j);
+		touchwin(win1);
+		wrefresh(win1);
+		wmove(win2, LINES - 1 - i, j);
+		wprintw(win2, "%2d,%2d", LINES - 1 - i, j);
+		touchwin(win2);
+		wrefresh(win2);
+		expect();
+		if ((j + 12) < (COLS / 2))
+			j += 6;
+		else
+			j = 0;
+	}
+	finis
+
+	delwin(win1);
+	delwin(win2);
+	clear();
+	refresh();
+	c = 'w';
+
+	prep("create two windows, one above the other");
+	start
+	win1 = newwin(LINES / 2, COLS, 0, 0);
+	win2 = newwin(LINES / 2, COLS, LINES / 2, 0);
+	i = 0;
+	finis
+	# put a character in each column - advancing the line
+	# by two each time - start at the bottom of win2 and
+	# top of win1.
+	testing("put a character in each column, skipping every other line.");
+	testing("start at the bottom of window2 and the top of window1");
+	start
+	for (j = 0; j < COLS; j++)
+	{
+		if (j % 2)
+		{
+			wattron(win1, A_BLINK | A_UNDERLINE);
+			wattrset(win2, 0);
+		}
+		else
+		{
+			wattrset(win1, 0);
+			wattron(win2, A_UNDERLINE | A_BOLD);
+		}
+		mvwprintw(win1, i, j, "%c", c);
+		touchwin(win1);
+		wrefresh(win1);
+		mvwprintw(win2, LINES / 2 - 1 - i, j, "%c", c);
+		touchwin(win2);
+		wrefresh(win2);
+		expect();
+		if ((i + 2) < (LINES / 2))
+			i += 2;
+		else
+			i = 0;
+	}
+	finis
+finis

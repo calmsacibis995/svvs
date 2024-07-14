@@ -1,0 +1,85 @@
+#
+# @(#)addch	3.1 (SVVS) 12/1/86
+#
+# cursor motion: addch
+#
+abstract("cursor motion - addch");
+start
+	iterations = LINES / 2;
+	colnum = 0;
+
+	testing("adding newlines to a filled stdscr at");
+	testing("different columns and rows");
+	start
+	for (i = 0; i < iterations; i++)
+	{
+		move(0, 0);
+		barber('a');
+		move(i * 2, colnum);
+		addch('\n');
+  		colnum = colnum + 2;
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("adding characters to a blank screen at");
+	testing("all of the right edge positions");
+	start
+	for (i = 0; i < LINES - 1; i++)
+	{
+		move(i, COLS - 1);
+		refresh();
+		addch('a');
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("adding characters to a blank screen at");
+	testing("all of the left edge positions");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		move(i, 0);
+		refresh();
+		addch('a');
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("adding characters to a blank screen at");
+	testing("all of the top edge positions");
+	start
+	for (i = 0; i < COLS; i++)
+	{
+		move(0, i);
+		refresh();
+		addch('a');
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("adding characters to a blank screen at");
+	testing("all of the bottom edge positions");
+	start
+	for (i = 0; i < COLS; i++)
+	{
+		move(LINES - 1, i);
+		refresh();
+		addch('a');
+		refresh();
+		expect();
+	}
+	finis
+finis

@@ -1,0 +1,43 @@
+#
+# @(#)flash	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining, flash
+#
+
+abstract("highlight: flash");
+start
+	ch = 'l';
+	# barber pole to stdscr and flash it - ten times
+	testing("fill stdscr, then flash ten times");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		move(0, 0);
+		barber(ch + i);
+		refresh();
+		flash();
+		expect();
+	}
+	finis
+
+	clear();
+	refresh();
+	prep("create a small window");
+	start
+	win = newwin(LINES / 4, COLS / 4, LINES / 2, COLS / 2);
+	finis
+
+	# barber pole to win and flash - five times
+	testing("fill window, then flash ten times");
+	start
+	for (i = 0; i < 5; i++)
+	{
+		wmove(win, 0, 0);
+		wbarber(win, LINES / 4, COLS / 4, 'a');
+		wrefresh(win);
+		flash();
+		wrefresh(win);
+		expect();
+	}
+	finis
+finis

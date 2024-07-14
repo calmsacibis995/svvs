@@ -1,0 +1,17 @@
+sv_tools.a sv_kext.a sv_base.a sv_sys.a
+ENV/src/header svcomp
+OS/src/acct svcomp
+OS/src/chroot svcomp
+OS/src/msgctl svcomp
+OS/src/msgget svcomp
+OS/src/msgop svcomp
+OS/src/nice svcomp
+OS/src/plock svcomp
+OS/src/profil svcomp
+OS/src/ptrace svcomp
+OS/src/semctl svcomp
+OS/src/semget svcomp
+OS/src/semop svcomp
+OS/src/shmctl svcomp
+OS/src/shmget svcomp
+OS/src/shmop svcomp

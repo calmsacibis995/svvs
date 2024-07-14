@@ -1,0 +1,8 @@
+*#ident	"@(#)tidg 1.1 3.0 01/22/86"
+* TIDG  TLI IPC test driver
+*
+*FLAG	#VEC	PREFIX	SOFT	#DEV	IPL	DEPENDENCIES/VARIABLES
+fs	-	tid	-		-
+						ti_tidg[#C] (%0x10)
+						tidg_cnt (%i) = { #C }
+$$

@@ -1,0 +1,28 @@
+#
+# Area clear tests, test wclrtobot
+#
+# @(#)wclrtobot	3.1 (SVVS) 12/1/86
+#
+abstract("wclrtobot");
+start
+	prep("create and refresh background window. create half length window");
+	start
+	background = newwin(LINES,COLS,0,0);
+	wrefresh(background);
+	lines = LINES / 2;
+	mainw = newwin(lines,COLS,0,0);
+	finis
+
+	testing("fill, then wclrtobot, moving down the half window");
+	start
+	for ( i = 0 ; i < lines ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw,lines,COLS,'a');
+		wmove(mainw,i,0);
+		wclrtobot(mainw);
+		wrefresh(mainw);
+		expect();
+	}
+	finis
+finis

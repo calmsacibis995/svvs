@@ -1,0 +1,15 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getegid.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/getegid getegid.o %SVLIBS% %LIBS%
+rm getegid.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% geteuid.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/geteuid geteuid.o %SVLIBS% %LIBS%
+rm geteuid.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getgid.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/getgid getgid.o %SVLIBS% %LIBS%
+rm getgid.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getuid.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/getuid getuid.o %SVLIBS% %LIBS%
+rm getuid.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getuid0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/getuid0 getuid0.o %SVLIBS% %LIBS%
+rm getuid0.o

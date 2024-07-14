@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% setpgrp.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/setpgrp setpgrp.o %SVLIBS% %LIBS%
+rm setpgrp.o

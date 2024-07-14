@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fumount.c
+%COMP% %OPTS% -o %DEST%/NS/CMD/bin/fumount fumount.o %SVLIBS% %LIBS%
+rm fumount.o

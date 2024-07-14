@@ -1,0 +1,6 @@
+%COMP% %OPTS%  -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% main.c
+%COMP% %OPTS%  -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% get.c
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/basiccap0 main.o get.o %SVLIBS% %LIBS%
+%COMP% %OPTS%  -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% caller.c
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/basiccap caller.o %SVLIBS% %LIBS%
+rm -f main.o get.o caller.o

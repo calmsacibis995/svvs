@@ -1,0 +1,58 @@
+#
+# @(#)copywin	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - copywin
+#
+
+abstract("copywin");
+start
+	prep("create one large and one small window");
+	start
+	win = newwin(LINES / 2, COLS, 0, 0);
+	smwin = newwin(LINES / 6, COLS, LINES - (LINES / 6), 0);
+	ch = 'a';
+	wmove(smwin, 0, 0);
+	finis
+
+	# put the alphabet repeatedly to smwin.  alternate
+	# characters in STANDOUT mode
+	testing("add alternate characters to the small window in standout");
+	start
+	for (i = 0; i < LINES / 6; i++)
+	{
+		c = ch;
+		for (j = 0; j < COLS; j++)
+		{
+			if (j == (COLS - 1) && i == (LINES / 6) - 1)
+				break;
+			if (j % 2)
+				wattron(smwin, A_STANDOUT);
+			waddch(smwin, c);
+			if (!((j + 1) % 26))
+				c = ch;
+			else
+				c = c + 1;
+			wattroff(smwin, A_STANDOUT);
+			wrefresh(smwin);
+		}
+		expect();
+	}
+	finis
+
+	# copy smwin to various size rectangles in win
+	testing("copy small window to various sized sections of larger window");
+	start
+	for (j = 0; j < 5; j++)
+	{
+		wclear(win);
+		wrefresh(win);
+		for (i = 0; i < LINES / 2; i += 2)
+		{
+			copywin(smwin, win, 0, 0, i, 0, i + 1,
+				((COLS / (i + 1)) - 1), 0);
+			wrefresh(win);
+			expect();
+		}
+	}
+	finis
+finis

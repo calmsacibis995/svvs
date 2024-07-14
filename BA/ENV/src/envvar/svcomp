@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% envvar.c
+%COMP% %OPTS% -o %DEST%/BA/ENV/bin/envvar envvar.o %SVLIBS% %LIBS%
+rm envvar.o

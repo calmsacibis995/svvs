@@ -1,0 +1,27 @@
+#
+# @(#)horizontal	3.1 (SVVS) 12/1/86
+#
+abstract("start in the middle of a line and move cursor forward and ");
+abstract("back on the line leaving a character. Increase each motion");
+abstract("by one character, until every position on the line has");
+abstract("been reached");
+start
+	for (i = 0; i < COLS / 2; i++)
+	{
+		move(15, (COLS / 2) - 1);
+		refresh();
+
+		move(15, (COLS / 2) - 1 - i);
+		addch('A' + i);
+		refresh();
+		expect(WARNING);
+
+		move(15, (COLS / 2));
+		refresh();
+
+		move(15, (COLS / 2) + i);
+		addch('A' + i);
+		refresh();
+		expect(WARNING);
+	}
+finis

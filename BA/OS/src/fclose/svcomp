@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fclose.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fclose fclose.o %SVLIBS% %LIBS%
+rm fclose.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fclose0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fclose0 fclose0.o %SVLIBS% %LIBS%
+rm fclose0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fflush0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fflush0 fflush0.o %SVLIBS% %LIBS%
+rm fflush0.o

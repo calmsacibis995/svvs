@@ -1,0 +1,70 @@
+#
+# @(#)flushinp	3.2 (SVVS) 12/10/86
+#
+# input: flushinp
+#
+
+abstract("input: flushinp");
+start
+	prep("call 'cbreak()' to insure 'getch()'-type routines return");
+	prep("after a single character has been input.");
+	start
+		cbreak();
+	finis
+
+	# put two characters into the input buffer.
+	# do one getch from stdscr and a flushinp.
+	# do this 10 times.
+
+	testing("put two characters into the input buffer. do a getch");
+	testing("and flushinp. repeat ten times.");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		keyboard("%s", "ab");
+
+		move(i, i + 2);
+		ch = getch();
+		refresh();
+		expect;
+
+		if (ch != 'a')
+		{
+			error("char is /%c/",ch);
+			break;
+		}
+
+		flushinp();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	win = newwin(LINES / 4, COLS / 2, 0, 0);
+
+	# put two characters into the input buffer.
+	# do one getch from win and a flushinp.
+	# do this 10 times.
+
+	testing("put two characters into the input buffer. do a getch");
+	testing("and flushinp. repeat ten times");
+	start
+	for (i = 0; i < LINES / 4; i++)
+	{
+		keyboard("%s", "AB");
+
+		ch = mvwgetch(win, i, i * 2);
+		wrefresh(win);
+
+		if (ch != 'A')
+		{
+			error("char is /%c/", ch);
+			break;
+		}
+
+		flushinp();
+		expect();
+	}
+	finis
+finis

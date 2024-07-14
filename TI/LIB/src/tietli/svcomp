@@ -1,0 +1,18 @@
+yacc -d yyparse.yacc
+mv y.tab.c yyparse.txt
+mv y.tab.h yyparse.h
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c yyparse.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c scanner.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c construct.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c extern.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c load_var.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c main.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c prologue.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c save_prgm.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c screech.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c store.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c switch.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c tbl_alloc.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% -DTIETLI -c yyerror.c
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/tietli yyparse.o scanner.o  construct.o extern.o load_var.o main.o prologue.o  save_prgm.o screech.o store.o switch.o tbl_alloc.o yyerror.o %SVLIBS% %LIBS%
+rm -f  yyparse.o scanner.o  construct.o extern.o load_var.o main.o prologue.o  save_prgm.o screech.o store.o switch.o tbl_alloc.o yyerror.o yyparse.txt yyparse.h

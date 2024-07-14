@@ -1,0 +1,15 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fork.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fork fork.o %SVLIBS% %LIBS%
+rm fork.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fork0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fork0 fork0.o %SVLIBS% %LIBS%
+rm fork0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fork1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fork1 fork1.o %SVLIBS% %LIBS%
+rm fork1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fork2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fork2 fork2.o %SVLIBS% %LIBS%
+rm fork2.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fork3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fork3 fork3.o %SVLIBS% %LIBS%
+rm fork3.o

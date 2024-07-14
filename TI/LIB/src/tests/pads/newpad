@@ -1,0 +1,27 @@
+#
+# @(#)newpad	3.1 (SVVS) 12/1/86
+#
+# pads - newpad
+#
+
+abstract("pads - newpad");
+start
+	# do a bunch of newpads
+	h = 2 * LINES;
+	w = 2 * COLS;
+	testing("create and fill ten pads.");
+	start
+		for (i = 9; i >= 0; i--)
+		{
+			pad[i] = newpad(h, w);
+			wmove(pad[i], 0, 0);
+			wbarber(pad[i], h, w, 'A' + i);
+			prefresh(pad[i], 0, 0, 0, i, LINES / 2, (COLS / 2) + i);
+			expect();
+			werase(pad[i]);
+			prefresh(pad[i], 0, 0, 0, 0, LINES - 1, COLS - 1);
+
+			delwin(pad[i]);
+		}
+	finis
+finis

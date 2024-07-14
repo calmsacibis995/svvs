@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% t_listen.c
+%COMP% %OPTS% -o %DEST%/NS/LIB/bin/t_listen t_listen.o %SVLIBS% %LIBS%
+rm t_listen.o

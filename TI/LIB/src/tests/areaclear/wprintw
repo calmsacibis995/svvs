@@ -1,0 +1,25 @@
+#
+# Area clear test, test printw.
+#
+# @(#)wprintw	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: wprintw");
+start
+	iterations = LINES / 2;
+	colnum = 0;
+	mainw = newwin(LINES,COLS, 0, 0);
+
+	testing("wprintw newline in diagonal pattern on stdscr");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+		{
+			wmove(mainw, 0, 0);
+			wbarber(mainw,LINES,COLS, 'a');
+			wmove(mainw,i * 2, colnum);
+			wprintw(mainw,'\n');
+			colnum = colnum + 2;
+			wrefresh(mainw);
+			expect();
+		}
+	finis
+finis

@@ -1,0 +1,4 @@
+sv_tools.a sv_nse.a sv_base.a sv_sys.a
+src/putmsg svcomp
+src/getmsg svcomp
+src/poll svcomp

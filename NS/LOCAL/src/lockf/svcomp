@@ -1,0 +1,15 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lockf.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lockf lockf.o %SVLIBS% %LIBS%
+rm lockf.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lockf0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lockf0 lockf0.o %SVLIBS% %LIBS%
+rm lockf0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lockf1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lockf1 lockf1.o %SVLIBS% %LIBS%
+rm lockf1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lockf2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lockf2 lockf2.o %SVLIBS% %LIBS%
+rm lockf2.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lockf3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lockf3 lockf3.o %SVLIBS% %LIBS%
+rm lockf3.o

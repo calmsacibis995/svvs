@@ -1,0 +1,6 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% string.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/string string.o %SVLIBS% %LIBS%
+rm string.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% strdup.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/strdup strdup.o %SVLIBS% %LIBS%
+rm strdup.o

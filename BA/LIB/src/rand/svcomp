@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rand.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/rand rand.o %SVLIBS% %LIBS%
+rm rand.o

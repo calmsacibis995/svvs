@@ -1,0 +1,94 @@
+#
+# @(#)pechochar	3.1 (SVVS) 12/1/86
+#
+# pads - pechochar
+#
+
+abstract("pads - pechochar");
+start
+	prep("create pad twice the length of the screen and werase it");
+	start
+		h = LINES * 2;
+		w = COLS;
+		pad = newpad(h, w);
+		wclear(pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+	finis
+
+	# echo a char to the pad repeatedly changing the 
+	# char halfway down the pad
+	testing("pechochar several times to each line in the pad.");
+	testing("when the bottom of the screen is reached, prefresh");
+	testing("to show the lower portion of the pad. Do NOT take");
+	testing("advantage of the implied prefresh built into pechochar");
+	start
+		ch = '$';
+		for (i = 0; i < LINES; i++)
+		{
+			for (j = 0; j < COLS; j += 20)
+			{
+				wmove(pad, i, j);
+				prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+				pechochar(pad, ch);
+			}
+			expect();
+		}
+
+		clear();
+		refresh();
+		prefresh(pad, LINES, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+
+		ch = '~';
+		for (i = LINES; i < (LINES * 2); i++)
+		{
+			for (j = 0; j < COLS; j += 20)
+			{
+				wmove(pad, i, j);
+				prefresh(pad, LINES, 0, 0, 0, LINES - 1, COLS - 1);
+				pechochar(pad, ch);
+			}
+			expect();
+		}
+	finis
+
+	prep("clear the pad for next test");
+	start
+		wclear(pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	testing("pechochar several times to each line in the pad.");
+	testing("when the bottom of the screen is reached, prefresh");
+	testing("to show the lower portion of the pad. NOW take");
+	testing("advantage of the implied prefresh built into pechochar");
+	start
+		ch = '$';
+		for (i = 0; i < LINES; i++)
+		{
+			for (j = 0; j < COLS; j += 20)
+			{
+				wmove(pad, i, j);
+				pechochar(pad, ch);
+			}
+			expect(WARNING);
+		}
+
+		clear();
+		refresh();
+		prefresh(pad, LINES, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+
+		ch = '~';
+		for (i = LINES; i < (LINES * 2); i++)
+		{
+			for (j = 0; j < COLS; j += 20)
+			{
+				wmove(pad, i, j);
+				pechochar(pad, ch);
+			}
+			expect();
+		}
+	finis
+finis

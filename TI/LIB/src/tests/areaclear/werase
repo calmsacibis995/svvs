@@ -1,0 +1,98 @@
+#
+# Area clear test, test werase.
+#
+# @(#)werase	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: werase");
+start
+	prep("create full sized main window. create 3 smaller windows");
+	start
+	mainw = newwin(LINES,COLS, 0, 0);
+	numwins = 3;
+
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		win[i] = newwin(10, 10, i * 5, i * 5);
+	}
+	finis
+
+	testing("fill main window. erase small windows on top");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		wmove(mainw, 0, 0);
+		wbarber(mainw,LINES,COLS, 'a');
+		werase(win[i]);
+		touchwin(mainw);
+		touchwin(win[i]);
+		wrefresh(mainw);
+		wrefresh(win[i]);
+		expect();
+	}
+	finis
+
+	testing("fill main window. erase small windows on top");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		wmove(mainw, 0, 0);
+		wbarber(mainw,LINES,COLS, 'a');
+		werase(win[i]);
+		touchwin(mainw);
+		touchwin(win[i]);
+		wrefresh(mainw);
+		wrefresh(win[i]);
+		expect();
+	}
+	finis
+
+	cleanup("delete the small windows");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		delwin(win[i]);
+	}
+	finis
+
+	#
+	# Do the same thing, but use subwindows.
+	#
+	prep("create three small sub-windows");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		win[i] = subwin(mainw,8, 8, i * 5, i * 5);
+	}
+	finis
+
+
+	testing("erase subwindows on top of main window");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		wmove(mainw, 0, 0);
+		wbarber(mainw,LINES,COLS, 'a');
+		werase(win[i]);
+		touchwin(mainw);
+		touchwin(win[i]);
+		wrefresh(mainw);
+		wrefresh(win[i]);
+		expect();
+	}
+	finis
+
+	testing("erase subwindows on top of main window");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		wmove(mainw, 0, 0);
+		wbarber(mainw,LINES,COLS, 'a');
+		touchwin(mainw);
+		werase(win[i]);
+		touchwin(win[i]);
+		wrefresh(mainw);
+		wrefresh(win[i]);
+		expect();
+	}
+	finis
+finis

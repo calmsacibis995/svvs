@@ -1,0 +1,11 @@
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% init.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% apply.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% extern.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% print.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% push.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% function1.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% function2.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% function3.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% error.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% bless.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/bless -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% uses_sl.c

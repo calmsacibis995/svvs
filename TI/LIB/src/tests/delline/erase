@@ -1,0 +1,40 @@
+#
+# @(#)erase	3.1 (SVVS) 12/1/86
+#
+# insert/delete line, erase and werase
+#
+abstract("delline: erase");
+start
+	# fill stdscr with a barber pole and erase it.
+
+	testing("fill stdscr, the use erase to clear it. repeat 10 times");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		move(0, 0);
+		barber('H');
+		refresh();
+		expect();
+		erase();
+		refresh();
+		expect();
+	}
+	finis
+
+	# create a small window.  fill it and erase it ten times.
+
+	smwin = newwin(LINES - 9, COLS / 12, 0, 0);
+	testing("fill a small window. use werase to clear it. repeat 10 times");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		wmove(smwin, 0, 0);
+		wbarber(smwin, LINES - 9, COLS / 12, 'H');
+		wrefresh(smwin);
+		expect();
+		werase(smwin);
+		wrefresh(smwin);
+		expect();
+	}
+	finis
+finis

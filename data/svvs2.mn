@@ -1,0 +1,647 @@
+%leader% startup
+%regarding% startup
+%value% ready
+%next% action
+
+%menu% action
+%init%
+%description%
+Choose an action:
+%end%
+%promptstr% action (?, h, help, exit)> 
+
+%information%
+By selecting an item in this menu you move to a set of menus which
+allow you to specify the parameters to be passed to the report
+generator or the test driver.  Your choices are as follows:
+
+        verify - Verify one or more sections and send the results
+                 to a journal file.
+
+        run    - Run one or more individual tests and send the
+                 results to standard output.  Output may be
+                 redirected to a temporary file.
+
+	report - Report on one or more sections and send the results
+                 to standard output.  Output may be redirected to a
+                 temporary file.
+%end%
+%regarding% action
+%repeat% -1
+
+	%entry% "        1) Verify section(s)"
+		%responses% verify v 1
+		%link% action1
+	%entry% "        2) Run individual tests"
+		%responses% run 2
+		%link% action2
+	%entry% "        3) Report on test results"
+		%responses% report 3
+		%link% action3
+	%nonentry%
+		%responses% h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%leader% action1
+%regarding% action
+%value% verify
+%next% verify
+
+%leader% action2
+%regarding% action
+%value% run
+%next% run
+
+%leader% action3
+%regarding% action
+%value% report
+%next% report
+
+%menu% verify
+%description%
+What parameters do you want to specify?
+%end%
+%promptstr% verify (?, h, help, show, action, exit)>  
+%information%
+This menu allows you to select a parameter you want to pass to the
+test driver.  Your choices are:
+        section  - Choose one or more sections to be verified.  You
+                   must choose at least one section or subsection.
+
+        options  - Choose any command line options you want to use
+                   with the test driver.
+
+        execute  - Execute the test driver with the section and
+                   options you have selected.
+
+In addition to these choices you may respond with: 'action' to
+return to the action menu, 'exit' to exit from the menus, 'help'
+or '?' to print this message, or 'show' to display the parameters
+you have set.
+%end%
+%regarding% params
+%repeat% -1
+
+	%entry% "        1) Select complete sections to verify"
+		%responses% 1 sections
+		%call% sections
+	%entry% "        2) Select subsections to verify"
+		%responses% 2 subsections
+		%call% subsections
+	%entry% "        3) Select options to the test driver"
+		%responses%  3 options
+		%call% drive_opt
+	%entry% "        4) Execute the test driver"
+		%responses% 4 execute
+		%link% do_it
+	%nonentry%
+		%responses% help ? h
+		%help%
+	%nonentry%
+		%responses% action actions act
+		%link% action
+	%nonentry%
+		%responses% show
+		%value% show	
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%menu% run
+%description%
+What parameters do you want to specify?
+%end%
+%promptstr% run (?, h, help, show, action, exit)>  
+%information%
+This menu allows you to select a parameter you want to pass to the
+test driver.  Your choices are:
+        tests      - Select the test you want to run individually. You
+                     must select at least one test.
+
+        Temp Files - Specify whether or not to preserve temporary files.
+
+        redirect   - Specify whether or not to redirect standard output.
+
+        execute    - Run the tests you have selected.
+
+In addition to these choices you may respond with: 'action' to
+return to the action menu, 'exit' to exit from the menus, 'help'
+or '?' to print this message, or 'show' to display the parameters
+you have set.
+%end%
+%regarding% params
+%repeat% -1
+
+	%entry% "        1) Select tests to execute"
+		%responses% 1 tests select
+		%call% drive_tsect
+	%entry% "        2) Temporary Files"
+		%responses% 2 temp temporary
+		%call% d_opt
+	%entry% "        3) Redirect standard output"
+		%responses% 3 redirect
+		%call% redirect
+	%entry% "        4) Execute the tests"
+		%responses% 4 execute
+		%link% do_it
+	%nonentry%
+		%responses% help ? h
+		%help%
+	%nonentry%
+		%responses% action actions act
+		%link% action
+	%nonentry%
+		%responses% show
+		%value% show
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%menu% report
+%description%
+What parameters do you want to specify?
+%end%
+%promptstr% report (?, h, help, show, action, exit)> 
+%information%
+This menu allows you to select parameters you want to pass to the
+report generator.  Your choices are:
+
+        sections       - Choose one or more sections for reporting.  You
+                         must choose at least one section or subsection.
+        options        - Choose any command line options you want to use
+                         with the report generator.
+        Select Tests   - You may select individual tests on which to
+                         report.
+        redirect       - Specify whether or not to redirect standard output
+        execute        - Execute the report generator with the section and
+                         options you have selected.
+
+In addition to these choices you may respond with: 'action' to
+return to the action menu, 'exit' to exit from the menus, 'help'
+or '?' to print this message, or 'show' to display the parameters
+you have set.
+%end%
+%regarding% params
+%repeat% -1
+
+	%entry% "        1) Select complete sections for reporting"
+		%responses% 1 sections
+		%call% sections
+	%entry% "        2) Select subsections for reporting"
+		%responses% 2 subsections
+		%call% subsections
+	%entry% "        3) Select options to the report generator"
+		%responses% 3 options
+		%call% rep_opt
+	%entry% "        4) Select individual tests to view"
+		%responses% 4 individual
+		%call% rep_tests
+	%entry% "        5) Redirect standard output"
+		%responses% 5 redirect
+		%call% redirect
+	%entry% "        6) Generate a report"
+		%responses% 6 execute
+		%link% do_it
+	%nonentry%
+		%responses% help ? h
+		%help%
+	%nonentry%
+		%responses% action actions act
+		%link% action
+	%nonentry%
+		%responses% show
+		%value% show
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%prompt% redirect
+%description%
+Special responses are: ?, h, help, exit.
+
+Do you want to redirect the output from this command to a file (y/n)? 
+%end%
+%information%
+If you answer yes to this question, all output from tests or reports
+generated by this command and appearing on standard output will be
+placed in a temporary file which you may examine or print at your
+leisure.  In some cases these files may be very large.  If you
+answer no to this question, all output will be directed to your
+terminal.
+
+In addition to these choices you may respond with: 'exit' to exit
+from the menus, or 'help' or '?' to print this message.
+%end%
+%next% return
+%regarding% redirect
+%repeat% 0
+	%responses% y yes
+		%value% yes
+	%responses% n no
+		%value% no
+	%responses% ? h help
+		%help%
+	%responses% exit
+		%exit%
+
+%leader% return
+%regarding% nothing
+%return%
+%next% return
+
+%leader% sections
+%description%
+You have selected the following sections and subsections so far:
+%end%
+%next% sect
+%regarding% section
+%value% show
+
+%menu% sect
+%promptstr% section (?, h, help, clear, exit)> 
+%description%
+What section do you want to use?
+%end%
+%information%
+You may select one or more sections of SVVS from this menu.  The
+sections you choose will be collected into a list of sections to
+use.
+
+If you change your mind about the sections you want to use, 'clear'
+will erase all of the  sections so far selected, allowing you to
+start over.  To leave this menu press the return key, 'h', '?'
+or 'help' will display this message.
+%end%
+%next% sections
+%regarding% section
+%repeat% 0
+
+	%entry% "        1) BA - Base"
+		%responses%  ba 1
+		%value% BA
+	%entry% "        2) KE - Kernel Extension"
+		%responses%  ke 2
+		%value% KE
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%leader% subsections
+%description%
+You have selected the following sections and subsections so far:
+%end%
+%next% subsect
+%regarding% section
+%value% show
+
+%menu% subsect
+%promptstr% subsection (?, h, help, clear, exit)> 
+%description%
+What subsection do you want to use?
+%end%
+%information%
+You may select one or more subsections of SVVS from this menu.  The
+subsections you choose will be collected into a list of sections to
+use.
+
+If you change your mind about the sections you want to use, 'clear'
+will erase all of the  sections so far selected, allowing you to
+start over.  To leave this menu press the return key,  '?' or 'help'
+will display this message.
+%end%
+%next% subsections
+%regarding% section
+%repeat% 0
+
+	%entry% "        1) BA_ENV    - Base Environment "
+		%responses%  ba/env ba_env 1
+		%value% BA_ENV
+	%entry% "        2) BA_OS     - Base Operating System Services "
+		%responses%  ba/os ba_os 2
+		%value% BA_OS
+	%entry% "        3) BA_LIB    - Base Library "
+		%responses%  ba/lib ba_lib 3
+		%value% BA_LIB
+	%entry% "        4) KE_ENV    - Kernel Extension Environment "
+		%responses%  ke/env ke_env 4
+		%value% KE_ENV
+	%entry% "        5) KE_OS     - Kernel Extension System Services "
+		%responses%  ke/os ke_os 5
+		%value% KE_OS
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+
+%leader% drive_opt
+%description%
+The options you have selected for the test driver are:
+%end%
+%next% driver_options
+%regarding% options
+%value% show
+
+%menu% driver_options
+%description%
+What options do you want to use with the test driver?
+%end%
+%promptstr% option (?, h, help, clear, exit)> 
+%information%
+The options you select will be used to control the driver.  They are
+selected one at a time by typing either '-<option>' or just the
+option letter which corresponds to the entry you want to select. 
+You may also select the options by number. If you decide to change
+the options  you have selected, you may type 'clear' to clear away
+the previous selections and start over.  When you have selected the
+options you want, press the  return key to leave this menu.
+%end%
+
+%regarding% options
+%next% drive_opt
+%repeat% 0
+
+	%entry% "        1) -i - Ignore dependency information"
+		%responses% -i i 1
+		%value% i
+	%entry% "        2) -t - Correction run"
+		%responses% -t t 2
+		%value% t
+	%entry% "        3) -c - Continuation run"
+		%responses% -c c 3
+		%value% c
+	%entry% "        4) -l - Long form journal"
+		%responses% -l l 4
+		%value% l
+	%entry% "        5) -d - Retain temporary files for examination"
+		%responses% -d d 5
+		%value% d
+	%entry% "        6) -r - Remove journal file before verification"
+		%responses% -r r 6
+		%value% r
+	%nonentry%
+		%responses%  clear
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  ""
+		%return%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses%  exit
+		%exit%
+
+%leader% rep_opt
+%description%
+The options you have selected for the report generator are:
+%end%
+%next% report_options
+%regarding% options
+%value% show
+
+%menu% report_options
+%description%
+What options do you want to use with the report generator?
+%end%
+%promptstr% option (?, h, help, clear, exit)> 
+%information%
+The options you select will be used to control the report generator.
+They are selected one at a time by typing either '-<option>' or
+just the option letter which corresponds to the entry you want to
+select.  If you decide to change the options you have selected, you
+may type 'clear' to clear away the previous selections and start
+over. When you have selected the options you want, press the return
+key to leave this menu.
+%end%
+%next% rep_opt
+%regarding% options
+%repeat% 0
+
+	%entry% "        1) -h - History report"
+		%responses% -h h 1
+		%value% h
+	%entry% "        2) -s - Generate only summary information"
+		%responses% -s s 2
+		%value% s
+	%entry% "        3) -m - Only report tests with messages in them"
+		%responses% -m m 3
+		%value% m
+	%entry% "        4) -x - Generate execution duration information
+		%responses% -x x 4
+		%value% x
+	%nonentry%
+		%responses%  clear
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% h help ?
+		%help%
+	%nonentry%
+		%responses%  exit
+		%exit%
+
+%prompt% d_opt
+%description%
+Special responses are: ?, h, help, exit.
+
+Do you want to preserve temporary files after the
+tests have run (y/n)? 
+%end%
+%information%
+If you answer 'yes' to this question, the temporary files created by
+the tests you are running will not be deleted after the tests have
+run.  This may yield useful debugging information.  If you
+answer 'no' to this question, the temporary files will be cleaned up
+as soon as all of the selected tests have run.
+
+In addition to these choices you may respond with: 'exit' to exit
+from the menus, or 'help' or '?' to print this message.
+%end%
+%next% d_return
+%regarding% d_option
+%repeat% 0
+	%responses% y yes
+		%value% yes
+	%responses% n no
+		%value% no
+	%responses% ? h help
+		%help%
+	%responses% exit
+		%exit%
+
+%leader% d_return
+%regarding% d_option
+%value% show
+%next% return
+
+%leader% rep_tests
+%regarding% rep_tests
+%value% show
+%next% report_tests
+
+%prompt% report_tests
+%description%
+Special responses are: ?, h, help, clear, exit.  Press the return key
+to return to the main menu.
+
+Enter the names of the tests on which you want to
+report: 
+%end%
+%information%
+Here you should enter the names of individual tests for which you
+want to see results.  Enter the test names separated by spaces. 
+
+To leave this prompt press return alone on the line.
+
+The responses you give to this prompt will be accumulated.  If you
+decide you do not want the choices you have made, type 'clear' and
+your selections up to that point will be cleared.  If you
+type '?' or 'help' this message will be printed.
+%end%
+%regarding% rep_tests
+%next% rep_tests
+%repeat% 0
+	%responses% clear
+		%value% clear
+		%redisplay%
+	%responses% ""
+		%return%
+	%responses% ? help h
+		%value% help
+
+%menu% drive_tsect
+%promptstr% section (?, h, help, show, clear, exit)> 
+%description%
+In what subsection do you want to run individual tests?
+%end%
+%information%
+This menu allows you to specify individual tests you want to run. 
+In order to run those tests, the test driver needs to know what
+section to search to find those tests.  Once you have selected a
+section, you will be allowed to select tests to be run in that
+section.
+
+The choices you make for a given section will be accumulated within
+that section.  If you want to clear all of the sections,
+type 'clear' in this menu and all selections for all sections will
+be cleared.  If you want to view your current selections, type 'show'
+in this menu and all of the tests you have selected will be
+displayed. If you type 'exit' you will exit the menus, if you
+type '?' or 'help' this message will be displayed.
+
+To leave this menu, press the return key.
+
+If you want to clear selections for one section, go to that section
+and type 'clear'.
+%end%
+%next% drive_tests
+%regarding% drive_tsect
+%repeat% 0
+
+	%entry% "        1) BA_ENV    - Base Environment"
+		%responses%  ba/env ba_env 1
+		%value% BA_ENV
+	%entry% "        2) BA_OS     - Base Operating System Services"
+		%responses%  ba/os ba_os 2
+		%value% BA_OS
+	%entry% "        3) BA_LIB    - Base Library"
+		%responses%  ba/lib ba_lib 3
+		%value% BA_LIB
+	%entry% "        4) KE_ENV    - Kernel Extension Environment"
+		%responses%  ke/env ke_env 4
+		%value% KE_ENV
+	%entry% "        5) KE_OS     - Kernel Extension System Services"
+		%responses%  ke/os ke_os 5
+		%value% KE_OS
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% show
+		%value% show
+		%redisplay%
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%leader% drive_tests
+%regarding% drive_tests
+%value% show
+%next% drv_tst
+
+%prompt%  drv_tst
+%description%
+Special responses are: ?, h, help, clear, exit.  Press the return key
+to return to the section menu.
+
+Enter the names of the tests you want to run in this
+section: 
+%end%
+%information%
+Here you should enter the names of the tests you want to run
+individually.  Enter the names separated by spaces.  Your selections
+will be accumulated.
+
+If you change your mind about the selections you have made for this
+section, type 'clear' and the tests you have selected for this
+section will be erased.  The tests for other sections will be
+preserved.
+
+To leave this prompt press return alone on the line.
+
+Type '?' or 'help' to display this message.
+%end%
+%regarding% drive_tests
+%next% drive_tests
+%repeat% 0
+	%responses% ""
+		%link% drive_tsect
+	%responses% clear
+		%value% clear
+		%redisplay%
+	%responses% ? h help
+		%value% help
+
+%leader% do_it
+%value% do_it
+%regarding% do_it
+%next% action
+
+%start% startup
+%sitmsg% press return to continue...
+%exitresp% exit
+%exitreg% exit

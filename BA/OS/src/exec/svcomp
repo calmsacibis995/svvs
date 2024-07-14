@@ -1,0 +1,27 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec exec.o %SVLIBS% %LIBS%
+rm exec.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec0 exec0.o %SVLIBS% %LIBS%
+rm exec0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec1 exec1.o %SVLIBS% %LIBS%
+rm exec1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec2 exec2.o %SVLIBS% %LIBS%
+rm exec2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec3 exec3.o %SVLIBS% %LIBS%
+rm exec3.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec4.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec4 exec4.o %SVLIBS% %LIBS%
+rm exec4.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec5.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec5 exec5.o %SVLIBS% %LIBS%
+rm exec5.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec6.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec6 exec6.o %SVLIBS% %LIBS%
+rm exec6.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% exec7.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/exec7 exec7.o %SVLIBS% %LIBS%
+rm exec7.o

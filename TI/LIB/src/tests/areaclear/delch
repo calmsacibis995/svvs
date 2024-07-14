@@ -1,0 +1,30 @@
+#
+# Area clear test, test delch.
+#
+# @(#)delch	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: delch");
+start
+	iterations = 12;
+	colnum = 0;
+
+	testing("fill stdscr, then use delch to emulate a clrtoeol");
+	start
+		for ( i = 0 ; i < iterations ; i++ )
+		{
+			move(0, 0);
+			barber('a');
+			#
+			# Emulate a clrtoeol.
+			#
+			for ( j = LINES - 1; j >= colnum ; j-- )
+			{
+				move(i * 2, j);
+				delch();
+			}
+			colnum = colnum + 2;
+			refresh();
+			expect();
+		}
+	finis
+finis

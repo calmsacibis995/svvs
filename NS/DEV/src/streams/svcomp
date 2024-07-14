@@ -1,0 +1,21 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% close.c
+%COMP% %OPTS% -o %DEST%/NS/DEV/bin/close close.o %SVLIBS% %LIBS%
+rm close.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ioctl_1.c
+%COMP% %OPTS% -o %DEST%/NS/DEV/bin/ioctl_1 ioctl_1.o %SVLIBS% %LIBS%
+rm ioctl_1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ioctl_2.c
+%COMP% %OPTS% -o %DEST%/NS/DEV/bin/ioctl_2 ioctl_2.o %SVLIBS% %LIBS%
+rm ioctl_2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% open.c
+%COMP% %OPTS% -o %DEST%/NS/DEV/bin/open open.o %SVLIBS% %LIBS%
+rm open.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% read.c
+%COMP% %OPTS% -o %DEST%/NS/DEV/bin/read read.o %SVLIBS% %LIBS%
+rm read.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% streams.c
+%COMP% %OPTS% -o %DEST%/NS/DEV/bin/streams streams.o %SVLIBS% %LIBS%
+rm streams.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% write.c
+%COMP% %OPTS% -o %DEST%/NS/DEV/bin/write write.o %SVLIBS% %LIBS%
+rm write.o

@@ -1,0 +1,97 @@
+#
+# @(#)insch	3.1 (SVVS) 12/1/86
+#
+# tabs: insch
+#
+
+abstract("tabs: insch");
+start
+	prep("fill stdscr");
+	start
+	ch = 'a';
+	move(0, 0);
+	barber(ch);
+	refresh();
+	finis
+
+	testing("insert a tab on each line with insch");
+	start
+	for (i = 0; i < LINES ; i++)
+	{
+		move(i, i * 2);
+		insch('\t');
+	}
+	expect();
+	refresh();
+	clear();
+	refresh();
+	finis
+
+	prep("fill stdscr");
+	start
+	ch = 'A';
+	move(0, 0);
+	barber(ch);
+	refresh();
+	finis
+
+	testing("insert a tab on each line with mvinsch");
+	start
+	for (i = 0; i < LINES ; i++)
+	{
+		move(0, 0);
+		barber(ch);
+		mvinsch(i, i * 2, '\t');
+	}
+	refresh();
+	expect();
+	clear();
+	refresh();
+	finis
+
+	prep("create and fill a window");
+	start
+	ch = 'a';
+	win1 = newwin(LINES / 2, COLS / 2, 0, 0);
+	wmove(win1, 0, 0);
+	wbarber(win1, LINES / 2, COLS / 2, ch);
+	wrefresh(win1);
+	finis
+
+	testing("insert a tab on each line with winsch");
+	start
+	for (i = 0; i < (LINES / 2) ; i++)
+	{
+		wmove(win1, i, i * 2);
+		winsch(win1, '\t');
+	}
+	expect();
+	refresh();
+	clear();
+	refresh();
+	finis
+
+	prep("create and fill another window");
+	start
+	ch = 'A';
+	win2 = newwin(LINES, COLS, 0, 0);
+	wmove(win2, 0, 0);
+	wbarber(win2, LINES, COLS, ch);
+	wrefresh(win2);
+	finis
+
+	testing("insert a tab on each line with mvwinsch");
+	start
+	for (i = 0; i < LINES ; i++)
+	{
+		wmove(win2, 0, 0);
+		wbarber(win2, LINES, COLS, ch);
+		mvwinsch(win2, i, i * 2, '\t');
+	}
+	expect();
+	refresh();
+	clear();
+	touchwin(stdscr);
+	refresh();
+	finis
+finis

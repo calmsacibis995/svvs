@@ -1,0 +1,21 @@
+#
+# @(#)slk_init2	3.1 (SVVS) 12/1/86
+#
+# cursor motion: slk_init
+#
+#NOINITSCR
+abstract("cursor motion - slk_init");
+start
+	label = "alabel";
+
+	testing("setup labels in 3-2-3 format and");
+	testing("put a string in each label.");
+	start
+		slk_init(0);
+		initscr();
+		for (i = 1; i < 9; i++)
+			slk_set(i, label, 0);
+		slk_refresh();
+		expect();
+	finis
+finis

@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% frexp.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/frexp frexp.o %SVLIBS% %LIBS%
+rm frexp.o

@@ -1,0 +1,99 @@
+#
+# @(#)ungetch	3.3 (SVVS) 12/30/86
+#
+# input - ungetch
+#
+
+abstract("input: ungetch");
+start
+	prep("call 'cbreak()' to insure 'getch()'-type routines return");
+	prep("after a single character has been input");
+	start
+		cbreak();
+	finis
+
+	h = LINES;
+	w = COLS;
+	# input contains 'abcde'
+	for (j = 0; j < LINES; j++)
+		input[j] = 'a' + j;
+
+	testing("get a char from stdscr and put it back");
+	testing("then get the same char and be sure it's correct");
+	start
+
+		# do ungetch on each line
+		for (i = 0; i < LINES; i++)
+		{
+			keyboard("%c", input[i]);
+
+			move(i, 0);
+			ch = getch();
+			move(i, 20);
+			printw("%d got '%c'", i, ch);
+			refresh();
+			expect();
+			if (ch != input[i])
+			{
+				error("getch error!  wanted '%c', got '%c'", input[i], ch);
+				break;
+			}
+
+			ungetch(ch);
+			move(i, 0);
+			ch = getch();
+			move(i, 20);
+			printw("2nd %d got '%c'", i, ch);
+			refresh();
+			expect();
+			if (ch != input[i])
+			{
+				error("getch error!  wanted '%c', got '%c'", input[i], ch);
+				break;
+			}
+		}
+	finis
+
+	prep("ungetch - create window for testing");
+	start
+		win = newwin(h, w, 0, 0);
+		werase(win);
+		wrefresh(win);
+	finis
+		
+	testing("ungetch - get a char from a window and put it back");
+	testing("then get the same char and be sure it's correct");
+	start
+
+		# do ungetch for each line
+		for (i = 0; i < h; i++)
+		{
+			keyboard("%c", input[i]);
+
+			wmove(win, i, 0);
+			ch = wgetch(win);
+			wmove(win, i, 20);
+			wprintw(win, "%d got '%c'", i, ch);
+			wrefresh(win);
+			expect();
+			if (ch != input[i])
+			{
+				error(win, "getch error!  wanted '%c', got '%c'", input[i], ch);
+				break;
+			}
+
+			ungetch(ch);
+			wmove(win, i, 0);
+			ch = wgetch(win);
+			wmove(win, i, 20);
+			wprintw(win, "2nd %d got '%c'", i, ch);
+			wrefresh(win);
+			expect();
+			if (ch != input[i])
+			{
+				error(win, "getch error!  wanted '%c', got '%c'", input[i], ch);
+				break;
+			}
+		}
+	finis
+finis

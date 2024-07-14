@@ -1,0 +1,27 @@
+#
+# @(#)delwin	3.1 (SVVS) 12/1/86
+#
+# insert/delete: delwin
+#
+abstract("insert/delete: delwin");
+start
+	depth = 10;
+
+	win1 = newwin(LINES,COLS, 0, 0);
+
+	wbarber(win1, LINES, COLS, 'a');
+
+	testing("create and fill a window. Then create, fill, and delete");
+	testing("another window on top of the first.");
+	start
+	for (i = 0;i <= 2;i++)
+	{
+		win2 = newwin(LINES / 4, COLS / 4, 10 + (i * 5), 10 + (i * 5));
+		wbarber(win2, LINES / 4, COLS / 4, 'Z');
+		delwin(win2);
+		touchwin(win1);
+		wrefresh(win1);
+		expect();
+	}
+	finis
+finis

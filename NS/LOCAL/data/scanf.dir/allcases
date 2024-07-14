@@ -1,0 +1,1041 @@
+F%d
+D1
+R1
+i1
+F%d %d
+D1 2
+R2
+i1
+i2
+F%d %d%n
+D1 2
+R2
+i1
+i2
+i3
+F%2d
+D121
+R1
+i12
+F%2d %d
+D1234 1
+R2
+i12
+i34
+F%2d %d%n
+D1234 1
+R2
+i12
+i34
+i4
+F%1d
+D121
+R1
+i1
+F%*d
+D121 ab
+R0
+F%*2d
+D123 ab
+R0
+F%*1d
+D123 ab
+R0
+F%ld
+D1
+R1
+l1
+F%2ld
+D1234
+R1
+l12
+F%1ld
+D1234
+R1
+l1
+F%*ld
+D121 ab
+R0
+F%*2ld
+D1234
+R0
+F%*1ld
+D1234
+R0
+F%hd
+D1
+R1
+h1
+F%2hd
+D1234
+R1
+h12
+F%1hd
+D1234
+R1
+h1
+F%*hd
+D12 ab
+R0
+F%*2hd
+D1234
+R0
+F%*1hd
+D1234
+R0
+F%u
+D1
+R1
+u1
+F%u %u
+D1 2
+R2
+u1
+u2
+F%u %u%n
+D1 2
+R2
+u1
+u2
+i3
+F%2u
+D121
+R1
+u12
+F%2u %u
+D1234 1
+R2
+u12
+u34
+F%2u %u%n
+D1234 1
+R2
+u12
+u34
+i4
+F%1u
+D121
+R1
+u1
+F%*u
+D121 ab
+R0
+F%*2u
+D123 ab
+R0
+F%*1u
+D123 ab
+R0
+F%lu
+D1
+R1
+u1
+F%2lu
+D1234
+R1
+u12
+F%1lu
+D1234
+R1
+u1
+F%*lu
+D121 ab
+R0
+F%*2lu
+D1234
+R0
+F%*1lu
+D1234
+R0
+F%hu
+D1
+R1
+v1
+F%2hu
+D1234
+R1
+v12
+F%1hu
+D1234
+R1
+v1
+F%*hu
+D12 ab
+R0
+F%*2hu
+D1234
+R0
+F%*1hu
+D1234
+R0
+F%o
+D1
+R1
+i1
+F%o %o
+D1 2
+R2
+i1
+i2
+F%o %o%n
+D1 2"
+R2
+i1
+i2
+i3
+F%2o
+D121
+R1
+i10
+F%2o %o
+D1234 1
+R2
+i10
+i28
+F%2o %o%n
+D1234 1
+R2
+i10
+i28
+i4
+F%1o
+D123
+R1
+i1
+F%*o
+D123 ab
+R0
+F%*2o
+D123 ab
+R0
+F%*1o
+D123 ab
+R0
+F%lo
+D1
+R1
+i1
+F%2lo
+D1234
+R1
+l10
+F%1lo
+D1234
+R1
+l1
+F%*lo
+D121 ab
+R0
+F%*2lo
+D1234
+R0
+F%*1lo
+D1234
+R0
+F%ho
+D1
+R1
+h1
+F%2ho
+D1234
+R1
+h10
+F%1ho
+D1234
+R1
+h1
+F%*ho
+D12 ab
+R0
+F%*2ho
+D1234
+R0
+F%*1ho
+D1234
+R0
+F%x
+D1abc
+R1
+i6844
+F%x %x
+Dde bee
+R2
+i222
+i3054
+F%x %x%n
+D1 feed
+R2
+i1
+i65261
+i6
+F%2x
+D121
+R1
+i18
+F%2x %x
+D1234 1
+R2
+i18
+i52
+F%2x %x%n
+D1234 1
+R2
+i18
+i52
+i4
+F%1x
+D123
+R1
+i1
+F%*x
+D121 ab
+R0
+F%*2x
+D123 ab
+R0
+F%*1x
+D123 ab
+R0
+F%lx
+D1
+R1
+i1
+F%2lx
+D1234
+R1
+l18
+F%1lx
+D1234
+R1
+l1
+F%*lx
+D121 ab
+R0
+F%*2lx
+D1234
+R0
+F%*1lx
+D1234
+R0
+F%hx
+D1
+R1
+h1
+F%2hx
+D1234
+R1
+h18
+F%1hx
+D1234
+R1
+h1
+F%*hx
+D12 ab
+R0
+F%*2hx
+D1234
+R0
+F%*1hx
+D1234
+R0
+F%i
+D1
+R1
+i1
+F%i
+D011
+R1
+i9
+F%i
+D0x12
+R1
+i18
+F%i %i
+D015 020
+R2
+i13
+i16
+F%i %i%n
+D0111 0222
+R2
+i73
+i146
+i9
+F%2i
+D0123
+R1
+i1
+F%2i %i
+D01234 01
+R2
+i1
+i234
+F%2i %i%n
+D01234 01
+R2
+i1
+i234
+i5
+F%1i
+D0123
+R1
+i0
+F%*i%s
+D0121 ab
+R1
+sab
+F%*2i%c
+D0123 ab
+R1
+c2
+F%*1i%d
+D0123 22
+R1
+i123
+F%e
+D1.1E-2
+R1
+f.011
+F%e %e
+D1.1E-2 2.1E-2
+R2
+f.011
+f.021
+F%e %e%n
+D1.1E-2 2.1E-2
+R2
+f.011
+f.021
+i13
+F%2e
+D1.21
+R1
+f1
+F%2e %e
+D1.234 1.1E-2
+R2
+f1
+f234
+F%2e %e%n
+D1.234 1.1E-2
+R2
+f1
+f234
+i5
+F%1e
+D121
+R1
+f1
+F%*e
+D1.21E-2 ab
+R0
+F%*2e
+D123 ab
+R0
+F%*1e
+D123 ab
+R0
+F%le
+D1.34E-2
+R1
+d.0134
+F%2le
+D1.34E-2
+R1
+d1
+F%1le
+D1234
+R1
+d1
+F%*le
+D1.21 ab
+R0
+F%*2le
+D1234
+R0
+F%*1le
+D1234
+R0
+F%f
+D1.1E-2
+R1
+f.011
+F%f %f
+D1.1E-2 2.1E-2
+R2
+f.011
+f.021
+F%f %f%n
+D1.1E-2 2.1E-2
+R2
+f.011
+f.021
+i13
+F%2f
+D1.21
+R1
+f1
+F%2f %f
+D1.234 1.1E-2
+R2
+f1
+f234
+F%2f %f%n
+D1.234 1.1E-2
+R2
+f1
+f234
+i5
+F%1f
+D121
+R1
+f1
+F%*f
+D1.21E-2 ab
+R0
+F%*2f
+D123 ab
+R0
+F%*1f
+D123 ab
+R0
+F%lf
+D1.34E-2
+R1
+d.0134
+F%2lf
+D1.34E-2
+R1
+d1
+F%1lf
+D1234
+R1
+d1
+F%*lf
+D1.21 ab
+R0
+F%*2lf
+D1234
+R0
+F%*1lf
+D1234
+R0
+F%g
+D1.1E-2
+R1
+f.011
+F%g %g
+D1.1E-2 2.1E-2
+R2
+f.011
+f.021
+F%g %g%n
+D1.1E-2 2.1E-2
+R2
+f.011
+f.021
+i13
+F%2g
+D1.21
+R1
+f1
+F%2g %g
+D1.234 1.1E-2
+R2
+f1
+f234
+F%2g %g%n
+D1.234 1.1E-2
+R2
+f1
+f234
+i5
+F%1g
+D121
+R1
+f1
+F%*g
+D1.21E-2 ab
+R0
+F%*2g
+D123 ab
+R0
+F%*1g
+D123 ab
+R0
+F%lg
+D1.34E-2
+R1
+d.0134
+F%2lg
+D1.34E-2
+R1
+d1
+F%1lg
+D1234
+R1
+d1
+F%*lg
+D1.21 ab
+R0
+F%*2lg
+D1234
+R0
+F%*1lg
+D1234
+R0
+F%s
+Dabc
+R1
+sabc
+F%s %s
+Dabc efg
+R2
+sabc
+sefg
+F%s %s%n
+Dabc efg
+R2
+sabc
+sefg
+i7
+F%2s
+Dabc
+R1
+sab
+F%2s %s
+Dabcd e
+R2
+sab
+scd
+F%2s %s%n
+Dabcd e
+R2
+sab
+scd
+i4
+F%1s
+Dabc
+R1
+sa
+F%*s
+Dabc de
+R0
+F%*2s
+Dabc de
+R0
+F%*1s
+Dabc de
+R0
+F%c
+Dabc
+R1
+ca
+F%c%c
+Dabc
+R2
+ca
+cb
+F%*c
+Dabc de
+R0
+F%[a]
+Da
+R1
+sa
+F%[a-z]
+Da
+R1
+sa
+F%[]a-z A-Z]
+Da]z xABCabc [ abcd
+R1
+sa]z xABCabc 
+F%[0-9]
+D012345 a]z xABCabc [ abcd
+R1
+s012345
+F%[^a-z]
+DABCDEFGHabc
+R1
+sABCDEFGH
+F%[^]0-9]
+DabcdefABCDEF 012]
+R1
+sabcdefABCDEF 
+F%[]^0-9]
+D]^012345678abcdef
+R1
+s]^012345678
+F%[%^A-G]
+D%^ABCDEFGabcd
+R1
+s%^ABCDEFG
+F%d %u
+D1 2
+R2
+i1
+u2
+F%d %o
+D1 02
+R2
+i1
+i2
+F%d %x
+D1 2
+R2
+i1
+i2
+F%d %i
+D1 02
+R2
+i1
+i2
+F%d %e
+D1 2.0E+1
+R2
+i1
+f20
+F%d %f
+D1 2.0
+R2
+i1
+f2
+F%d %g
+D1 2.0
+R2
+i1
+f2
+F%d %s
+D1 abc
+R2
+i1
+sabc
+F%d%c
+D1e
+R2
+i1
+ce
+F%d%[A-Z]
+D1ABc
+R2
+i1
+sAB
+F%u %o
+D1 02
+R2
+u1
+i2
+F%u %x
+D1 2
+R2
+u1
+i2
+F%u %i
+D1 02
+R2
+u1
+i2
+F%u %e
+D1 2.0E+1
+R2
+u1
+f20
+F%u %f
+D1 2.0
+R2
+u1
+f2
+F%u %g
+D1 2.0
+R2
+u1
+f2
+F%u %s
+D1 abc
+R2
+u1
+sabc
+F%u%c
+D1e
+R2
+u1
+ce
+F%u%[A-Z]
+D1ABc
+R2
+u1
+sAB
+F%o %x
+D1 2
+R2
+i1
+i2
+F%o %i
+D1 02
+R2
+i1
+i2
+F%o %e
+D1 2.0E+1
+R2
+i1
+f20
+F%o %f
+D1 2.0
+R2
+i1
+f2
+F%o %g
+D1 2.0
+R2
+i1
+f2
+F%o %s
+D1 abc
+R2
+i1
+sabc
+F%o%c
+D1e
+R2
+i1
+ce
+F%o%[A-Z]
+D1ABc
+R2
+i1
+sAB
+F%x %i
+D1 02
+R2
+i1
+i2
+F%x %e
+D1 2.0E+1
+R2
+i1
+f20
+F%x %f
+D1 2.0
+R2
+i1
+f2
+F%x %g
+D1 2.0
+R2
+i1
+f2
+F%x %s
+D1 abc
+R2
+i1
+sabc
+F%x%c
+D1z
+R2
+i1
+cz
+F%x%[A-Z]
+D1ZBc
+R2
+i1
+sZB
+F%i %e
+D1 2.0E+1
+R2
+i1
+f20
+F%i %f
+D1 2.0
+R2
+i1
+f2
+F%i %g
+D1 2.0
+R2
+i1
+f2
+F%i %s
+D1 abc
+R2
+i1
+sabc
+F%i%c
+D1z
+R2
+i1
+cz
+F%i%[A-Z]
+D1ZBc
+R2
+i1
+sZB
+F%e %f
+D1 2.0
+R2
+f1
+f2
+F%e %g
+D1 2.0
+R2
+f1
+f2
+F%e %s
+D1 abc
+R2
+f1
+sabc
+F%e%c
+D1z
+R2
+f1
+cz
+F%e%[A-Z]
+D1ZBc
+R2
+f1
+sZB
+F%f %g
+D1 2.0
+R2
+f1
+f2
+F%f %s
+D1 abc
+R2
+f1
+sabc
+F%f%c
+D1z
+R2
+f1
+cz
+F%f%[A-Z]
+D1ZBc
+R2
+f1
+sZB
+F%g %s
+D1 abc
+R2
+f1
+sabc
+F%g%c
+D1z
+R2
+f1
+cz
+F%g%[A-Z]
+D1ZBc
+R2
+f1
+sZB
+F%s %c
+Da z
+R2
+sa
+cz
+F%s %[A-Z]
+Da ZBc
+R2
+sa
+sZB
+F%3d %d%n
+D        1234567
+R2
+i123
+i4567
+i15
+F%%%d
+D%456
+R1
+i456
+Fthis is nothing
+Dthis 4 me
+R0
+F%d%d
+D		12	34
+R2
+i12
+i34
+F%1c%1s%2s%s%3s
+D 12   \t  34567	89abcdefg
+R5
+c 
+s1
+s2
+s34567
+s89a
+F\t%[abcd]
+Dzaphod
+R0
+F\t%[abcd]
+D	cadcam
+R1
+scadca
+F%[^abcde]%[abcde]
+Dzippadeeyay
+R2
+szipp
+sadee
+F%[a-z]%[^a-z]%c
+Dthis_is 4 you
+R3
+sthis
+s_
+ci
+F%lc%hs%hlc
+Dignore l and h in format
+R2
+ci
+sgnore
+FThe %s %g%s%d
+DThe data	\t 3.4 and 876
+R4
+sdata
+f3.4
+sand
+i876
+F%e%g%e%lg%le
+D-2.4e-2  +3e+2  -3.7e-6  +333E+6 3.1415e+0
+R5
+f-.024
+f300
+f-.0000037
+d333000000
+d3.1415
+F%e %*[ a-z]%% %d
+D3e3      this is all skipped%123v
+R2
+f3000
+i123
+F%[-]
+D-1,23
+R1
+s-
+F%[a-z-]%1c
+Dthis-will-all-match!
+R2
+sthis-will-all-match
+c!
+F%s %c
+Dthis_is_too_little_data
+R1
+sthis_is_too_little_data
+F%o%x
+D6789az
+R2
+i55
+i2202
+F%s %s %s
+Dthis\\_has\tfunnychars\nthis\balso_has!funny@#chars\v\s zip
+R3
+sthis\\_has
+sfunnychars
+sthis\balso_has!funny@#chars
+F%s%[^@]
+Dhi\fthere\! this is a test\\ \b \f \N \r \t \v @nomore
+R2
+shi
+s\fthere\! this is a test\\ \b \f \N \r \t \v 

@@ -1,0 +1,18 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% open.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/open open.o %SVLIBS% %LIBS%
+rm open.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% open0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/open0 open0.o %SVLIBS% %LIBS%
+rm open0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% open1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/open1 open1.o %SVLIBS% %LIBS%
+rm open1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% open2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/open2 open2.o %SVLIBS% %LIBS%
+rm open2.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% open3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/open3 open3.o %SVLIBS% %LIBS%
+rm open3.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% open4.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/open4 open4.o %SVLIBS% %LIBS%
+rm open4.o

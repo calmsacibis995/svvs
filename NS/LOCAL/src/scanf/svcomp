@@ -1,0 +1,9 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% scanf.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/scanf scanf.o %SVLIBS% %LIBS%
+rm scanf.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% scanf1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/scanf1 scanf1.o %SVLIBS% %LIBS%
+rm scanf1.o
+rm -f %DEST%/NS/LOCAL/bin/scanf2 %DEST%/NS/LOCAL/bin/scanf3
+ln %DEST%/NS/LOCAL/bin/scanf1 %DEST%/NS/LOCAL/bin/scanf2
+ln %DEST%/NS/LOCAL/bin/scanf1 %DEST%/NS/LOCAL/bin/scanf3

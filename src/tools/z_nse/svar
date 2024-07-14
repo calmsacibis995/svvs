@@ -1,0 +1,4 @@
+ar -cr sv_nse.a fakesem.o sv_fill.o sv_check.o sv_names.o sv_terrloo.o sv_terrno.o sv_teval.o z_getmsg.o z_poll.o z_putmsg.o z_t_accept.o z_t_alloc.o z_t_bind.o z_t_close.o z_t_connec.o z_t_error.o z_t_free.o z_t_getinf.o z_t_getsta.o
+ar -cr sv_nse.a z_t_listen.o z_t_look.o z_t_open.o z_t_optmgm.o z_t_rcv.o z_t_rcvcon.o z_t_rcvdis.o z_t_rcvrel.o z_t_rcvuda.o z_t_rcvude.o z_t_snd.o z_t_snddis.o z_t_sndrel.o z_t_snduda.o z_t_sync.o z_t_unbind.o
+cp sv_nse.a %DEST%/lib/sv_nse.a
+rm sv_nse.a *.o

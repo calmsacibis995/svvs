@@ -1,0 +1,51 @@
+#
+# @(#)pnoutrefresh	3.1 (SVVS) 12/1/86
+#
+# pads - pnoutrefresh
+#
+
+abstract("pads - pnoutrefresh");
+start
+	prep("Create and fill a pad.");
+	start
+		h = LINES * 5;
+		w = COLS * 3;
+		pad = newpad(h, w);
+		wbarber(pad, h, w, 'Z');
+	finis
+
+	# display various parts of the pad with pnoutrefresh
+	testing("pnoutrefresh and doupdate to show 4 line");
+	testing("portions of the pad from column 0.");
+	start
+		for (i =  LINES - 4; i >= 0; i -= 4)
+		{
+			pnoutrefresh(pad, i * 4, 0, i, 0, i + 3, COLS - 1);
+			doupdate();
+			expect();
+		}
+	finis
+
+	# start at pad top and delete all lines using insertln
+	testing("start at the top of a pad and delete all");
+	testing("the lines from it using insertln.");
+	start
+		for (i = 0; i < h; i++)
+		{
+			wmove(pad, i, 0);
+			winsertln(pad);
+		}
+	finis
+
+	# display various parts of the pad with pnoutrefresh
+	testing("pnoutrefresh and doupdate to show 4 line");
+	testing("portions of the pad from column 0.");
+	start
+		for (i =  LINES - 4; i >= 0; i -= 4)
+		{
+			pnoutrefresh(pad, i * 4, 0, i, 0, i + 3, COLS - 1);
+			doupdate();
+			expect();
+		}
+	finis
+finis

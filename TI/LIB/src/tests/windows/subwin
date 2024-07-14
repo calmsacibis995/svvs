@@ -1,0 +1,36 @@
+#
+# @(#)subwin	3.1 (SVVS) 12/1/86
+#
+# windows - subwin
+#
+
+abstract("windows: subwin");
+start
+	prep("create and clear a full sized window");
+	start
+	h = LINES / 4;
+	w = COLS / 10;
+	ch = '!';
+	k = 0;
+	win = newwin(LINES, COLS, 0, 0);
+	wclear(win);
+	touchwin(win);
+	wrefresh(win);
+	finis
+
+	testing("create and fill numerous subwindows");
+	start
+	for (i = LINES - h; i >= 0; i -= h)
+	{
+		for (j = COLS - w; j >= 0; j -= w)
+		{
+			smwin[k] = subwin(win, h, w, i, j);
+			wbarber(smwin[k], h, w, ch + i + j);
+			touchwin(smwin[k]);
+			wrefresh(smwin[k]);
+			expect();
+			k++;
+		}
+	}
+	finis
+finis

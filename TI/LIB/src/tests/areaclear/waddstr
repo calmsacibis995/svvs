@@ -1,0 +1,28 @@
+#
+# Area clear test, test addstr.
+#
+# @(#)waddstr	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: waddstr");
+start
+	prep("create a full sized window");
+	start
+	iterations = LINES / 2;
+	colnum = 0;
+	mainw = newwin(LINES, COLS, 0, 0);
+	finis
+
+	testing("waddstr newline in diagonal pattern to filled window");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		wmove(mainw, 0, 0);
+		wbarber(mainw, LINES, COLS, 'a');
+		wmove(mainw,i * 2, colnum);
+		waddstr(mainw,"\n");
+		colnum = colnum + 2;
+		wrefresh(mainw);
+		expect();
+	}
+	finis
+finis

@@ -1,0 +1,18 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% clearerr0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/clearerr0 clearerr0.o %SVLIBS% %LIBS%
+rm clearerr0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% clearerr1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/clearerr1 clearerr1.o %SVLIBS% %LIBS%
+rm clearerr1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% feof0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/feof0 feof0.o %SVLIBS% %LIBS%
+rm feof0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ferror.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/ferror ferror.o %SVLIBS% %LIBS%
+rm ferror.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ferror0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/ferror0 ferror0.o %SVLIBS% %LIBS%
+rm ferror0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fileno0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fileno0 fileno0.o %SVLIBS% %LIBS%
+rm fileno0.o

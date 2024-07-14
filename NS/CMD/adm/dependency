@@ -1,0 +1,12 @@
+NS/CMD adv
+NS/CMD dname
+NS/CMD fumount
+NS/CMD fusage
+NS/CMD idload
+NS/CMD nsquery
+NS/CMD rfadmin
+NS/CMD rfpasswd
+NS/CMD rfstart
+NS/CMD rfstop
+NS/CMD rmntstat
+NS/CMD unadv

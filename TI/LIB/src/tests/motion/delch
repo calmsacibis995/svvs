@@ -1,0 +1,28 @@
+#
+# @(#)delch	3.1 (SVVS) 12/1/86
+#
+# cursor motion: delch
+#
+abstract("cursor motion - delch");
+start
+	iterations = LINES / 2;
+	colnum = 0;
+
+	testing("in a loop, fill the screen, then move to various lines");
+	testing("and columns and use delch to clear to the end of the line.");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		move(0, 0);
+		barber('a');
+		for ( j = LINES - 1; j >= colnum ; j-- )
+		{
+			move(i * 2, j);
+			delch();
+		}
+		colnum = colnum + 2;
+		refresh();
+		expect();
+	}
+	finis
+finis

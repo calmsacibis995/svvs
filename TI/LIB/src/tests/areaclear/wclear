@@ -1,0 +1,91 @@
+#
+# Area clear test, test wclear.
+#
+# @(#)wclear	3.1 (SVVS) 12/1/86
+#
+abstract("wclear");
+start
+	prep("create main window. also create five small windows");
+	start
+	mainw = newwin(LINES, COLS, 0, 0);
+	numwins = 5;
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		win[i] = newwin(10, 10, i * 2, i * 5);
+	}
+	finis
+
+	testing("fill and clear small windows.");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw, LINES, COLS, 'a');
+		wclear(win[i]);
+		wrefresh(mainw);
+		wrefresh(win[i]);
+		expect();
+	}
+	finis
+
+	testing("fill and clear main window");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw, LINES, COLS, 'a');
+		wclear(win[i]);
+		wrefresh(mainw);
+		wrefresh(win[i]);
+		expect();
+	}
+	finis
+
+	cleanup("delete small windows");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		delwin(win[i]);
+	}
+	finis
+
+	#
+	# Now do the same thing with subwindows.
+	#
+	prep("create five small subwindows, and clear mainw");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		win[i] = subwin(mainw,10, 10, i * 2, i * 5);
+	}
+	wclear(mainw);
+	wrefresh(mainw);
+	finis
+
+	testing("fill and clear subwindows");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw, LINES, COLS, 'a');
+		wclear(win[i]);
+		wrefresh(mainw);
+		wrefresh(win[i]);
+		expect();
+	}
+	finis
+
+	testing("fill and clear main window");
+	start
+	for ( i = 0 ; i < numwins ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw, LINES, COLS, 'a');
+		touchwin(mainw);
+		wclear(win[i]);
+		wrefresh(mainw);
+		wrefresh(win[i]);
+		expect();
+	}
+	finis
+finis

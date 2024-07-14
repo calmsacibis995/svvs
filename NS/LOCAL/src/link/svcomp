@@ -1,0 +1,9 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% link.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/link link.o %SVLIBS% %LIBS%
+rm link.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% link0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/link0 link0.o %SVLIBS% %LIBS%
+rm link0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% link1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/link1 link1.o %SVLIBS% %LIBS%
+rm link1.o

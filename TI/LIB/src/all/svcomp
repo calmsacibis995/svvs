@@ -1,0 +1,15 @@
+%COMP% %OPTS% -c %DEST%/TI/LIB/bin/highlight -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% all.c 
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/highlight %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/areaclear  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/delline  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/errors  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/input  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/insert  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/keypad  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/motion  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/pads  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/slk  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/strings  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/tabs  %REL% %EXT% all.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/windows  %REL% %EXT% all.o %SVLIBS% %LIBS%
+rm -f all.o

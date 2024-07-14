@@ -1,0 +1,60 @@
+#
+# @(#)slkset	3.1 (SVVS) 12/1/86
+#
+# soft labels - slk_set()
+#
+#NOINITSCR
+
+abstract("soft label keys: slkset");
+start
+	# labels are arranged in 4-4 format
+	prep("slk_init, then initscr");
+	start
+	slk_init(1);
+	initscr();
+	label = "ho";
+	finis
+
+	# the outer loop varies the adjustment of the labels
+
+	testing("set labels and refresh them");
+	start
+	for (j = 0; j <= 2; j++)
+	{
+		# put all labels out and then refresh the line
+
+		for (i = 1; i < 9; i++)
+		{
+			slk_set(i, label:i:j, j);
+		}
+		slk_refresh();
+		expect();
+	}
+	finis
+
+	# put labels and then put null ones
+	label = "bigstuff";
+	testing("set labels to 'bigstuff'");
+	start
+	for (i = 1; i < 9; i++)
+	{
+		slk_set(i, label, 0);
+		slk_noutrefresh();
+	}
+	finis
+	doupdate();
+	expect();
+
+	# put null labels just to see it it works
+	label = "";
+	testing("setting null labels");
+	start
+	for (i = 1; i < 9; i++)
+	{
+		slk_set(i, label, 0);
+		slk_noutrefresh();
+	}
+	finis
+	doupdate();
+	expect();
+finis

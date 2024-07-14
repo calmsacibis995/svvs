@@ -1,0 +1,6 @@
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include main.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include tput.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include vid.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include tgo.c
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/paramstrings  main.o tput.o vid.o tgo.o %SVLIBS% %LIBS%
+rm *.o

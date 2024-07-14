@@ -1,0 +1,12 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mknod.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mknod mknod.o %SVLIBS% %LIBS%
+rm mknod.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mknod0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mknod0 mknod0.o %SVLIBS% %LIBS%
+rm mknod0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mknod1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mknod1 mknod1.o %SVLIBS% %LIBS%
+rm mknod1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mknod2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mknod2 mknod2.o %SVLIBS% %LIBS%
+rm mknod2.o

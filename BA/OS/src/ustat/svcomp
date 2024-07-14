@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ustat.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/ustat ustat.o %SVLIBS% %LIBS%
+rm ustat.o

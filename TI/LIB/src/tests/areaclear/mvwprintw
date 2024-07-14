@@ -1,0 +1,27 @@
+#
+# Area clear test, test mvprintw.
+#
+# @(#)mvwprintw	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: mvwprintw");
+start
+	prep("clear a full size window");
+	start
+	iterations = 12;
+	colnum = 0;
+	mainw = newwin(LINES,COLS, 0, 0);
+	finis
+
+	testing("mvprintw a newline to filled stdscr");
+	start
+		for ( i = 0 ; i < iterations ; i++ )
+		{
+			wmove(mainw, 0, 0);
+			wbarber(mainw,LINES,COLS, 'a');
+			mvwprintw(mainw, (i * 2), colnum,'\n');
+ 			colnum = colnum + 2;
+			wrefresh(mainw);
+			expect();
+		}
+	finis
+finis

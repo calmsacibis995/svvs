@@ -1,0 +1,21 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% readwrite0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/readwrite0 readwrite0.o %SVLIBS% %LIBS%
+rm readwrite0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% readwrite1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/readwrite1 readwrite1.o %SVLIBS% %LIBS%
+rm readwrite1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% write.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/write write.o %SVLIBS% %LIBS%
+rm write.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% write0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/write0 write0.o %SVLIBS% %LIBS%
+rm write0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% write1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/write1 write1.o %SVLIBS% %LIBS%
+rm write1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% write2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/write2 write2.o %SVLIBS% %LIBS%
+rm write2.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% write3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/write3 write3.o %SVLIBS% %LIBS%
+rm write3.o

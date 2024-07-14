@@ -1,0 +1,24 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fdopen0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fdopen0 fdopen0.o %SVLIBS% %LIBS%
+rm fdopen0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fopen.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fopen fopen.o %SVLIBS% %LIBS%
+rm fopen.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fopen0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fopen0 fopen0.o %SVLIBS% %LIBS%
+rm fopen0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fopen1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fopen1 fopen1.o %SVLIBS% %LIBS%
+rm fopen1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fopen3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fopen3 fopen3.o %SVLIBS% %LIBS%
+rm fopen3.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% freopen0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/freopen0 freopen0.o %SVLIBS% %LIBS%
+rm freopen0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% freopen1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/freopen1 freopen1.o %SVLIBS% %LIBS%
+rm freopen1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% freopen3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/freopen3 freopen3.o %SVLIBS% %LIBS%
+rm freopen3.o

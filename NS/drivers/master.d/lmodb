@@ -1,0 +1,7 @@
+*#ident	"@(#)lmodb	1.1"
+*
+* LMODB   stream loopback bottom module
+*
+*FLAG	#VEC	PREFIX	SOFT	#DEV	IPL	DEPENDENCIES/VARIABLES
+om	-	lmb	-	-	-
+

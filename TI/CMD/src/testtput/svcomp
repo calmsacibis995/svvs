@@ -1,0 +1,7 @@
+%COMP% %OPTS%  -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% main.c
+%COMP% %OPTS%  -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% tput.c
+%COMP% %OPTS%  -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% tput_str.c
+%COMP% %OPTS% -o %DEST%/TI/CMD/bin/testtput0 main.o tput.o tput_str.o %SVLIBS% %LIBS%
+%COMP% %OPTS%  -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% caller.c
+%COMP% %OPTS% -o %DEST%/TI/CMD/bin/testtput caller.o %SVLIBS% %LIBS%
+rm -f main.o tput.o tput_str.o caller.o

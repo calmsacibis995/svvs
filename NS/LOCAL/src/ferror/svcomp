@@ -1,0 +1,18 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% clearerr0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/clearerr0 clearerr0.o %SVLIBS% %LIBS%
+rm clearerr0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% clearerr1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/clearerr1 clearerr1.o %SVLIBS% %LIBS%
+rm clearerr1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% feof0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/feof0 feof0.o %SVLIBS% %LIBS%
+rm feof0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% ferror.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/ferror ferror.o %SVLIBS% %LIBS%
+rm ferror.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% ferror0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/ferror0 ferror0.o %SVLIBS% %LIBS%
+rm ferror0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fileno0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fileno0 fileno0.o %SVLIBS% %LIBS%
+rm fileno0.o

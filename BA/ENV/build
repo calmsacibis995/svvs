@@ -1,0 +1,9 @@
+sv_tools.a sv_base.a sv_sys.a
+src/devcon svcomp
+src/devnul svcomp
+src/devtty svcomp
+src/envvar svcomp
+src/filsys svcomp
+src/header svcomp
+src/passwd svcomp
+src/termio svcomp

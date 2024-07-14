@@ -1,0 +1,17 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_acct.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_chroot.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_msgctl.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_msgget.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_msgrcv.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_msgsnd.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_nice.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_plock.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_profil.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_ptrace.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_semctl.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_semget.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_semop.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_shmat.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_shmctl.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_shmdt.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% z_shmget.c

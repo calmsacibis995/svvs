@@ -1,0 +1,12 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mount.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mount mount.o %SVLIBS% %LIBS%
+rm mount.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mount0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mount0 mount0.o %SVLIBS% %LIBS%
+rm mount0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mount1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mount1 mount1.o %SVLIBS% %LIBS%
+rm mount1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mount2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mount2 mount2.o %SVLIBS% %LIBS%
+rm mount2.o

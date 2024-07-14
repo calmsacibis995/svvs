@@ -1,0 +1,2 @@
+%COMP% %OPTS% -o sv_abort -I%DEST%/include %REL% %EXT% sv_abort.c
+mv sv_abort %DEST%/bin

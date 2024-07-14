@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rmntstat.c
+%COMP% %OPTS% -o %DEST%/NS/CMD/bin/rmntstat rmntstat.o %SVLIBS% %LIBS%
+rm rmntstat.o

@@ -1,0 +1,40 @@
+#
+# @(#)slklabel	3.1 (SVVS) 12/1/86
+#
+# soft labels
+#
+#NOINITSCR
+
+# put labels and refresh the screen.  then do
+# slk_label for each one 
+# labels are left justified
+abstract("highlight: slklabel");
+start
+	prep("turn on soft labels and then do an initscr");
+	start
+	slk_init(0);
+	initscr();
+	finis
+
+	prep("set labels, touch and refresh them");
+	start
+	label = "gelato";
+	for (i = 1; i < 9; i++)
+	{
+		slk_set(i, label:i, 1);
+	}
+	slk_touch();
+	slk_refresh();
+	expect();
+	finis
+
+	testing("check labels against output");
+	start
+	for (i = 1; i < 9; i++)
+	{
+		scrlabel = slk_label(i);
+		if (scrlabel != label:i)
+			printf("incorrect label returned");
+	}
+	finis
+finis

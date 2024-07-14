@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fstat.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fstat fstat.o %SVLIBS% %LIBS%
+rm fstat.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% stat.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/stat stat.o %SVLIBS% %LIBS%
+rm stat.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% stat0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/stat0 stat0.o %SVLIBS% %LIBS%
+rm stat0.o

@@ -1,0 +1,163 @@
+#
+# @(#)padinput	3.3 (SVVS) 12/30/86
+#
+# pads - all the various input calls
+#	 except inch which is in the misc test
+#
+
+abstract("pads - input routines used on pads");
+start
+	prep("create a pad and prepare an array of characters for input.");
+	start
+		h = LINES * 2;
+		w = COLS * 2;
+		pad = newpad(h, w);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		
+		# input contains 'abcde'
+		for (j = 0; j < 5; j++)
+			input[j] = 'a' + j;
+
+		# echoing is not allowed for pads
+		noecho();
+		cbreak();
+	finis
+
+	# get characters from each line of the pad
+	testing("for each line of the first two thirds of a pad,");
+	testing("get 3 characters from that line and prefresh the");
+	testing("pad to display that line at the top of the screen");
+	start
+		for (i = 0; i < h - LINES; i++)
+		{
+			for (j = 0; j < 3; j++)
+			{
+				keyboard("%c", input[j]);
+				wmove(pad, i, 0);
+				ch = wgetch(pad);
+				touchwin(pad);
+				prefresh(pad, i, 0, 0, 0, LINES - 1, COLS - 1);
+				expect();
+				if (ch != input[j])
+				{
+					error("wgetch error!  wanted '%c', got '%c'", input[j], ch);
+					break;
+				}
+			}
+		}
+		wclear(pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+	finis
+
+	testing("for each of the first five lines of a pad,");
+	testing("get a character from the line, verify that it is");
+	testing("the expected character and prefresh to show the");
+	testing("line at the top of the screen.  then do an ungetch and");
+	testing("get the character again and be sure it's correct");
+	start
+		for (i = 0; i < 5; i++)
+		{
+			keyboard("%c", input[i]);
+
+			wmove(pad, i, 0);
+			ch = wgetch(pad);
+			touchwin(pad);
+			prefresh(pad, i, 0, 0, 0, LINES - 1, COLS - 1);
+			expect();
+			if (ch != input[i])
+			{
+				error("getch error!  wanted '%c', got '%c'", input[i], ch);
+				break;
+			}
+
+			ungetch(ch);
+			wmove(pad, i, 0);
+			ch = wgetch(pad);
+			touchwin(pad);
+			prefresh(pad, i, 0, 0, 0, LINES - 1, COLS - 1);
+			expect();
+			if (ch != input[i])
+			{
+				error("getch error!  wanted '%c', got '%c'", input[i], ch);
+				break;
+			}
+		}
+		wclear(pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+	finis
+
+	testing("for every third line of the first two thirds of a pad");
+	testing("get a single character and then flushinp.  prefresh");
+	testing("the pad to display the line at the top of the screen.");
+	start
+		for (i = 0; i < h - LINES; i += 3)
+		{
+			for (j = 0; j < 5; j++)
+				keyboard("%c", input[j]);
+
+			wmove(pad, i, 0);
+			ch = wgetch(pad);
+			touchwin(pad);
+			prefresh(pad, i, 0, 0, 0, LINES - 1, COLS - 1);
+			flushinp();
+			expect();
+			if (ch != 'a')
+			{
+				error("getch error!  wanted 'a', got '%c'", ch);
+				break;
+			}
+		}
+	finis
+	wclear(pad);
+	prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+
+	string = "a string of characters";
+
+	testing("from alternate lines of the first two thirds of a pad, get");
+	testing("a string, prefresh the pad so the line is at the top of the");
+	testing("screen and verify that the string is the expected one.");
+	start
+		# get a string from alternate lines of the pad
+		for (i = 0; i < h - LINES; i += 2)
+		{
+			keyboard("%s\n", string);
+
+			mvwgetstr(pad, i, 0, str);
+			touchwin(pad);
+			prefresh(pad, i, 0, 0, 0, LINES - 1, COLS - 1);
+			expect();
+			if (str != string)
+			{
+				error("mvwgetstr error!  wanted '%s', got '%s'", string, str);
+				break;
+			}
+		}
+		wclear(pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+	finis
+
+	c = 'x';
+	s = "adifferentstringofcharacters";
+	d = 1956;
+
+	testing("from every third line of the first two thirds of a pad,");
+	testing("do mvwscanw of an integer, a character and a string and");
+	testing("prefresh the pad to show this line at the top of the screen.");	testing("verify that the scanned items are the expected ones.");
+	start
+		for (i = 0; i < h - LINES; i += 3)
+		{
+			keyboard("%d%c%s\n", d, c, s);
+
+			mvwscanw(pad, i, 0, "%d%c%s", x, y, z);
+			touchwin(pad);
+			prefresh(pad, i, 0, 0, 0, LINES - 1, COLS - 1);
+			expect();
+			if ((x != d) || (y != c) || (z != s))
+			{
+				error("mvwscanw error!  wanted '%d%c%s', got '%d%c%s'", d, c, s, x, y, z);
+				break;
+			}
+
+		}
+	finis
+finis

@@ -1,0 +1,24 @@
+#
+# @(#)newwin	3.1 (SVVS) 12/1/86
+#
+# windows - newwin
+#
+
+abstract("windows: newwin");
+start
+	# do a bunch of newwin's
+
+	testing("create overlapping windows, increasing in size each time,");
+	testing("and filling each one.");
+	start
+	for (i = LINES; i > 0; i--)
+	{
+		wins[i] = newwin(i, COLS, 0, 0);
+		wbarber(wins[i], i, COLS, 'a' + i);
+		wrefresh(wins[i]);
+		expect();
+		wclear(wins[i]);
+		wrefresh(wins[i]);
+	}
+	finis
+finis

@@ -1,0 +1,21 @@
+sv_tools.a sv_nse.a sv_base.a sv_sys.a
+src/t_accept svcomp
+src/t_alloc svcomp
+src/t_bind svcomp
+src/t_close svcomp
+src/t_connect svcomp
+src/t_error svcomp
+src/t_free svcomp
+src/t_getinfo svcomp
+src/t_getstate svcomp
+src/t_listen svcomp
+src/t_open svcomp
+src/t_optmgmt svcomp
+src/t_rcvconnect svcomp
+src/t_rcvdis svcomp
+src/t_snd svcomp
+src/t_snddis svcomp
+src/t_sndrel svcomp
+src/t_sndudata svcomp
+src/t_sync svcomp
+src/t_unbind svcomp

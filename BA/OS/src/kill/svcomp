@@ -1,0 +1,27 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill kill.o %SVLIBS% %LIBS%
+rm kill.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill0 kill0.o %SVLIBS% %LIBS%
+rm kill0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill1 kill1.o %SVLIBS% %LIBS%
+rm kill1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill2 kill2.o %SVLIBS% %LIBS%
+rm kill2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill3 kill3.o %SVLIBS% %LIBS%
+rm kill3.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill4.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill4 kill4.o %SVLIBS% %LIBS%
+rm kill4.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill_me_0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill_me_0 kill_me_0.o %SVLIBS% %LIBS%
+rm kill_me_0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill_me_1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill_me_1 kill_me_1.o %SVLIBS% %LIBS%
+rm kill_me_1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% kill_me_2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/kill_me_2 kill_me_2.o %SVLIBS% %LIBS%
+rm kill_me_2.o

@@ -1,0 +1,32 @@
+#
+# @(#)slk_label	3.1 (SVVS) 12/1/86
+#
+# cursor motion: slk_label
+#
+#NOINITSCR
+abstract("cursor motion - slk_label");
+start
+	prep("put strings in each label using slk_set.");
+	start
+	slk_init(0);
+	initscr();
+	label = "foobar";
+	for (i = 1; i < 9; i++)
+	{
+		slk_set(i, label:i, 1);
+	}
+	slk_refresh();
+	expect();
+	finis
+
+
+	testing("do slk_label for each label and verify that it is correct");
+	start
+	for (i = 1; i < 9; i++)
+	{
+		scrlabel = slk_label(i);
+		if (scrlabel != label:i)
+			printw("incorrect label returned, expected '%s', got '%s'", scrlabel, label:i);
+	}
+	finis
+finis

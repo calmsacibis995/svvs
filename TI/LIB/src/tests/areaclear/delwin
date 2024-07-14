@@ -1,0 +1,30 @@
+#
+# Test area clear, function delwin.
+#
+# @(#)delwin	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: delwin");
+start
+	prep("create and clear a full-size window");
+	start
+	mainw = newwin(LINES,COLS,0,0);
+	wclear(mainw);
+	iterations = 5;
+	finis
+
+	testing("create, fill, and delete a small window on top of the");
+	testing("first 5 times");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		stuff = newwin(LINES / 5, COLS / 5, 0, 0);
+		wmove(stuff, 0, 0);
+		wbarber(stuff,LINES / 5,COLS / 5,'a');
+		wrefresh(mainw);
+		wrefresh(stuff);
+		delwin(stuff);
+		wrefresh(mainw);
+		expect();
+	}
+	finis 
+finis

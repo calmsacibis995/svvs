@@ -1,0 +1,35 @@
+#
+# @(#)mvwin	3.1 (SVVS) 12/1/86
+#
+# windows - mvwin
+#
+
+abstract("windows: mvwin");
+start
+	prep("create and fill a small window");
+	start
+	h = LINES / 8;
+	w = COLS / 20;
+	win = newwin(h, w, 0, 0);
+	wbarber(win, h, w, 'a');
+	touchwin(win);
+	wrefresh(win);
+	expect();
+	finis
+
+	testing("move the window across the screen");
+	start
+	for (i = 0; i <= LINES - h; i += h)
+	{
+		for (j = 0; j <= COLS - w; j += w)
+		{
+			mvwin(win, i, j);
+			touchwin(stdscr);
+			refresh();
+			touchwin(win);
+			wrefresh(win);
+			expect();
+		}
+	}
+	finis
+finis

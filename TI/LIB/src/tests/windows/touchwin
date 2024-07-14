@@ -1,0 +1,37 @@
+#
+# @(#)touchwin	3.1 (SVVS) 12/1/86
+#
+# windows - touchwin
+#
+
+abstract("windows: touchwin");
+start
+	prep("create and fill a small window");
+	start
+	h = LINES / 4;
+	w = COLS / 10;
+	win = newwin(h, w, 0, 0);
+	wbarber(win, h, w, 'a');
+	touchwin(win);
+	wrefresh(win);
+	expect();
+	ch = '!';
+	finis
+
+	testing("move a small window around on the screen");
+	testing("touchwin must be called to redisplay the moved window");
+	start
+		for (i = LINES - h; i >= 0; i -= h)
+		{
+			for (j = COLS - w; j >= 0; j -= w)
+			{
+				mvwin(win, i, j);
+				touchwin(stdscr);
+				refresh();
+				touchwin(win);
+				wrefresh(win);
+				expect();
+			}
+		}
+	finis
+finis

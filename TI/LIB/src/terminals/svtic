@@ -1,0 +1,12 @@
+tic SVVS1
+tic SVVS2
+tic SVVS3
+tic SVVS4
+rm -f %DEST%/TI/LIB/data/basiccap.dir/SVVS1
+rm -f %DEST%/TI/LIB/data/basiccap.dir/SVVS2
+rm -f %DEST%/TI/LIB/data/basiccap.dir/SVVS3
+rm -f %DEST%/TI/LIB/data/basiccap.dir/SVVS4
+cp SVVS1 %DEST%/TI/LIB/data/basiccap.dir/SVVS1
+cp SVVS2 %DEST%/TI/LIB/data/basiccap.dir/SVVS2
+cp SVVS3 %DEST%/TI/LIB/data/basiccap.dir/SVVS3
+cp SVVS4 %DEST%/TI/LIB/data/basiccap.dir/SVVS4

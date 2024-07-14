@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sleep.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sleep sleep.o %SVLIBS% %LIBS%
+rm sleep.o

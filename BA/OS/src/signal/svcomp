@@ -1,0 +1,24 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% signal.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/signal signal.o %SVLIBS% %LIBS%
+rm signal.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% signal0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/signal0 signal0.o %SVLIBS% %LIBS%
+rm signal0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% signal1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/signal1 signal1.o %SVLIBS% %LIBS%
+rm signal1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% signal2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/signal2 signal2.o %SVLIBS% %LIBS%
+rm signal2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% signal3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/signal3 signal3.o %SVLIBS% %LIBS%
+rm signal3.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% signal_me0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/signal_me0 signal_me0.o %SVLIBS% %LIBS%
+rm signal_me0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% signal_me1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/signal_me1 signal_me1.o %SVLIBS% %LIBS%
+rm signal_me1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% signal_me2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/signal_me2 signal_me2.o %SVLIBS% %LIBS%
+rm signal_me2.o

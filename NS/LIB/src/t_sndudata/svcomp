@@ -1,0 +1,5 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% t_sndudata.c
+%COMP% %OPTS% -o %DEST%/NS/LIB/bin/t_sndudata t_sndudata.o %SVLIBS% %LIBS%
+rm t_sndudata.o
+rm -f %DEST%/NS/LIB/bin/t_rcvudata 
+ln %DEST%/NS/LIB/bin/t_sndudata %DEST%/NS/LIB/bin/t_rcvudata 

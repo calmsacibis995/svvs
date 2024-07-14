@@ -1,0 +1,6 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ptrace.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/ptrace ptrace.o %SVLIBS% %LIBS%
+rm ptrace.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ptrace1.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/ptrace1 ptrace1.o %SVLIBS% %LIBS%
+rm ptrace1.o

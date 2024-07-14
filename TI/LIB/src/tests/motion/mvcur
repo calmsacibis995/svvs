@@ -1,0 +1,119 @@
+#
+# @(#)mvcur	3.1 (SVVS) 12/1/86
+#
+# cursor motion: mvcur
+#
+#NOFINALEXPECT
+abstract("mvcur");
+start
+	prep("set oldy and oldx to 0");
+	start
+	oldy = 0;
+	oldx = 0;
+	finis
+
+	testing("mvcur in a diagonal down the screen");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		mvcur(oldy, oldx, i, i);
+		expect_mvcur(oldy, oldx, i, i);
+		oldy = i;
+		oldx = i;
+	}
+	finis
+
+	cleanup("moving back to 0,0");
+	start
+	mvcur(oldy, oldx, 0, 0);
+	expect_mvcur(oldy, oldx, 0, 0);
+	finis
+
+	testing("move at least once in each direction of movement");
+	start
+	mvcur(0, 0, 1, 0);
+	expect_mvcur(0, 0, 1, 0);
+	mvcur(1, 0, 2, 1);
+	expect_mvcur(1, 0, 2, 1);
+	mvcur(2, 1, 3, 0);
+	expect_mvcur(2, 1, 3, 0);
+	mvcur(3, 0, 3, 1);
+	expect_mvcur(3, 0, 3, 1);
+	mvcur(3, 1, 3, 2);
+	expect_mvcur(3, 1, 3, 2);
+	mvcur(3, 2, 2, 2);
+	expect_mvcur(3, 2, 2, 2);
+	mvcur(2, 2, 1, 2);
+	expect_mvcur(2, 2, 1, 2);
+	mvcur(1, 2, 0, 1);
+	expect_mvcur(1, 2, 0, 1);
+	mvcur(0, 1, 0, 0);
+	expect_mvcur(0, 1, 0, 0);
+	finis
+
+	testing("move two spaces in each direction of movement");
+	start
+	mvcur(0, 0, 0, 2);
+	expect_mvcur(0, 0, 0, 2);
+	mvcur(0, 2, 2, 4);
+	expect_mvcur(0, 2, 2, 4);
+	mvcur(2, 4, 4, 4);
+	expect_mvcur(2, 4, 4, 4);
+	mvcur(4, 4, 6, 4);
+	expect_mvcur(4, 4, 6, 4);
+	mvcur(6, 4, 6, 2);
+	expect_mvcur(6, 4, 6, 2);
+	mvcur(6, 2, 4, 0);
+	expect_mvcur(6, 2, 4, 0);
+	mvcur(4, 0, 2, 0);
+	expect_mvcur(4, 0, 2, 0);
+	mvcur(2, 0, 0, 2);
+	expect_mvcur(2, 0, 0, 2);
+	mvcur(0, 2, 0, 0);
+	expect_mvcur(0, 2, 0, 0);
+	finis
+
+	testing("move three spaces in each direction of movement");
+	start
+	mvcur(0, 0, 0, 3);
+	expect_mvcur(0, 0, 0, 3);
+	mvcur(0, 3, 3, 6);
+	expect_mvcur(0, 3, 3, 6);
+	mvcur(3, 6, 6, 6);
+	expect_mvcur(3, 6, 6, 6);
+	mvcur(6, 6, 9, 3);
+	expect_mvcur(6, 6, 9, 3);
+	mvcur(9, 3, 9, 0);
+	expect_mvcur(9, 3, 9, 0);
+	mvcur(9, 0, 6, 3);
+	expect_mvcur(9, 0, 6, 3);
+	mvcur(6, 3, 3, 0);
+	expect_mvcur(6, 3, 3, 0);
+	mvcur(3, 0, 0, 0);
+	expect_mvcur(3, 0, 0, 0);
+	finis
+
+	testing("jump around the screen");
+	start
+	mvcur(0, 0, (LINES / 2), (COLS / 2));
+	expect_mvcur(0, 0, (LINES / 2), (COLS / 2));
+	mvcur((LINES/ 2), (COLS / 2), (LINES - 1), (COLS - 1)); 
+	expect_mvcur((LINES/ 2), (COLS / 2), (LINES - 1), (COLS - 1)); 
+	mvcur((LINES - 1), (COLS - 1), (LINES / 4), (COLS / 2));
+	expect_mvcur((LINES - 1), (COLS - 1), (LINES / 4), (COLS / 2));
+	mvcur((LINES / 4), (COLS / 2), (LINES / 2), (COLS / 4));
+	expect_mvcur((LINES / 4), (COLS / 2), (LINES / 2), (COLS / 4));
+	mvcur((LINES / 2), (COLS / 4), 0, 0);
+	expect_mvcur((LINES / 2), (COLS / 4), 0, 0);
+	finis
+	
+	testing("batch mvcur requests");
+	start
+	mvcur(0, 0, (LINES / 2), (COLS / 2));
+	mvcur((LINES/ 2), (COLS / 2), (LINES - 1), (COLS - 1)); 
+	mvcur((LINES - 1), (COLS - 1), (LINES / 4), (COLS / 2));
+	mvcur((LINES / 4), (COLS / 2), (LINES / 2), (COLS / 4));
+	mvcur((LINES / 2), (COLS / 4), 0, 0);
+	expect_mvcur(0, 0, 0, 0);
+	finis
+finis

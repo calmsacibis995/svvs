@@ -1,0 +1,39 @@
+#
+# @(#)delch	3.1 (SVVS) 12/1/86
+#
+# insert/delete: delch
+#
+abstract("inserting/deleting characters: delch");
+start
+	iterations = LINES / 2;
+	colnum = 0;
+
+	testing("fill screen, then delete characters with delch");
+	testing("diagonally down the screen.");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		move(0, 0);
+		barber('a');
+		move(i * 2, colnum);
+		delch();
+		colnum = colnum + 2;
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("delete the last character on each line with delch.");
+	start
+	barber('A');
+	for ( i = 0; i < LINES ; i++ )
+	{
+		move(i, COLS - 1);
+		delch();
+		refresh();
+		expect();
+	}
+	finis
+finis

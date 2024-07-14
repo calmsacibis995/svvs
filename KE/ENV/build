@@ -1,0 +1,2 @@
+sv_tools.a sv_base.a sv_sys.a
+src/header svcomp

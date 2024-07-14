@@ -1,0 +1,24 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sys0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sys0 sys0.o %SVLIBS% %LIBS%
+rm sys0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sys1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sys1 sys1.o %SVLIBS% %LIBS%
+rm sys1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sys2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sys2 sys2.o %SVLIBS% %LIBS%
+rm sys2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sys3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sys3 sys3.o %SVLIBS% %LIBS%
+rm sys3.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% system.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/system system.o %SVLIBS% %LIBS%
+rm system.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% system0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/system0 system0.o %SVLIBS% %LIBS%
+rm system0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% system1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/system1 system1.o %SVLIBS% %LIBS%
+rm system1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% system2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/system2 system2.o %SVLIBS% %LIBS%
+rm system2.o

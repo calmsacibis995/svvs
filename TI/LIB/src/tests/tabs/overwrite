@@ -1,0 +1,31 @@
+#
+# @(#)overwrite	3.1 (SVVS) 12/1/86
+#
+# tabs: overwrite
+#
+abstract("tabs: overwrite");
+start
+	prep("create two windows. add a tab to the second one");
+	start
+	win1 = newwin(LINES - 2, COLS, 0, 0);
+	win2 = newwin(1, COLS, LINES - 1, 0);
+	wprintw(win2, "\t");
+	wrefresh(win2);
+	expect();
+	finis
+
+	# win2 contains a tab. fill win1 and overwrite its top line with win2.
+
+	testing("overwrite the first (filled) window with the second one");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		wmove(win1, 0, 0);
+		wbarber(win1, LINES - 2, COLS, 'a' + i);
+		wrefresh(win1);
+		overwrite(win2, win1);
+	}
+	wrefresh(win1);
+	expect();
+	finis
+finis

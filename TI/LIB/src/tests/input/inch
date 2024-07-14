@@ -1,0 +1,116 @@
+#
+# @(#)inch	3.1 (SVVS) 12/1/86
+#
+# input: inch, winch, mvinch, mvwinch
+#
+
+abstract("input: inch");
+start
+	prep("fill and refresh stdscr");
+	start
+	ch = 'a';
+	move(0, 0);
+	barber(ch);
+	refresh();
+	finis
+
+	# get a character from the first position of each line
+	# and compare it to the expected character
+	# then do the same using mvinch instead of inch
+	testing("get a character from the first position of each line,");
+	testing("and compare it, using inch and mvinch");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		move(i, 0);
+		result = inch();
+		expect();
+		if (result != ch + i)
+		{
+			error("i: %d, ch: %c, should be: %c\n", i,
+				result, ch + i);
+			break;
+		}
+		result = mvinch(i, 0);
+		expect();
+		if (result != ch + i)
+		{
+			error("i: %d, ch: %c, should be: %c\n", i,
+				result, ch + i);
+			break;
+		}
+	}
+	finis
+
+	cleanup("clear and refresh");
+	start
+	clear();
+	refresh();
+	finis
+
+	prep("create and fill two small windows");
+	start
+	ch = 'A';
+	win1 = newwin(LINES / 3, COLS / 4, 0, 0);
+	wmove(win1, 0, 0);
+	wbarber(win1, LINES / 3, COLS / 4, ch);
+	wrefresh(win1);
+	win2 = newwin(LINES / 3, COLS / 4, LINES / 3, COLS / 2);
+	wmove(win2, 0, 0);
+	wbarber(win2, LINES / 3, COLS / 4, ch);
+	wrefresh(win2);
+	finis
+
+	# get a character from the first position of each line
+	# for win1 and win2, and compare with what is expected
+	testing("get a character from the first position of each line");
+	testing("of win1 and win2, and compare it, using winch");
+	start
+	for (i = 0; i < LINES / 3; i++)
+	{
+		wmove(win1, i, 0);
+		result = winch(win1);
+		expect();
+		if (result != ch + i)
+		{
+			error("i: %d, ch: %c, should be: %c\n", i,
+				result, ch + i);
+			break;
+		}
+		wmove(win2, i, 0);
+		result = winch(win2);
+		expect();
+		if (result != ch + i)
+		{
+			error("i: %d, ch: %c, should be: %c\n", i,
+				result, ch + i);
+			break;
+		}
+	}
+	finis
+
+	# same as preceding test using mvwinch
+	testing("get a character from the first position of each line");
+	testing("of win1 and win2, and compare it, using mvwinch");
+	start
+	for (i = 0; i < LINES / 3; i++)
+	{
+		result = mvwinch(win1, i, 0);
+		expect();
+		if (result != ch + i)
+		{
+			error("i: %d, ch: %c, should be: %c\n", i,
+				result, ch + i);
+			break;
+		}
+		result = mvwinch(win2, i, 0);
+		expect();
+		if (result != ch + i)
+		{
+			error("i: %d, ch: %c, should be: %c\n", i,
+				result, ch + i);
+			break;
+		}
+	}
+	finis
+finis

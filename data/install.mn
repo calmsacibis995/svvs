@@ -1,0 +1,1143 @@
+%leader% path_lead
+%regarding% nothing
+%next% source_name
+%push% sv_release
+
+%menu% sv_release
+%promptstr% release (?, h, help, exit)> 
+%description%
+What System V release are you planning to verify?
+%end%
+%information%
+The SVVS can verify either release 2 or release 3 of System V.  You
+should enter the release that corresponds to the system you are
+verifying in order to allow the tests to configure themselves
+according to the definitions of the particular release under test. 
+An incorrect answer on this menu will cause certain tests to fail
+verification unnecessarily.
+%end%
+%regarding% release
+%repeat% -1
+
+	%entry% "         Release 2.* (2)"
+		%responses% 2 svr2 sysvr_2
+		%link% rel_2
+	%entry% "         Release 3.* (3)"
+		%responses% 3 svr3 sysvr_3
+		%link% rel_3
+	%nonentry%
+		%responses% h help ?
+		%help%
+	%nonentry%
+		%responses% exit 
+		%exit%
+
+%leader% rel_2
+%regarding% release
+%value% 2
+%next% table_2
+
+%leader% rel_3
+%regarding% release
+%value% 3
+%next% table_3
+
+%prompt% source_name
+%description%
+
+Special responses are: ?, h, help, exit.
+
+Enter the absolute path to the root of the SVVS tree containing the
+SVVS source:  
+%end%
+
+%information%
+This path describes the directory which contains the sources from which
+the SVVS is to be built.  This directory must exist on whatever machine
+is to perform the actual building of the SVVS.  This path must be an
+absolute path on the machine where the SVVS is to be built.
+
+The responses: '?', 'h' or 'help' will display this message and
+'exit' will write the parameters to stdout and exit.
+%end%
+
+%regarding% source
+%next% dest_name
+%repeat% 0
+	%responses% help ? h
+		%help%
+	%responses% exit
+		%exit%
+
+%prompt% dest_name
+%description%
+
+Special responses are: ?, h, help, exit.
+
+Enter the absolute path under which you want SVVS to be
+built: 
+%end%
+
+%information%
+This is the directory under which the executable version of the SVVS
+will be placed.  It must exist and be an absolute path on the
+machine on which the SVVS is actually to be built.
+
+The responses: '?', 'h' or 'help' will display this message and
+'exit' will write the parameters to stdout and exit.
+%end%
+
+%regarding% destination
+%repeat% 0
+%next% path_ret
+	%responses% help ? h
+		%help%
+	%responses% exit
+		%exit%
+
+%leader% path_ret
+%regarding% nothing
+%return%
+
+%menu% table_2
+%promptstr% parameter (?, h, help, show, exit)> 
+%description%
+What parameter do you want to specify?
+%end%
+%information%
+When you build SVVS there are certain parameters which must be specified
+for the install program to work properly.  You may select these items one
+at a time from this menu.  The items are as follows:
+        System V Release        The System V release of your target system.
+        Directories             The SOURCE and DESTINATION directories.
+        C Compiler Command      The command to compile a C program on your
+                                development system for your target system.
+        C Options               Any options needed to compile SVVS.
+        C Libraries             Any libraries for the sections selected
+                                (example: -lm -lmalloc -lcurses -lnsl_s)
+        Special C Libraries     Special library lists for sections
+        Optional Components     Optional items your target system supports.
+        Sections                Overall sections of SVVS you want to build.
+                                If you build a section and one of its sub-
+                                sections, the subsection will build twice.
+        Subsections             Subsections of SVVS that you want to build.
+        SVVS Utilities          Whether you want to build the SVVS commands
+                                and libraries.
+Selecting 'exit' exits the menus, writing values you have selected
+on standard output. 'show' shows the current values, 'help' or '?'
+displays this message. 
+%end%
+%regarding% check
+%repeat% -1
+
+	%entry% "         1) Change System V Release"
+		%responses% 1 release
+		%link% sv_release
+	%entry% "         2) Change SOURCE and DESTINATION Directories"
+		%responses% 2 directories
+		%call% source_name
+	%entry% "         3) Command to invoke C compiler"
+		%responses% 3 command
+		%call% c_command
+	%entry% "         4) Options to the C compiler"
+		%responses% 4 options
+		%call% c_options
+	%entry% "         5) C system libraries"
+		%responses% 5 libraries
+		%call% c_libraries
+	%entry% "         6) Special C system libraries"
+		%responses% 6 special
+		%call% spec_libs_2
+	%entry% "         7) Optional components supported"
+		%responses% 7 optional
+		%call% extensions_2
+	%entry% "         8) Complete sections to build"
+		%responses% 8 sections
+		%call% sections_2
+	%entry% "         9) Subsections to build"
+		%responses% 9 subsections
+		%call% subsections_2
+	%entry% "        10) SVVS Utilities"
+		%responses% 10 utilities
+		%call% wantlibs
+	%nonentry%
+		%responses% show
+		%value% check
+	%nonentry%
+		%responses% h help ?
+		%help%
+	%nonentry%
+		%responses% exit 
+		%exit%
+
+%menu% table_3
+%promptstr% parameter (?, h, help, show, exit)> 
+%description%
+What parameter do you want to specify?
+%end%
+%information%
+When you build SVVS there are certain parameters which must be specified
+for the install program to work properly.  You may select these items one
+at a time from this menu.  The items are as follows:
+        System V Release        The System V release of your target system.
+        Directories             The SOURCE and DESTINATION directories.
+        C Compiler Command:     The command to compile a C program on your
+                                development system for your target system.
+        C Options               Any options needed to compile SVVS.
+        C Libraries             Any libraries for the sections selected
+                                (example: -lm -lmalloc -lcurses -lnsl_s)
+        Special C Libraries     Special library lists for sections
+        Optional Components     Optional items your target system supports.
+        Sections                Overall sections of SVVS you want to build.
+                                If you build a section and one of its sub-
+                                sections, the subsection will build twice.
+        Subsections             Subsections of SVVS that you want to build.
+        SVVS Utilities          Whether you want to build the SVVS commands
+                                and libraries.
+Selecting 'exit' exits the menus, writing values you have selected
+on standard output. 'show' shows the current values, 'help' or '?'
+displays this message. 
+%end%
+%regarding% check
+%repeat% -1
+
+	%entry% "         1) Change System V Release"
+		%responses% 1 release
+		%link% sv_release
+	%entry% "         2) Change SOURCE and DESTINATION Directories"
+		%responses% 2 directories
+		%call% source_name
+	%entry% "         3) Command to invoke C compiler"
+		%responses% 3 command
+		%call% c_command
+	%entry% "         4) Options to the C compiler"
+		%responses% 4 options
+		%call% c_options
+	%entry% "         5) C system libraries"
+		%responses% 5 libraries
+		%call% c_libraries
+	%entry% "         6) Special C system libraries"
+		%responses% 6 special
+		%call% spec_libs_3
+	%entry% "         7) Optional components supported"
+		%responses% 7 optional
+		%call% extensions_3
+	%entry% "         8) Complete sections to build"
+		%responses% 8 sections
+		%call% sections_3
+	%entry% "         9) Subsections to build"
+		%responses% 9 subsections
+		%call% subsections_3
+	%entry% "        10) SVVS Utilities"
+		%responses% 10 utilities
+		%call% ns_libs
+	%nonentry%
+		%responses% show
+		%value% check
+	%nonentry%
+		%responses% h help ?
+		%help%
+	%nonentry%
+		%responses% exit 
+		%exit%
+
+%leader% c_command
+%description%
+The current command to invoke the C compiler is:
+%end%
+%regarding% compiler
+%value% sHoW
+%next% cc_command
+
+%leader% c_options
+%description%
+The current options for the C compiler are:
+%end%
+%regarding% options
+%value% sHoW
+%next% cc_flags
+
+%leader% c_libraries
+%description%
+The current libraries for the C compiler are:
+%end%
+%regarding% libraries
+%value% sHoW
+%next% cc_libs
+
+%leader% extensions_3
+%description%
+The currently selected optional components are:
+%end%
+%regarding% extensions
+%value% sHoW
+%next% optional_3
+
+%leader% extensions_2
+%description%
+The currently selected optional components are:
+%end%
+%regarding% extensions
+%value% sHoW
+%next% optional_2
+
+%leader% sections_3
+%description%
+The currently selected sections and subsections are:
+%end%
+%regarding% sections
+%value% sHoW
+%next% sect_3
+
+%leader% sections_2
+%description%
+The currently selected sections and subsections are:
+%end%
+%regarding% sections
+%value% sHoW
+%next% sect_2
+
+%leader% subsections_3
+%description%
+The currently selected sections and subsections are:
+%end%
+%regarding% sections
+%value% sHoW
+%next% subsect_3
+
+%leader% subsections_2
+%description%
+The currently selected sections and subsections are:
+%end%
+%regarding% sections
+%value% sHoW
+%next% subsect_2
+
+%prompt% cc_command
+
+%description%
+
+Special responses are: ?, h, help, exit.  Press the return key to
+skip this prompt.
+
+Enter the command used to invoke the C compiler: 
+%end%
+
+%information%
+This prompt allows you to enter the command you want to use to run
+the C compiler for this installation.  The default for this is 'cc'.
+If you are cross compiling to another system, however, you might
+want to use another command.
+
+The responses: '?', 'h' or 'help' will display this message
+and 'exit' will write parameters to standard output and exit.
+You may also press the return key alone to skip this prompt.
+
+Except for the above keywords, any other response will replace the
+currently active value with the value you enter.
+%end%
+
+%regarding% compiler
+%next% c_com_ret
+	%responses% help ? h
+		%help%
+	%responses% ""
+		%return%
+	%responses% exit
+		%exit%
+
+%leader% c_com_ret
+%next% c_com_ret
+%return%
+%regarding% nothing
+
+%prompt% cc_flags
+
+%description%
+
+Special responses are: ?, h, help, show, clear, exit.  Press the
+return key to go on.
+
+Enter any options to the C compiler which are needed to build the SVVS
+properly: 
+%end%
+%information%
+At this prompt you should enter any flags needed to make your C
+compiler work correctly.  Examples of this are flags to force
+compilation with separate text and data or flags to include a
+floating point emulator at link time.  These should not be the flags
+to include libraries, since you will be prompted for these later.
+
+Responses to this prompt are accumulated.  If you decide to discard
+the responses you have already made, you may type 'clear' and the
+current value will be erased.  You may then enter a new value.
+
+The responses: '?', 'h' or 'help' will display this message
+and 'exit' will write parameters to standard output and exit.
+
+If you press the return key you will be returned to the main menu.
+%end%
+%repeat% 0
+%regarding% options
+%next% c_options
+	%responses% help ? h
+		%help%
+	%responses% ""
+		%return%
+	%responses% show
+		%link% c_options
+	%responses% clear clr
+		%value% clear
+		%redisplay%
+	%responses% exit
+		%exit%
+
+%prompt% cc_libs
+%description%
+
+Special responses are: ?, h, help, show, clear, exit.  Press the
+return key to go on.
+
+Enter the flags to include any libraries needed for successful
+compilation of the tests: 
+%end%
+
+%information%
+In order to build the tests, the installation procedure
+needs to know what system libraries to link with the executable
+tests.  An example of a library which might be needed is the math
+library: 'libm.a' if this is needed you should respond with '-lm'
+to this prompt.
+
+Responses to this prompt are accumulated.  If you decide to discard
+the responses you have already made, you may type 'clear' and the
+current value will be erased.  You may then enter a new value.
+
+The responses:  '?', 'h' or 'help' will display this message and
+ 'exit' will write parameters to standard output and exit.
+
+If you press the return key you will return to the main menu.
+%end%
+
+%regarding% libraries
+%next% c_libraries
+%repeat% 0
+	%responses% ""
+		%return%
+	%responses% ? h help
+		%help%
+	%responses% show
+		%link% c_libraries
+	%responses% clear clr
+		%value% clear
+		%redisplay%
+	%responses% exit
+		%exit%
+
+%menu% spec_libs_3
+%promptstr% section (?, h, help, show, clear, exit)> 
+%description%
+For what section or subsection do you want to specify libraries?
+%end%
+%information%
+This menu allows you to specify special libraries to be used only
+with the named section.  The section you choose will be associated
+exactly with the libraries you choose for that section.  If you
+choose an overall section, the libraries will only be used to build
+that section specifically BY NAME.  If you are building SVVS by sub-
+section you must specify special libraries by subsection, not by
+overall section.
+
+To view the special libraries you have selected, type 'show' and the
+list of special libraries will be displayed. If you change your mind
+about the libraries you have specified, 'clear' will erase all of
+the libraries so far specified, allowing you to start over. A
+response of 'exit' will write the values you have chosen so far and
+exit the menus; 'h', '?' or 'help' will display this message.
+
+Press the return key to return to the main menu.
+
+To clear the libraries for a particular section, select that section
+and clear it.
+%end%
+%next% sp_libs_3
+%regarding% spec_sect
+%repeat% 0
+
+	%entry% "        1) BA       - The base section"
+		%responses%  ba ba 1
+		%value% BA
+	%entry% "        2) KE       - The Kernel Extension section"
+		%responses%  ke 2
+		%value% KE
+	%entry% "        3) TI       - The Terminal Interface section"
+		%responses%  ti 3
+		%value% TI
+	%entry% "        4) NS       - The Network Services section
+		%responses%  ns 4
+		%value% NS
+	%entry% "        5) BA_ENV   - Base Environment section"
+		%responses%  ba/env ba_env 5
+		%value% BA_ENV
+	%entry% "        6) BA_OS    - Base Operating System Services section"
+		%responses%  ba/os ba_os 6
+		%value% BA_OS
+	%entry% "        7) BA_LIB   - Base Library section"
+		%responses%  ba/lib ba_lib 7
+		%value% BA_LIB
+	%entry% "        8) KE_ENV   - Kernel Extension Environment section"
+		%responses%  ke/env ke_env 8
+		%value% KE_ENV
+	%entry% "        9) KE_OS    - Kernel Extension System Services section"
+		%responses%  ke/os ke_os 9
+		%value% KE_OS
+	%entry% "       10) TI_ENV   - Terminal Interface Environment section"
+		%responses%  ti/env ti_env 10
+		%value% TI_ENV
+	%entry% "       11) TI_CMD   - Terminal Interface Commands section"
+		%responses%  ti/cmd ti_cmd 11
+		%value% TI_CMD
+	%entry% "       12) TI_LIB   - Terminal Interface Library section"
+		%responses%  ti/lib ti_lib 12
+		%value% TI_LIB
+	%entry% "       13) NS_OS    - Network Services System Services section"
+		%responses%  ns/os ns_os 13
+		%value% NS_OS
+	%entry% "       14) NS_LIB   - Network Services Library section"
+		%responses%  ns/lib ns_lib 14
+		%value% NS_LIB
+	%entry% "       15) NS_DEV   - Streams section"
+		%responses%  ns/dev ns_dev 15
+		%value% NS_DEV
+	%entry% "       16) NS_CMD   - Network Services Commands section"
+		%responses%  ns/cmd ns_cmd 16
+		%value% NS_CMD
+	%entry% "       17) NS_LOCAL - Remote File Sharing section"
+		%responses%  ns/local ns_local 17
+		%value% NS_LOCAL
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% show
+		%value% sHoW
+		%redisplay%
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%menu% spec_libs_2
+%promptstr% section (?, h, help, show, clear, exit)> 
+%description%
+For what section or subsection do you want to specify libraries?
+%end%
+%information%
+This menu allows you to specify special libraries to be used only
+with the named section.  The section you choose will be associated
+exactly with the libraries you choose for that section.  If you
+choose an overall section, the libraries will only be used to build
+that section specifically BY NAME.  If you are building SVVS by sub-
+section you must specify special libraries by subsection, not by
+overall section.
+
+To view the special libraries you have selected, type 'show' and the
+list of special libraries will be displayed. If you change your mind
+about the libraries you have specified, 'clear' will erase all of
+the libraries so far specified, allowing you to start over.  A
+response of 'exit' will write the values you have chosen so far and
+exit the menus;  'h', '?' or 'help' will display this message.  
+
+Press the return key to return to the main menu.
+
+To clear the libraries for a particular section, select that section
+and clear it.
+%end%
+%next% sp_libs_2
+%regarding% spec_sect
+%repeat% 0
+
+	%entry% "        1) BA       - The base section"
+		%responses%  ba ba 1
+		%value% BA
+	%entry% "        2) KE       - The Kernel Extension section"
+		%responses%  ke 2
+		%value% KE
+	%entry% "        3) BA_ENV   - Base Environment section"
+		%responses%  ba/env ba_env 3
+		%value% BA_ENV
+	%entry% "        4) BA_OS    - Base Operating System Services section"
+		%responses%  ba/os ba_os 4
+		%value% BA_OS
+	%entry% "        5) BA_LIB   - Base Library section"
+		%responses%  ba/lib ba_lib 5
+		%value% BA_LIB
+	%entry% "        6) KE_ENV   - Kernel Extension Environment section"
+		%responses%  ke/env ke_env 6
+		%value% KE_ENV
+	%entry% "        7) KE_OS    - Kernel Extension System Services section"
+		%responses%  ke/os ke_os 7
+		%value% KE_OS
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% show
+		%value% sHoW
+		%redisplay%
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%leader% sp_libs_3
+%regarding% sp_libs
+%next% sect_show
+%push% spec_libs_3
+
+%leader% sp_libs_2
+%regarding% sp_libs
+%next% sect_show
+%push% spec_libs_2
+
+%leader% sect_show
+%regarding% cursect
+%value% sHoW
+%next% spec_show
+
+%leader% spec_show
+%description%
+The libraries for this section are:
+%end%
+%regarding% sp_libs
+%value% sHoW
+%next% special
+
+%prompt% special
+%description%
+Special responses are: ?, h, help, show, clear, exit.  Press the return
+key to return to the sections menu.
+
+Enter the flags for libraries needed for this section: 
+%end%
+%information%
+Here you may enter the special libraries for the section you have
+selected.  They should be entered as compiler options to include the
+libraries as though you were typing them on the C Compiler command
+line.  These are the only libraries which will be used by this
+section, so be sure you specify all libraries needed.
+
+In order to prevent a section from using any libraries, type 'none'.
+This will force a blank library list for this section.  If you add
+libraries after this, the list will be filled as usual.
+
+If you decide you do not want the libraries you have specified for
+this section, you may type 'clear' to erase what you have chosen. 
+This will only clear the special libraries for this section.  If you
+type 'exit' you will exit the menus, writing the values you have
+defined to standard output.
+
+When you are finished selecting libraries, press the return key to
+return to the section menu.
+%end%
+%regarding% sp_libs
+%next% sect_show
+
+	%responses% none
+	%value% none
+
+	%responses% ""
+	%return%
+
+	%responses% show
+	%link% sect_show
+
+	%responses% clear clr
+	%value% clear
+	%redisplay%
+
+	%responses%  h help ?
+	%help%
+
+	%responses% exit
+	%exit%
+
+%menu% optional_2
+%promptstr% optional components (?, h, help, show, clear, exit)> 
+%description%
+What optional components does your system support?
+%end%
+%information%
+This menu allows you to specify components listed as optional in the
+SVID which your system supports.  By selecting an item from this
+list, you enable it during verification.  If you select a component
+not supported by your system, unexpected failures will occur, since
+the component will be tested.
+
+All responses to this menu will be accumulated.  If  you decide you
+do not like the selections you have made, select 'clear' and your
+selections will be erased.
+
+Press the return key to return to the main menu.
+%end%
+
+%repeat% 0
+%next% extensions_2
+%regarding% extensions
+	%entry% "        1) The shared memory functions"
+		%responses% 1 shm shared
+		%value% SHM
+	%entry% "        2) The crypt(BA_LIB) function"
+		%responses%  crypt 2
+		%value% CRYPT
+	%entry% "        3) The encrypt(BA_LIB) function"
+		%responses%  encrypt 3
+		%value% ENCRYPT
+	%entry% "        4) The setkey(BA_LIB) function"
+		%responses%  setkey 4
+		%value% SETKEY
+	%entry% "        5) Record/File locking"
+		%responses% lockf 5
+		%value% LOCKF
+	%entry% "        6) All of the above"
+		%responses% all 6
+		%value%  SHM CRYPT ENCRYPT SETKEY LOCKF
+	%nonentry%
+		%responses%  ""
+		%return%
+	%nonentry%
+		%responses% show
+		%link% extensions_2
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+	%nonentry%
+		%responses% h help ?
+		%help%
+		%redisplay%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+
+%menu% optional_3
+%promptstr% optional components (?, h, help, show, clear, exit)> 
+%description%
+What optional components does your system support?
+%end%
+
+%information%
+This menu allows you to specify components listed as optional in the
+SVID which your system supports.  By selecting an item from this
+list, you enable it during verification.  If you select a component
+not supported by your system, unexpected failures will occur, since
+the component will be tested.
+
+All responses to this menu will be accumulated.  If  you decide you
+do not like the selections you have made, select 'clear' and your
+selections will be erased.
+
+Press the return key to return to the main menu.
+%end%
+
+%repeat% 0
+%next% extensions_3
+%regarding% extensions
+	%entry% "        1) The shared memory functions"
+		%responses% 1 shm shared
+		%value% SHM
+	%entry% "        2) The crypt(BA_LIB) function"
+		%responses%  crypt 2
+		%value% CRYPT
+	%entry% "        3) The encrypt(BA_LIB) function"
+		%responses%  encrypt 3
+		%value% ENCRYPT
+	%entry% "        4) The setkey(BA_LIB) function"
+		%responses%  setkey 4
+		%value% SETKEY
+	%entry% "        5) All of the above"
+		%responses% all 5
+		%value% SHM CRYPT ENCRYPT SETKEY
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% show
+		%link% extensions_3
+	%nonentry%
+		%responses% clear
+		%value% clear
+	%nonentry%
+		%responses% h help ?
+		%help%
+		%redisplay%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%menu% subsect_3
+%promptstr% subsection (?, h, help, show, clear, exit)> 
+%description%
+What subsection do you want to build?
+%end%
+%information%
+You may select one or more subsections of SVVS from this menu.  The
+subsections you choose will be collected into a list of sections to
+build.  If you select subsections which are part of entire sections
+you have already chosen to build, the subsections will be built
+twice, once as part of the  overall section and again as a
+subsection.
+
+If you change your mind about the sections or subsections you want
+to build, 'clear' will erase all of the  sections so far selected,
+allowing you to start over.  A response of 'exit' will write the
+values you have chosen so far and exit the menus;  '?' or 'help'
+will display this message.
+
+Press the return key to return to the main menu.
+%end%
+%next% subsections_3
+%regarding% sections
+%repeat% 0
+
+	%entry% "        1) BA_ENV   - Base Environment tests"
+		%responses%  ba/env ba_env 1
+		%value% BA_ENV
+	%entry% "        2) BA_OS    - Base Operating System Services tests"
+		%responses%  ba/os ba_os 2
+		%value% BA_OS
+	%entry% "        3) BA_LIB   - Base Library tests"
+		%responses%  ba/lib ba_lib 3
+		%value% BA_LIB
+	%entry% "        4) KE_ENV   - Kernel Extension Environment tests"
+		%responses%  ke/env ke_env 4
+		%value% KE_ENV
+	%entry% "        5) KE_OS    - Kernel Extension System Services tests"
+		%responses%  ke/os ke_os 5
+		%value% KE_OS
+	%entry% "        6) TI_ENV   - Terminal Interface Environment tests"
+		%responses%  ti/env ti_env 6
+		%value% TI_ENV
+	%entry% "        7) TI_CMD   - Terminal Interface Commands tests"
+		%responses%  ti/cmd ti_cmd 7
+		%value% TI_CMD
+	%entry% "        8) TI_LIB   - Terminal Interface Library tests"
+		%responses%  ti/lib ti_lib 8
+		%value% TI_LIB
+	%entry% "        9) NS_OS    - Network Services System Services tests"
+		%responses%  ns/os ns_os 9
+		%value% NS_OS
+	%entry% "       10) NS_LIB   - Network Services Library tests"
+		%responses%  ns/lib ns_lib 10
+		%value% NS_LIB
+	%entry% "       11) NS_DEV   - Streams tests"
+		%responses%  ns/dev ns_dev 11
+		%value% NS_DEV
+	%entry% "       12) NS_CMD   - Network Services Commands tests"
+		%responses%  ns/cmd ns_cmd 12
+		%value% NS_CMD
+	%entry% "       13) NS_LOCAL - Remote File Sharing tests"
+		%responses%  ns/local ns_local 13
+		%value% NS_LOCAL
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% show
+		%link% subsections_3
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%menu% subsect_2
+%promptstr% subsection (?, h, help, show, clear, exit)> 
+%description%
+What subsection do you want to build?
+%end%
+%information%
+You may select one or more subsections of SVVS from this menu.  The
+subsections you choose will be collected into a list of sections to
+build.  If you select subsections which are part of entire sections
+you have already chosen to build, the subsections will be built
+twice, once as part of the  overall section and again as a
+subsection.
+
+If you change your mind about the sections or subsections you want
+to build, 'clear' will erase all of the  sections so far selected,
+allowing you to start over.  A response of 'exit' will write the
+values you have chosen so far and exit the menus;  '?' or 'help'
+will display this message. 
+
+Press the return key to return to the main menu.
+%end%
+%next% subsections_2
+%regarding% sections
+%repeat% 0
+
+
+	%entry% "        1) BA_ENV   - Base Environment tests"
+		%responses%  ba/env ba_env 1
+		%value% BA_ENV
+	%entry% "        2) BA_OS    - Base Operating System Services tests"
+		%responses%  ba/os ba_os 2
+		%value% BA_OS
+	%entry% "        3) BA_LIB   - Base Library tests"
+		%responses%  ba/lib ba_lib 3
+		%value% BA_LIB
+	%entry% "        4) KE_ENV   - Kernel Extension Environment tests"
+		%responses%  ke/env ke_env 4
+		%value% KE_ENV
+	%entry% "        5) KE_OS    - Kernel Extension System Services tests"
+		%responses%  ke/os ke_os 5
+		%value% KE_OS
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% show
+		%link% subsections_2
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%menu% sect_3
+%promptstr% section (?, h, help, show, clear, exit)> 
+%description%
+What sections do you want to build?
+%end%
+%information%
+This menu allows you to specify which sections you want to build. 
+It is generally recommended that you build all sections, but if you
+are in a hurry to build one or two sections, or if you are low on
+disk space, you may want to select individual sections to build.
+
+Your responses to this menu will be accumulated.  If you want to
+clear your current choices and start again, type 'clear'.
+
+Press the return key to return to the main menu.
+%end%
+%next% sections_3
+%regarding% sections
+%repeat% 0
+
+	%entry% "        1) Base"
+		%responses%  ba base 1
+		%value% BA
+	%entry% "        2) Kernel Extension"
+		%responses%  ke kernel 2
+		%value% KE
+	%entry% "        3) Terminal Interface"
+		%responses%  ti tie 3
+		%value% TI
+	%entry% "        4) Network Services"
+		%responses%  nse ns network 4
+		%value% NS
+	%entry% "        5) All of SVVS"
+		%responses% all a 5
+		%value% BA KE TI NS
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% show
+		%link% sections_3
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses%  h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%menu% sect_2
+%promptstr% section (?, h, help, show, clear, exit)> 
+%description%
+What sections do you want to build?
+%end%
+%information%
+This menu allows you to specify which sections you want to build. 
+It is generally recommended that you build all sections, but if you
+are in a hurry to build one or two sections, or if you are low on
+disk space, you may want to select individual sections to build.
+
+Your responses to this menu will be accumulated.  If you want to
+clear you current choices and start again, type 'clear'.
+
+Press the return key to return to the main menu.
+%end%
+%next% sections_2
+%regarding% sections
+%repeat% 0
+
+	%entry% "        1) Base"
+		%responses%  ba base 1
+		%value% BA
+	%entry% "        2) Kernel Extension"
+		%responses% ke kernel 2
+		%value% KE
+	%entry% "        3) All of SVVS"
+		%responses% all a 3
+		%value% BA KE
+	%nonentry%
+		%responses% ""
+		%return%
+	%nonentry%
+		%responses% show
+		%link% sections_2
+	%nonentry%
+		%responses% clear clr
+		%value% clear
+		%redisplay%
+	%nonentry%
+		%responses% h help ?
+		%help%
+	%nonentry%
+		%responses% exit
+		%exit%
+
+%prompt% ns_libs
+%description%
+
+Special responses are: ?, h, help, exit.
+
+Do you want to build the SVVS NS libraries (yes/no)? 
+%end%
+%information%
+If you have already built the SVVS NS libraries for the destination
+you specified, you may want to forego building them again.  We recommend
+that you build the libraries, since a problem with the NS libraries
+could propagate across the entire NS section of the SVVS, making it
+necessary for you to rebuild NS.  If you are at all uncertain, answer
+'yes' to this prompt, since it takes much longer to build the NS section
+than to build these libraries.
+%end%
+%next% ti_libs
+%regarding% ns_libs
+	%responses% y yes
+		%value% yes
+	%responses% no n
+		%value% no
+	%responses% ? h help
+		%help%
+	%responses% exit
+		%exit%
+
+%prompt% ti_libs
+%description%
+
+Special responses are: ?, h, help, exit.
+
+Do you want to build the SVVS TI libraries (yes/no)? 
+%end%
+%information%
+If you have already built the SVVS TI libraries for the destination
+you specified, you may want to forego building them again.  We recommend
+that you build the libraries, since a problem with the TI libraries
+could propagate across the entire TI section of the SVVS, making it
+necessary for you to rebuild TI.  If you are at all uncertain, answer
+'yes' to this prompt, since it takes much longer to build the TI section
+than to build these libraries.
+%end%
+%next% wantlibs
+%regarding% ti_libs
+	%responses% y yes
+		%value% yes
+	%responses% no n
+		%value% no
+	%responses% ? h help
+		%help%
+	%responses% exit
+		%exit%
+
+%prompt% wantlibs
+%description%
+
+Special responses are: ?, h, help, exit.
+
+Do you want to build the SVVS Libraries (yes/no)? 
+%end%
+%information%
+If you have already successfully built the SVVS libraries for the
+destination you specified, you may want to forego building them.
+It is recommended that you do build the libraries, since a problem
+in a library could propagate across the entire SVVS package.  It
+does, however, take quite a while to build them, so you might want
+to answer 'no' to this prompt.  If you are at all uncertain as to
+whether the libraries have been built properly, answer 'yes', since
+it takes much longer to re-build all of SVVS.
+%end%
+%next% wantcmds
+%regarding% wantlibs
+	%responses% yes y
+		%value% yes
+	%responses% no n
+		%value%	no
+	%responses% ? h help
+		%help%
+	%responses% exit
+		%exit%
+
+%prompt% wantcmds
+%description%
+
+Special responses are: ?, h, help, exit.
+
+Do you want to build the SVVS Commands (yes/no)? 
+%end%
+%information%
+You may build the commands at any time, so you may want to answer
+"no' to this prompt.  Building the commands is unlikely to take more
+than forty minutes on any machine, however, and if you are going to
+use the User Interface, the Driver or the Report Generator you will
+need to build them sometime.  We recommend that you build them with
+the rest of SVVS.
+%end%
+%next% util_ret
+%regarding% wantcmds
+	%responses% y yes
+		%value% yes
+	%responses% no n
+		%value%	no
+	%responses% ? h help
+		%help%
+	%responses% exit
+		%exit%
+
+%leader% util_ret
+%next% util_ret
+%return%
+%regarding% nothing
+
+%start% path_lead
+%sitmsg% Press return to continue...
+%exitreg% exit
+%exitresp% exit

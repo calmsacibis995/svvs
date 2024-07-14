@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% putenv.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/putenv putenv.o %SVLIBS% %LIBS%
+rm putenv.o

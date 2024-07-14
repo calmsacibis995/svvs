@@ -1,0 +1,160 @@
+#
+# @(#)misc	3.1 (SVVS) 12/1/86
+#
+# pads - miscellaneous window type commands
+#
+
+abstract("pads - miscellaneous window commands");
+start
+	h = LINES * 2;
+	w = COLS * 2;
+
+	# check mvwaddstr and clear on pads
+	testing("fill a pad, do a mvwaddstr to each");
+	testing("line and then clear the pad.");
+	start
+		pad = newpad(h, w);
+		for (i = 0; i < h; i++)
+		{
+			for (j = 0; j < w; j += 20)
+				mvwaddstr(pad, i, j, "a string");
+		}
+		prefresh(pad, 0, 0, 0, 0, LINES / 2, COLS / 2);
+		expect();
+		wclear(pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	# barber pole to pad and clrtobot
+	testing("in a loop, fill a pad and do wclrtobot from the top line");
+	start
+		for (i = 0; i < 5; i++)
+		{
+			wattron(pad, A_UNDERLINE);
+			wmove(pad,0,0);
+			wbarber(pad, h, w, '%' + i);
+			wmove(pad, i, i);
+			prefresh(pad, h - LINES, w - COLS, 0, 0, LINES - 1, COLS - 1);
+			expect();
+			wmove(pad,0,0);
+			wclrtobot(pad);
+			prefresh(pad, h - LINES, w - COLS, 0, 0, LINES - 1, COLS - 1);
+			wattroff(pad, A_UNDERLINE);
+			expect();
+		}
+	finis
+
+	delwin(pad);
+
+	prep("create a pad");
+	start
+	h = LINES * 3;
+	w = COLS * 3;
+
+	pad = newpad(h, w);
+	wattron(pad, A_BLINK);
+	finis
+
+	# barber pole then do clrtoeol on each line
+	testing("fill a pad, then start at the bottom line");
+	testing("and do wclrtoeol on each line leaving");
+	testing("one more character on the line each time.");
+	start
+		wbarber(pad, h, w, '1');
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+		prefresh(pad, h - LINES, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+		j = 0;
+		wattroff(pad, A_BLINK);
+		for (i = h - 1; i >= 0; i--)
+		{
+			wmove(pad, i, j);
+			wclrtoeol(pad);
+			j++;
+		}
+		prefresh(pad, h - LINES, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	# make a blank pad and do copywin to big pad
+	testing("create a small pad and erase it.  then");
+	testing("copywin this blank pad to a larger filled pad.");
+	start
+		wmove(pad, 0, 0);
+		wbarber(pad, h, w, 'Q');
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		smpad = newpad(LINES * 2, COLS * 2);
+		werase(smpad);
+		prefresh(smpad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		copywin(smpad, pad, 
+			0, 0, 
+			LINES - 1, COLS - 1, 
+			(LINES * 3) - 1, (COLS * 3) - 1, 
+			0);
+		prefresh(pad, 10, 10, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	# do an overwrite of blank pad to large pad
+	testing("overwrite a filled pad with a small blank pad.");
+	start
+		prefresh(smpad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		overwrite(smpad, pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	# barber to smpad and then do overlay to large pad
+	testing("fill a small pad and then overlay this pad");
+	testing("onto a larger pad.");
+	start
+		wmove(smpad, 0, 0);
+		wbarber(smpad, LINES * 2, COLS * 2, 'a');
+		prefresh(smpad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+		overlay(smpad, pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	# draw a box around smpad
+	testing("draw a box around the edge of a filled pad.");
+	start
+		box(smpad, '|', '=');
+		prefresh(smpad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	prep("delete two pads and create a new one and fill it.");
+	start
+		delwin(smpad);
+		delwin(pad);
+
+		h = LINES * 3;
+		w = COLS * 3;
+		ch = '!';
+		pad = newpad(h, w);
+		wbarber(pad, h, w, ch);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	# get a character from the first position of each line
+	testing("use mvwinch and get a character from the first");
+	testing("two thirds of the lines of a filled pad.");
+	start
+		for (i = 0; i < h - LINES; i++)
+		{
+			prefresh(pad, i, 0, 0, 0, LINES - 1, COLS - 1);
+			result = mvwinch(pad, i, 0);
+			expect();
+			if (result != ch + i)
+			{
+				error("mvwinch error, character is: '%c', should be: '%c'\n", result, ch + i);
+				break;
+			}
+		}
+	finis
+finis

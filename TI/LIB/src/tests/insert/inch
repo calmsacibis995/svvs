@@ -1,0 +1,97 @@
+#
+# @(#)inch	3.1 (SVVS) 12/1/86
+#
+# insert: inch, winch, mvinch, mvwinch
+#
+
+abstract("insert/delete: inch");
+start
+	prep("fill stdscr, starting with 'a'");
+	start
+	ch = 'a';
+	move(0, 0);
+	barber(ch);
+	refresh();
+	finis
+
+	# get a character from the first position of each line
+	# and compare it to the expected character
+	# then do the same using mvinch instead of inch
+	testing("Return first character from each line of stdscr,");
+	testing("and compare it to what was printed");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		move(i, 0);
+		result = inch();
+		expect();
+		if (result != ch + i)
+		{
+			error("i: %d, ch: %c, should be: %c\n", i,
+				result, ch + i);
+			break;
+		}
+		result = mvinch(i, 0);
+		expect();
+		if (result != ch + i)
+			break;
+	}
+	finis
+
+	clear();
+	refresh();
+
+	prep("create and fill two windows, one above the other,");
+	prep("starting with 'A'");
+	start
+	ch = 'A';
+	win1 = newwin(LINES / 3, COLS / 4, 0, 0);
+	wmove(win1, 0, 0);
+	wbarber(win1, LINES / 3, COLS / 4, ch);
+	wrefresh(win1);
+	win2 = newwin(LINES / 3, COLS / 4, LINES / 3, COLS / 2);
+	wmove(win2, 0, 0);
+	wbarber(win2, LINES / 3, COLS / 4, ch);
+	wrefresh(win2);
+	finis
+
+	# get a character from the first position of each line
+	# for win1 and win2, and compare with what is expected
+	testing("get characters from the first position of each line of");
+	testing("windows one and two, and compare with expected output.");
+	start
+	for (i = 0; i < LINES / 3; i++)
+	{
+		wmove(win1, i, 0);
+		result = winch(win1);
+		expect();
+		if (result != ch + i)
+		{
+			error("i: %d, ch: %c, should be: %c\n", i,
+				result, ch + i);
+			break;
+		}
+		wmove(win2, i, 0);
+		result = winch(win2);
+		expect();
+	}
+	finis
+
+	# same as preceding test using mvwinch
+	testing("Use mvwinch to get characters from the first position");
+	testing("of each line of windows one and two,");
+	testing("and compare with expected output.");
+	start
+	for (i = 0; i < LINES / 3; i++)
+	{
+		result = mvwinch(win1, i, 0);
+		expect();
+		if (result != ch + i)
+			break;
+		result = mvwinch(win2, i, 0);
+		expect();
+		if (result != ch + i)
+			break;
+	}
+	finis
+finis

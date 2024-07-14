@@ -1,0 +1,27 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec exec.o %SVLIBS% %LIBS%
+rm exec.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec0 exec0.o %SVLIBS% %LIBS%
+rm exec0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec1 exec1.o %SVLIBS% %LIBS%
+rm exec1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec2 exec2.o %SVLIBS% %LIBS%
+rm exec2.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec3 exec3.o %SVLIBS% %LIBS%
+rm exec3.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec4.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec4 exec4.o %SVLIBS% %LIBS%
+rm exec4.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec5.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec5 exec5.o %SVLIBS% %LIBS%
+rm exec5.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec6.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec6 exec6.o %SVLIBS% %LIBS%
+rm exec6.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% exec7.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/exec7 exec7.o %SVLIBS% %LIBS%
+rm exec7.o

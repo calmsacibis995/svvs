@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getopt.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/getopt getopt.o %SVLIBS% %LIBS%
+rm getopt.o

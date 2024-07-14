@@ -1,0 +1,149 @@
+#
+# @(#)inch	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - inch, winch etc.
+#
+
+abstract("highlight: inch");
+start
+	# barber pole to stdscr and then another barber pole
+	# to half of stdscr that is in STANDOUT mode
+	prep("fill stdscr, then fill half in standout mode");
+	start
+	move(0, 0);
+	wbarber(stdscr, LINES, COLS, 'a');
+	refresh();
+	move(0, 0);
+	attron(A_STANDOUT);
+	wbarber(stdscr, LINES / 2, COLS, 'a');
+	attrset(0);
+	refresh();
+	lim = LINES / 2;
+	finis
+	# using adch, copy the STANDOUT lines to the other half of stdscr
+	testing("copy the lines in standout to the other half of stdscr");
+	start
+	for (i = 0; i < lim; i++)
+	{
+		for (j = 0; j < COLS; j++)
+		{
+			move(i, j);
+			ch = inch();
+			move(i + (LINES / 2), j);
+			addch(ch);
+			refresh();
+		}
+		expect();
+	}
+	finis
+
+	clear();
+	refresh();
+
+	# barber pole to stdscr, then a barber pole in BLINK mode
+	# to the first line of stdscr
+	prep("fill stdscr, the fill first line with blink mode");
+	start
+	wbarber(stdscr, LINES, COLS, 'a');
+	refresh();
+	move(0, 0);
+	attron(A_BLINK);
+	wbarber(stdscr, 1, COLS, 'A');
+	attrset(0);
+	refresh();
+	finis
+
+	# copy the blinking line to alternate lines the rest of stdscr
+	testing("copy the blinking line to alternate lines of stdscr");
+	start
+	for (i = 1; i < LINES; i += 2)
+	{
+		for (j = 0; j < COLS; j++)
+		{
+			ch = mvinch(0, j);
+			mvaddch(i, j, ch);
+			refresh();
+		}
+		expect();
+	}
+	finis
+
+	clear();
+	refresh();
+
+	# make a window of only two lines and fill these with - and =
+	# in BOLD, UNDERLINE AND BLINK modes
+	prep("make a two line window, filled with bold, underlined, and");
+	prep("blinking -'s and ='s");
+	start
+	smwin = newwin(2, COLS, 0, 0);
+	wattron(smwin, A_BOLD | A_UNDERLINE | A_BLINK);
+	wmove(smwin, 0, 0);
+	for (i = 0; i < COLS; i++)
+		waddch(smwin, '-');
+	wmove(smwin, 1, 0);
+	for (i = 0; i < COLS; i++)
+		waddch(smwin, '=');
+	wattroff(smwin, A_UNDERLINE | A_BOLD | A_BLINK);
+	wrefresh(smwin);
+	finis
+
+	# copy the two lines of the small window to win, alternating
+	# with a line of z's with no attributes.
+	win = newwin(LINES - 4, COLS, 3, 0);
+	wmove(smwin, 0, 0);
+	wmove(win, 0, 0);
+	lim = (LINES - 4) / 2;
+	testing("copy the window to another, alternating with a line of z's");
+	start
+	for (i = 0; i < lim; i++)
+	{
+		for (j = 0; j < COLS; j++)
+		{
+			if (i % 2)
+				wmove(smwin, 1, j);
+			else
+				wmove(smwin, 0, j);
+			ch = winch(smwin);
+			waddch(win, ch);
+		}
+		for (j = 0; j < COLS; j++)
+			waddch(win, 'z');
+		wrefresh(win);
+		expect();
+	}
+	finis
+	delwin(smwin);
+	delwin(win);
+	touchwin(stdscr);
+	clear();
+	refresh();
+
+	# two windows, smaller of which contains a BOLD barber pole
+	prep("create two windows, one with bold filling");
+	start
+	smwin = newwin(5, 5, 0, 0);
+	win = newwin(10, 10, LINES - 10, COLS - 10);
+	wattron(smwin, A_BOLD);
+	wbarber(smwin, 5, 5, 'a');
+	wrefresh(smwin);
+	expect();
+	wattroff(smwin, A_BOLD);
+	wmove(win, 0, 0);
+	finis
+
+	# copy each char of smwin to win twice
+	testing("copy each character of bold window to other window twice");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		for (j = 0; j < 10; j++)
+		{
+			ch = mvwinch(smwin, i / 2, j / 2);
+			waddch(win, ch);
+		}
+		wrefresh(win);
+		expect();
+	}
+	finis
+finis

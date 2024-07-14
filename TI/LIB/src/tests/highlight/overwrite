@@ -1,0 +1,56 @@
+#
+# @(#)overwrite	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - overwrite
+#
+
+abstract("highlight: overwrite");
+start
+	prep("create a four-line window");
+	start
+	win1 = newwin(4, COLS / 2, LINES - 4, COLS / 4);
+	finis
+
+	# fill win1 with BLINKING, UNDERLINED, DIM B's and
+	# have every tenth space be blank
+	prep("fill window with blinking, underlined dim B's, with");
+	prep("every tenth line blank");
+	start
+	for (i = 0; i < 4; i++)
+	{
+		for (j = 0; j < COLS / 2; j++)
+		{
+			if (!((j + 1) % 10))
+				waddch(win1, ' ');
+			else
+			{
+				wattron(win1, A_DIM | A_UNDERLINE | A_BLINK);
+				waddch(win1, 'B');
+			}
+			wrefresh(win1);
+			wattroff(win1, A_DIM);
+		}
+		expect();
+	}
+	finis
+
+	# overwrite each win2 with win1 - spaces should be copied too
+	testing("overwrite filled window with first window");
+	start
+	for (i = 0; i < 9; i++)
+	{
+		win2 = newwin(LINES - (i * 2), (i + 1) * 7,
+			0, COLS - ((i + 1) * 7));
+		wmove(win2, 0, 0);
+		wbarber(win2, LINES - (i * 2), (i + 1) * 7, 'A');
+		touchwin(win2);
+		wrefresh(win2);
+		expect();
+		overwrite(win1, win2);
+		touchwin(win2);
+		wrefresh(win2);
+		expect();
+		delwin(win2);
+	}
+	finis
+finis

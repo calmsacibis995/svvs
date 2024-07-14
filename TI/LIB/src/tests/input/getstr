@@ -1,0 +1,152 @@
+#
+# @(#)getstr	3.1 (SVVS) 12/1/86
+#
+# input: getstr, wgetstr, mvgetstr, mvwgetstr
+#
+
+abstract("input: getstr");
+start
+	string1 = "this is a short line of text";
+	string2 = "this is a long line of gibberish: aldkfoiero hnfkajlkajeori nva;";
+
+	# put string1 into the keyboard buffer and 
+	# do a getstr LINES times
+
+	testing("put a string into the input buffer,");
+	testing("and do a getstr for each line");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		keyboard("%s\n", string1);
+		move(i, 0);
+		getstr(s);
+		refresh();
+		expect();
+		if (s != string1)
+		{
+			error("s = %s", s);
+			break;
+		}
+	}
+	finis
+	cleanup("clear and refresh");
+	start
+	clear();
+	refresh();
+	finis
+
+	# put string2 into the keyboard buffer and 
+	# do a getstr LINES times - this test uses
+	# mvgetstr instead of getstr
+
+	testing("put a large string into the input buffer, and do a");
+	testing("mvgetstr for each line");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		keyboard("%s\n", string2);
+
+		mvgetstr(i, 0, s);
+		expect();
+		refresh();
+		if (s != string2)
+		{
+			error("s = %s", s);
+			break;
+		}
+	}
+	finis
+
+	cleanup("clear and refresh");
+	start
+	clear();
+	refresh();
+	finis
+
+	prep("create two short windows");
+	start
+	win1 = newwin(LINES / 4, COLS, 0, 0);
+	win2 = newwin(LINES / 4, COLS, LINES / 2, 0);
+	finis
+
+	# alternate getting string1 and string2 from
+	# win1 and win2 - for each line in the windows
+	testing("put a string into the input buffer, and alternate doing a");
+	testing("wgetstr for each line in window1 and window2");
+	start
+	for (i = 0; i < LINES / 4; i++)
+	{
+		keyboard("%s\n", string1);
+
+		wmove(win1, i, 0);
+		wgetstr(win1, str);
+		touchwin(win1);
+		wrefresh(win1);
+		expect();
+
+		if (str != string1)
+		{
+			error("str = %s", str);
+			break;
+		}
+
+		keyboard("%s\n", string2);
+
+		wmove(win2, i, 0);
+		wgetstr(win2, str);
+		touchwin(win2);
+		wrefresh(win2);
+		expect();
+
+		if (str != string2)
+		{
+			error("str = %s", str);
+			break;
+		}
+	}
+	finis
+
+	cleanup("wclear and wrefresh win1 and win2");
+	start
+	wclear(win1);
+	wrefresh(win1);
+	wclear(win2);
+	wrefresh(win2); 
+	clear();
+	refresh();
+	finis
+
+	# alternate getting string1 and string2 from
+	# win1 and win2 - for each line in the windows
+	# this test uses mvwgetstr instead of wgetstr
+	testing("put a string into the input buffer, and alternate doing a");
+	testing("mvwgetstr for each line in window1 and window2");
+	start
+	for (i = 0; i < LINES / 4; i++)
+	{
+		keyboard("%s\n", string1);
+
+		mvwgetstr(win1, i, 0, str);
+		touchwin(win1);
+		wrefresh(win1);
+		expect();
+		if (str != string1)
+		{
+			error("str = %s", str);
+			break;
+		}
+
+		keyboard("%s\n", string2);
+
+		mvwgetstr(win2, i, 0, str);
+		touchwin(win2);
+		wrefresh(win2);
+		expect();
+		if (str != string2)
+		{
+			error("str = %s", str);
+			break;
+		}
+	}
+	finis
+finis

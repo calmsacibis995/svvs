@@ -1,0 +1,3 @@
+ar -cr tielib.a trace.o wbarber.o pvtest.o cfprintf.o show.o tie_error.o mvcur.o
+mv tielib.a %DEST%/lib/tielib.a
+rm -f trace.o wbarber.o pvtest.o cfprintf.o show.o tie_error.o mvcur.o

@@ -1,0 +1,3 @@
+	sed -f sedfile < assert.t > assert.c
+	cc -I.  -c assert.c
+	cc -I.  assert.o /usr/svvs/src/util.o -o assert

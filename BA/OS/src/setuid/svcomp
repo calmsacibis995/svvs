@@ -1,0 +1,15 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% setgid.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/setgid setgid.o %SVLIBS% %LIBS%
+rm setgid.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% setgid1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/setgid1 setgid1.o %SVLIBS% %LIBS%
+rm setgid1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% setuid.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/setuid setuid.o %SVLIBS% %LIBS%
+rm setuid.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% setuid0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/setuid0 setuid0.o %SVLIBS% %LIBS%
+rm setuid0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% setuid1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/setuid1 setuid1.o %SVLIBS% %LIBS%
+rm setuid1.o

@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% t_close.c
+%COMP% %OPTS% -o %DEST%/NS/LIB/bin/t_close t_close.o %SVLIBS% %LIBS%
+rm t_close.o

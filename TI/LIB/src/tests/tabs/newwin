@@ -1,0 +1,23 @@
+#
+# @(#)newwin	3.1 (SVVS) 12/1/86
+#
+# tabs: newwin
+#
+abstract("tabs: newwin");
+start
+
+	win1 = newwin(LINES / 2, COLS, 0, 0);
+
+	testing("testing newwin by adding tabs at different columns");
+	testing("and lines, expecting to go the the next tab stop");
+	start
+	for (j = 0; j < (LINES / 2) ; j++)
+	{
+		wmove(win1, j, j * 2);
+		waddch(win1, '\t'); 
+		wprintw(win1, "tab stop");
+	}
+	expect();
+	refresh();
+	finis
+finis

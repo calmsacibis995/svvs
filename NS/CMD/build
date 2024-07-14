@@ -1,0 +1,13 @@
+sv_tools.a sv_nse.a sv_base.a sv_sys.a
+src/adv svcomp
+src/dname svcomp
+src/fumount svcomp
+src/fusage svcomp
+src/idload svcomp
+src/nsquery svcomp
+src/rfadmin svcomp
+src/rfpasswd svcomp
+src/rfstart svcomp
+src/rfstop svcomp
+src/rmntstat svcomp
+src/unadv svcomp

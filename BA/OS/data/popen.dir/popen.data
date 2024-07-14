@@ -1,0 +1,3938 @@
+:TESTING:
+a comment
+:EXPECTING:
+return value of 0
+:RETVAL:
+0
+:POPEN,"R":
+# This is a comment
+# pop0 does the following:
+#	pop0 -x exitval		exits with value exitval
+#	pop0 -s signum		kills self with signal signum
+#	pop0 -t waitval		sleeps for waitval seconds before execution
+#	pop0 [arglist] -o 	writes args to stdout, one per line
+#	pop0 [arglist] -o ofile	writes args to ofile, one per line
+# 	pop0 -i 		reads stdin
+#	pop0 -i ifile		reads from input file ifile
+#	pop0 -i -o		copies stdin to stdout
+#	pop0 -i -o ofile	copies stdin to ofile
+#	pop0 -i ifile -o	copies ifile to stdout
+#	pop0 -i ifile -o ofile	copies ifile to ofile
+#	pop0 -p procnum		kills procnum with signal SIGKILL
+#	pop0 -s sig -p procnum	kills procnum with signal sig
+#	pop0 -e			report envp instead of argv
+#	
+#	any combination of args except -x and -s will work
+#	error messages are reported on stderr
+#
+:EOT:
+
+:TESTING:
+that a blank line has no ill effects
+:EXPECTING:
+return value of 0
+:RETVAL:
+0
+:POPEN,"R":
+
+:EOT:
+
+:TESTING:
+a simple command
+:EXPECTING:
+return value of 0
+:RETVAL:
+0
+:POPEN,"R":
+pop0
+:EOT:
+
+:TESTING:
+a simple command
+:EXPECTING:
+output file content to contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 Hello_World -o
+:OUTPUT:
+Hello_World
+:EOT:
+
+:TESTING:
+a simple command
+:EXPECTING:
+output file content to contain input written to command
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o %TEMPsysout
+:INPUT:
+This was written to the command
+:EOT:
+
+:TESTING:
+a comment as the latter portion of a command line
+:EXPECTING:
+output file content not to contain comment
+:RETVAL:
+0
+:POPEN,"R":
+pop0 This_should_be_in_the_output_file -o # This comment should not be in the output file
+:OUTPUT:
+This_should_be_in_the_output_file
+:EOT:
+
+:TESTING:
+space separators
+:EXPECTING:
+ output file should contain list of args
+:RETVAL:
+0
+:POPEN,"R":
+pop0 This is a string of arguments separated by spaces -o
+:OUTPUT:
+This
+is
+a
+string
+of
+arguments
+separated
+by
+spaces
+:EOT:
+
+:TESTING:
+tab separators
+:EXPECTING:
+output file should contain list of args
+:RETVAL:
+0
+:POPEN,"R":
+pop0	This	is	a	string	of	arguments	separated	by	tabs	-o
+:OUTPUT:
+This
+is
+a
+string
+of
+arguments
+separated
+by
+tabs
+:EOT:
+
+:TESTING:
+a command whose arguments are separated by both tabs and spaces
+:EXPECTING:
+output should contain list of args
+:RETVAL:
+0
+:POPEN,"R":
+pop0	This is	 a string  	of	arguments separated by	both spaces	and tabs -o
+:OUTPUT:
+This
+is
+a
+string
+of
+arguments
+separated
+by
+both
+spaces
+and
+tabs
+:EOT:
+
+:TESTING:
+a command whose argument is a quoted asterisk
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \* -o
+:OUTPUT:
+*
+:EOT:
+
+:TESTING:
+a command whose argument is a quoted question mark
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \? -o
+:OUTPUT:
+?
+:EOT:
+
+:TESTING:
+a command whose argument contains a quoted left square brace
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \[.a-zA-Z] -o
+:OUTPUT:
+[.a-zA-Z]
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted spaces
+:EXPECTING:
+output file should contain list of args
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This\ is\ an\ argument\ containing\ quoted\ spaces -o
+:OUTPUT:
+This is an argument containing quoted spaces
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted tabs
+:EXPECTING:
+output should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0  \	This\	is\	an\	argument\	containing\	quoted\	tabs -o
+:OUTPUT:
+	This	is	an	argument	containing	quoted	tabs
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted newlines
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0  \
+This_\
+is_\
+an_\
+argument_\
+containing_\
+quoted_\
+newlines -o
+:OUTPUT:
+This_is_an_argument_containing_quoted_newlines
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted greater than signs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0  \>This_\>argument_\>contains_\>quoted_\>greater_thans\> -o
+:OUTPUT:
+>This_>argument_>contains_>quoted_>greater_thans>
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted less than signs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \<This_\<argument_\<contains_\<quoted_\<less_thans\< -o
+:OUTPUT:
+<This_<argument_<contains_<quoted_<less_thans<
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted vertical bars
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \|This_\|argument_\|contains_\|quoted_\|vertical_bars\| -o
+:OUTPUT:
+|This_|argument_|contains_|quoted_|vertical_bars|
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted right parentheses
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \)This_\)argument_\)contains_\)quoted_\)right_parens\) -o
+:OUTPUT:
+)This_)argument_)contains_)quoted_)right_parens)
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted left parentheses
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \(This_\(argument_\(contains_\(quoted_\(left_parens\( -o
+:OUTPUT:
+(This_(argument_(contains_(quoted_(left_parens(
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted ampersands
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \&This_\&argument_\&contains_\&quoted_\&ampersands\& -o
+:OUTPUT:
+&This_&argument_&contains_&quoted_&ampersands&
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted semicolons
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \;This_\;argument_\;contains_\;quoted_\;semicolons\; -o
+:OUTPUT:
+;This_;argument_;contains_;quoted_;semicolons;
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted dollar signs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \$This_\$argument_\$contains_\$quoted_\$dollar_signs\$ -o
+:OUTPUT:
+$This_$argument_$contains_$quoted_$dollar_signs$
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted back slashes
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \\This_\\argument_\\contains_\\quoted_\\back_slashs\\ -o
+:OUTPUT:
+\This_\argument_\contains_\quoted_\back_slashs\
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted double quotes
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \"This_\"argument_\"contains_\"quoted_\"double_quotes\" -o
+:OUTPUT:
+"This_"argument_"contains_"quoted_"double_quotes"
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted single quotes
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \'This_\'argument_\'contains_\'quoted_\'single_quotes\' -o
+:OUTPUT:
+'This_'argument_'contains_'quoted_'single_quotes'
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted grave accents
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \`This_\`argument_\`contains_\`quoted_\`grave_accents\` -o
+:OUTPUT:
+`This_`argument_`contains_`quoted_`grave_accents`
+:EOT:
+
+:TESTING:
+a command whose argument contains quoted number signs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \#This_\#argument_\#contains_\#quoted_\#number_signs\# -o
+:OUTPUT:
+#This_#argument_#contains_#quoted_#number_signs#
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted spaces
+:EXPECTING:
+output file should contain list of args
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \  This \  argument \  list \  contains \  quoted \  spaces -o
+:OUTPUT:
+ 
+This
+ 
+argument
+ 
+list
+ 
+contains
+ 
+quoted
+ 
+spaces
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted tabs
+:EXPECTING:
+output should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0 \	 This \	 argument \	 list \	 contains \	 quoted \	 tabs -o
+:OUTPUT:
+	
+This
+	
+argument
+	
+list
+	
+contains
+	
+quoted
+	
+tabs
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted newlines
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  \
+	This \
+	argument \
+	list \
+	contains \
+	quoted \
+	newlines -o
+:OUTPUT:
+This
+argument
+list
+contains
+quoted
+newlines
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted greater than signs
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \> argument \> list \> contains \> quoted \> greater_thans \> -o
+:OUTPUT:
+This
+>
+argument
+>
+list
+>
+contains
+>
+quoted
+>
+greater_thans
+>
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted less than signs
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \< argument \< list \< contains \< quoted \< less_thans \< -o
+:OUTPUT:
+This
+<
+argument
+<
+list
+<
+contains
+<
+quoted
+<
+less_thans
+<
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted vertical bars
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \| argument \| list \| contains \| quoted \| vertical_bars \| -o
+:OUTPUT:
+This
+|
+argument
+|
+list
+|
+contains
+|
+quoted
+|
+vertical_bars
+|
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted right parentheses
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \) argument \) list \) contains \) quoted \) right_parens \) -o
+:OUTPUT:
+This
+)
+argument
+)
+list
+)
+contains
+)
+quoted
+)
+right_parens
+)
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted left parentheses
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \( argument \( list \( contains \( quoted \( left_parens \( -o
+:OUTPUT:
+This
+(
+argument
+(
+list
+(
+contains
+(
+quoted
+(
+left_parens
+(
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted ampersands
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \& argument \& list \& contains \& quoted \& ampersands \& -o
+:OUTPUT:
+This
+&
+argument
+&
+list
+&
+contains
+&
+quoted
+&
+ampersands
+&
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted semicolons
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0 This \; argument \; list \; contains \; quoted \; semicolons \; -o
+:OUTPUT:
+This
+;
+argument
+;
+list
+;
+contains
+;
+quoted
+;
+semicolons
+;
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted dollar signs
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \$argument \$list \$contains \$quoted \$dollar_signs -o
+:OUTPUT:
+This
+$argument
+$list
+$contains
+$quoted
+$dollar_signs
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted back slashes
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \\ argument \\ list \\ contains \\ quoted \\ back_slashs \\ -o
+:OUTPUT:
+This
+\
+argument
+\
+list
+\
+contains
+\
+quoted
+\
+back_slashs
+\
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted double quotes
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \" argument \" list \" contains \" quoted \" double_quotes \" -o
+:OUTPUT:
+This
+"
+argument
+"
+list
+"
+contains
+"
+quoted
+"
+double_quotes
+"
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted single quotes
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \' argument \' list \' contains \' quoted \' single_quotes \' -o
+:OUTPUT:
+This
+'
+argument
+'
+list
+'
+contains
+'
+quoted
+'
+single_quotes
+'
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted grave accents
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \` argument \` list \` contains \` quoted \` grave_accents \` -o
+:OUTPUT:
+This
+`
+argument
+`
+list
+`
+contains
+`
+quoted
+`
+grave_accents
+`
+:EOT:
+
+:TESTING:
+a command whose argument list contains quoted number signs
+:EXPECTING:
+output file should contain argument list
+:RETVAL:
+0
+:POPEN,"R":
+pop0  This \# argument \# list \# contains \# quoted \# number_signs \# -o
+:OUTPUT:
+This
+#
+argument
+#
+list
+#
+contains
+#
+quoted
+#
+number_signs
+#
+:EOT:
+
+:TESTING:
+quoted argument containing spaces
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This is a quoted argument containing spaces" -o
+:OUTPUT:
+This is a quoted argument containing spaces
+:EOT:
+
+:TESTING:
+quoted argument containing tabs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "	This	quoted	argument	contains	tabs" -o
+:OUTPUT:
+	This	quoted	argument	contains	tabs
+:EOT:
+
+:TESTING:
+quoted argument containing greater thans
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "> This > quoted > argument > contains > greater thans >" -o
+:OUTPUT:
+> This > quoted > argument > contains > greater thans >
+:EOT:
+
+:TESTING:
+quoted argument containing less thans
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "< This < quoted < argument < contains < less thans <" -o
+:OUTPUT:
+< This < quoted < argument < contains < less thans <
+:EOT:
+
+:TESTING:
+quoted argument containing vertical bars
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "| This | quoted | argument | contains | vertical bars |" -o
+:OUTPUT:
+| This | quoted | argument | contains | vertical bars |
+:EOT:
+
+:TESTING:
+quoted argument containing right parentheses
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 ") This ) quoted ) argument ) contains ) right parentheses )" -o
+:OUTPUT:
+) This ) quoted ) argument ) contains ) right parentheses )
+:EOT:
+
+:TESTING:
+quoted argument containing left parentheses
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "( This ( quoted ( argument ( contains ( left parentheses (" -o
+:OUTPUT:
+( This ( quoted ( argument ( contains ( left parentheses (
+:EOT:
+
+:TESTING:
+quoted argument containing ampersands
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "& This & quoted & argument & contains & ampersands &" -o
+:OUTPUT:
+& This & quoted & argument & contains & ampersands &
+:EOT:
+
+:TESTING:
+quoted argument containing semicolons
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "; This ; quoted ; argument ; contains ; semicolons ;" -o
+:OUTPUT:
+; This ; quoted ; argument ; contains ; semicolons ;
+:EOT:
+
+:TESTING:
+quoted argument containing dollar signs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "\$This \$quoted \$argument \$contains \$dollar signs" -o
+:OUTPUT:
+$This $quoted $argument $contains $dollar signs
+:EOT:
+
+:TESTING:
+quoted argument containing back slashes
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "\\ This \\ quoted \\ argument \\ contains \\ back slashes \\" -o
+:OUTPUT:
+\ This \ quoted \ argument \ contains \ back slashes \
+:EOT:
+
+:TESTING:
+quoted argument containing double quotes
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "\" This \" quoted \" argument \" contains \" double quotes \"" -o
+:OUTPUT:
+" This " quoted " argument " contains " double quotes "
+:EOT:
+
+:TESTING:
+quoted argument containing single quotes
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "' This ' quoted ' argument ' contains ' single quotes '" -o
+:OUTPUT:
+' This ' quoted ' argument ' contains ' single quotes '
+:EOT:
+
+:TESTING:
+quoted argument containing number signs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "# This # quoted # argument # contains # number signs #" -o
+:OUTPUT:
+# This # quoted # argument # contains # number signs #
+:EOT:
+
+:TESTING:
+quoted argument containing grave accents
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "\` This \` quoted \` argument \` contains \` grave accents \`" -o
+:OUTPUT:
+` This ` quoted ` argument ` contains ` grave accents `
+:EOT:
+
+:TESTING:
+quoted argument containing new lines
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This
+quoted
+argument
+contains
+newlines" -o
+:OUTPUT:
+This
+quoted
+argument
+contains
+newlines
+:EOT:
+
+:TESTING:
+quoted argument containing spaces
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 'This is a quoted argument containing spaces' -o
+:OUTPUT:
+This is a quoted argument containing spaces
+:EOT:
+
+:TESTING:
+quoted argument containing tabs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '	This	quoted	argument	contains	tabs' -o
+:OUTPUT:
+	This	quoted	argument	contains	tabs
+:EOT:
+
+:TESTING:
+quoted argument containing greater thans
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '> This > quoted > argument > contains > greater thans >' -o
+:OUTPUT:
+> This > quoted > argument > contains > greater thans >
+:EOT:
+
+:TESTING:
+quoted argument containing less thans
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '< This < quoted < argument < contains < less thans <' -o
+:OUTPUT:
+< This < quoted < argument < contains < less thans <
+:EOT:
+
+:TESTING:
+quoted argument containing vertical bars
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '| This | quoted | argument | contains | vertical bars |' -o
+:OUTPUT:
+| This | quoted | argument | contains | vertical bars |
+:EOT:
+
+:TESTING:
+quoted argument containing right parentheses
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 ') This ) quoted ) argument ) contains ) right parentheses )' -o
+:OUTPUT:
+) This ) quoted ) argument ) contains ) right parentheses )
+:EOT:
+
+:TESTING:
+quoted argument containing left parentheses
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '( This ( quoted ( argument ( contains ( left parentheses (' -o
+:OUTPUT:
+( This ( quoted ( argument ( contains ( left parentheses (
+:EOT:
+
+:TESTING:
+quoted argument containing ampersands
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '& This & quoted & argument & contains & ampersands &' -o
+:OUTPUT:
+& This & quoted & argument & contains & ampersands &
+:EOT:
+
+:TESTING:
+quoted argument containing semicolons
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '; This ; quoted ; argument ; contains ; semicolons ;' -o
+:OUTPUT:
+; This ; quoted ; argument ; contains ; semicolons ;
+:EOT:
+
+:TESTING:
+quoted argument containing dollar signs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '$This $quoted $argument $contains $dollar signs' -o
+:OUTPUT:
+$This $quoted $argument $contains $dollar signs
+:EOT:
+
+:TESTING:
+quoted argument containing back slashes
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '\ This \ quoted \ argument \ contains \ back slashes \' -o
+:OUTPUT:
+\ This \ quoted \ argument \ contains \ back slashes \
+:EOT:
+
+:TESTING:
+quoted argument containing double quotes
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '" This " quoted " argument " contains " double quotes "'  -o
+:OUTPUT:
+" This " quoted " argument " contains " double quotes "
+:EOT:
+
+:TESTING:
+quoted argument containing number signs
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '# This # quoted # argument # contains # number signs #' -o
+:OUTPUT:
+# This # quoted # argument # contains # number signs #
+:EOT:
+
+:TESTING:
+quoted argument containing grave accents
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 '` This ` quoted ` argument ` contains ` grave accents `' -o
+:OUTPUT:
+` This ` quoted ` argument ` contains ` grave accents `
+:EOT:
+
+:TESTING:
+quoted argument containing new lines
+:EXPECTING:
+output file should contain argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 'This
+quoted
+argument
+contains
+newlines' -o
+:OUTPUT:
+This
+quoted
+argument
+contains
+newlines
+:EOT:
+
+:TESTING:
+one item list
+:EXPECTING:
+output file should contain list of args
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This is a one item list" -o
+:OUTPUT:
+This is a one item list
+:EOT:
+
+:TESTING:
+list separated by semicolons
+:EXPECTING:
+serial execution of commands reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This is first" -t 10 -o ; \
+	pop0 "This is second" -t 5 -o ; \
+	pop0 "This is third" -o
+:OUTPUT:
+This is first
+This is second
+This is third
+:EOT:
+
+:TESTING:
+list separated by newlines
+:EXPECTING:
+serial execution of commands reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This is first" -t 10 -o
+pop0 "This is second" -t 5 -o
+pop0 "This is third" -o
+:OUTPUT:
+This is first
+This is second
+This is third
+:EOT:
+
+:TESTING:
+list separated by semicolons enclosed in parentheses
+:EXPECTING:
+serial execution of commands reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+( pop0 "This is first" -t 10 -o ; \
+	pop0 "This is second" -t 5 -o ; \
+	pop0 "This is third" -o )
+:OUTPUT:
+This is first
+This is second
+This is third
+:EOT:
+
+:TESTING:
+return values from commands
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -x 0 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+256
+:POPEN,"R":
+pop0 -x 1
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+512
+:POPEN,"R":
+pop0 -x 2
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+768
+:POPEN,"R":
+pop0 -x 3
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+1024
+:POPEN,"R":
+pop0 -x 4
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+1280
+:POPEN,"R":
+pop0 -x 5
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+1536
+:POPEN,"R":
+pop0 -x 6
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+1792
+:POPEN,"R":
+pop0 -x 7
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+2048
+:POPEN,"R":
+pop0 -x 8
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+2304
+:POPEN,"R":
+pop0 -x 9
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+2560
+:POPEN,"R":
+pop0 -x 10 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-256
+:POPEN,"R":
+pop0 -x -1 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-512
+:POPEN,"R":
+pop0 -x -2 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-768
+:POPEN,"R":
+pop0 -x -3 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-1024
+:POPEN,"R":
+pop0 -x -4 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-1280
+:POPEN,"R":
+pop0 -x -5 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-1536
+:POPEN,"R":
+pop0 -x -6 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-1792
+:POPEN,"R":
+pop0 -x -7 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-2048
+:POPEN,"R":
+pop0 -x -8 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-2304
+:POPEN,"R":
+pop0 -x -9 
+:EOT:
+:TESTING:
+return values 
+:EXPECTING:
+return value from system to be exit val from command << 8
+and reflected in output file
+:RETVAL:
+-2560
+:POPEN,"R":
+pop0 -x -10 
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number
+:RETVAL:
+%SIGHUPEXIT
+:POPEN,"R":
+pop0 -s %SIGHUP
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number
+:RETVAL:
+%SIGINTEXIT
+:POPEN,"R":
+pop0 -s %SIGINT
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number | 0200
+:RETVAL:
+%SIGQUITEXIT
+:POPEN,"R":
+pop0 -s %SIGQUIT
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number | 0200
+:RETVAL:
+%SIGILLEXIT
+:POPEN,"R":
+pop0 -s %SIGILL
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number | 0200
+:RETVAL:
+%SIGTRAPEXIT
+:POPEN,"R":
+pop0 -s %SIGTRAP
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number | 0200
+:RETVAL:
+%SIGFPEEXIT
+:POPEN,"R":
+pop0 -s %SIGFPE
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number
+:RETVAL:
+%SIGKILLEXIT
+:POPEN,"R":
+pop0 -s %SIGKILL
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number | 0200
+:RETVAL:
+%SIGSYSEXIT
+:POPEN,"R":
+pop0 -s %SIGSYS
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number
+:RETVAL:
+%SIGPIPEEXIT
+:POPEN,"R":
+pop0 -s %SIGPIPE
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number
+:RETVAL:
+%SIGALRMEXIT
+:POPEN,"R":
+pop0 -s %SIGALRM
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number
+:RETVAL:
+%SIGTERMEXIT
+:POPEN,"R":
+pop0 -s %SIGTERM
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number
+:RETVAL:
+%SIGUSR1EXIT
+:POPEN,"R":
+pop0 -s %SIGUSR1
+:EOT:
+
+:TESTING:
+exit values due to signals
+:EXPECTING:
+exit value from system to be signal number
+:RETVAL:
+%SIGUSR2EXIT
+:POPEN,"R":
+pop0 -s %SIGUSR2
+:EOT:
+
+:TESTING:
+return values from list separated by semicolons
+:EXPECTING:
+return value from last command << 8
+:RETVAL:
+1024
+:POPEN,"R":
+pop0 -x 0 ; \
+pop0 -x 1 ; \
+pop0 -x 2 ; \
+pop0 -x 3 ; \
+pop0 -x 4 ;
+:EOT:
+
+:TESTING:
+return values of list separated by newlines
+:EXPECTING:
+return value from last command << 8
+:RETVAL:
+1024
+:POPEN,"R":
+pop0 -x 1
+pop0 -x 2
+pop0 -x 3
+pop0 -x 4
+:EOT:
+
+:TESTING:
+exit values of list separated by semicolons enclosed
+in parentheses
+:EXPECTING:
+return value from last command << 8
+:RETVAL:
+1024
+:POPEN,"R":
+( pop0 -x 0 ; \
+	pop0 -x 2;\
+	pop0 -x 3;\
+	pop0 -x 4; )
+:EOT:
+
+:TESTING:
+one pipe pipeline
+:EXPECTING:
+stdout of first command to flow through pipe and be written
+to output file by second command in pipeline
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a one pipe pipeline" -o \
+	| pop0 -i -o
+:OUTPUT:
+Testing a one pipe pipeline
+:EOT:
+
+:TESTING:
+two pipe pipelines
+:EXPECTING:
+stdout of first command to flow through pipes and be written
+to output file by last command in pipeline
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a two pipe pipeline" -o \
+	| pop0 -i -o \
+	| pop0 -i -o
+:OUTPUT:
+Testing a two pipe pipeline
+:EOT:
+
+:TESTING:
+three pipe pipelines
+:EXPECTING:
+stdout of first command to flow through pipes and be written
+to output file by last command in pipeline
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a three pipe pipeline" -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o
+:OUTPUT:
+Testing a three pipe pipeline
+:EOT:
+
+:TESTING:
+four pipe pipelines
+:EXPECTING:
+stdout of first command to flow through pipes and be written
+to output file by last command in pipeline
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a four pipe pipeline" -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o
+:OUTPUT:
+Testing a four pipe pipeline
+:EOT:
+
+:TESTING:
+five pipe pipelines
+:EXPECTING:
+stdout of first command to flow through pipes and be written
+to output file by last command in pipeline
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a five pipe pipeline" -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o
+:OUTPUT:
+Testing a five pipe pipeline
+:EOT:
+
+:TESTING:
+one pipe pipeline
+:EXPECTING:
+stdout of first command to flow through pipe and be written
+to output file by second command in pipeline
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o | pop0 -i -o %TEMPsysout
+:INPUT:
+Testing a one pipe pipeline
+:EOT:
+
+:TESTING:
+two pipe pipelines
+:EXPECTING:
+stdout of first command to flow through pipes and be written
+to output file by last command in pipeline
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o | pop0 -i -o	| pop0 -i -o %TEMPsysout
+:INPUT:
+Testing a two pipe pipeline
+:EOT:
+
+:TESTING:
+three pipe pipelines
+:EXPECTING:
+stdout of first command to flow through pipes and be written
+to output file by last command in pipeline
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o | pop0 -i -o | pop0 -i -o | pop0 -i -o %TEMPsysout
+:INPUT:
+Testing a three pipe pipeline
+:EOT:
+
+:TESTING:
+four pipe pipelines
+:EXPECTING:
+stdout of first command to flow through pipes and be written
+to output file by last command in pipeline
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o | pop0 -i -o | pop0 -i -o | pop0 -i -o | pop0 -i -o %TEMPsysout
+:INPUT:
+Testing a four pipe pipeline
+:EOT:
+
+:TESTING:
+five pipe pipelines
+:EXPECTING:
+stdout of first command to flow through pipes and be written
+to output file by last command in pipeline
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o \
+	| pop0 -i -o %TEMPsysout
+:INPUT:
+Testing a five pipe pipeline
+:EOT:
+
+:TESTING:
+exit value from one pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+512
+:POPEN,"R":
+pop0 "Testing a one pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2
+:OUTPUT:
+Testing a one pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from two pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+768
+:POPEN,"R":
+pop0 "Testing a two pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -x 3 -o
+:OUTPUT:
+Testing a two pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from three pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+1024
+:POPEN,"R":
+pop0 "Testing a three pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3 \
+	| pop0 -i -x 4 -o
+:OUTPUT:
+Testing a three pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from four pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+1280
+:POPEN,"R":
+pop0 "Testing a four pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3 \
+	| pop0 -i -o -x 4 \
+	| pop0 -i -o -x 5
+:OUTPUT:
+Testing a four pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from five pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+1536
+:POPEN,"R":
+pop0 "Testing a five pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3 \
+	| pop0 -i -o -x 4 \
+	| pop0 -i -o -x 5 \
+	| pop0 -i -o -x 6
+:OUTPUT:
+Testing a five pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from one pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+512
+:POPEN,"W":
+pop0 -i -o -x 1	| pop0 -i -o %TEMPsysout -x 2
+:INPUT:
+Testing a one pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from two pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+768
+:POPEN,"W":
+pop0 -i -o -x 1	| pop0 -i -o -x 2 | pop0 -i -o %TEMPsysout -x 3
+:INPUT:
+Testing a two pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from three pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+1024
+:POPEN,"W":
+pop0 -i -x 1 -o | pop0 -i -o -x 2 | pop0 -i -o -x 3 \
+	| pop0 -i -o %TEMPsysout -x 4
+:INPUT:
+Testing a three pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from four pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+1280
+:POPEN,"W":
+pop0 -i -o -x 1 \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3 \
+	| pop0 -i -o -x 4 \
+	| pop0 -i -o %TEMPsysout -x 5
+:INPUT:
+Testing a four pipe pipeline exit val
+:EOT:
+
+:TESTING:
+exit value from five pipe pipeline
+:EXPECTING:
+exit value to match exit value from last command in pipeline << 8
+:RETVAL:
+1536
+:POPEN,"W":
+pop0 -i -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3 \
+	| pop0 -i -o -x 4 \
+	| pop0 -i -o -x 5 \
+	| pop0 -i -o %TEMPsysout -x 6
+:INPUT:
+Testing a five pipe pipeline exit val
+:EOT:
+
+:TESTING:
+list separated by ampersands
+:EXPECTING:
+asynchronous execution reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This was executed first but should complete third" -t 10 -o &
+pop0 "This was executed second and should complete second" -t 5 -o &
+pop0 "This was executed third but should complete first" -o &
+# wait for previous case to complete
+pop0 -t 15
+:OUTPUT:
+This was executed third but should complete first
+This was executed second and should complete second
+This was executed first but should complete third
+:EOT:
+
+:TESTING:
+two simple commands separated by && where the first command exits with zero
+:EXPECTING:
+the second command to run and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" && \
+	pop0 "This should be executed" -o
+:OUTPUT:
+Zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+two simple commands separated by && and newline where the first
+command exits with zero
+:EXPECTING:
+the second command to run and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" &&
+pop0 "This should be executed" -o
+:OUTPUT:
+Zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+two simple commands separated by && where the first command
+exits with non-zero
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+256
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" && \
+	pop0 "This should not be executed" -o
+:OUTPUT:
+Non-zero exit value
+:EOT:
+
+:TESTING:
+two simple commands separated by && where the first command
+exits with non-zero, followed by a third command
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" && \
+	pop0 "This should not be executed" -o
+pop0 "This should be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+two simple commands separated by && and newline where the first
+command exits with non-zero
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+256
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+pop0 "This should not be executed" -o
+:OUTPUT:
+Non-zero exit value
+:EOT:
+
+:TESTING:
+two simple commands separated by && and newline where the first
+command exits with non-zero, followed by a third command
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+pop0 "This should not be executed" -o
+pop0 "This should be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+two simple commands separated by || where the first command
+exits with non-zero
+:EXPECTING:
+the second command to run and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" || \
+	pop0 "This should be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+two simple commands separated by || and newline where the first
+command exits with non-zero
+:EXPECTING:
+the second command to run and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" ||
+pop0 "This should be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+two simple commands separated by || where the first command
+exits with zero
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" || \
+	pop0 "This should not be executed" -o
+:OUTPUT:
+Zero exit value
+:EOT:
+
+:TESTING:
+two simple commands separated by || and newline where the first
+command exits with zero
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" ||
+pop0 "This should not be executed" -o
+:OUTPUT:
+Zero exit value
+:EOT:
+
+:TESTING:
+three simple commands separated by || where the first
+command exits with zero
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" ||
+pop0 "This should not be executed" -o ||
+pop0 "This should not be executed" -o
+:OUTPUT:
+Zero exit value
+:EOT:
+
+:TESTING:
+three simple commands separated by || where the first
+command exits with non-zero, and the second exits with zero
+:EXPECTING:
+the third command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" ||
+pop0 -o -x 0 "This should be executed" ||
+pop0 "This should not be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by && where the second command
+exits with non-zero
+:EXPECTING:
+the third command not to be run
+:RETVAL:
+256
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" &&
+pop0 -o -x 1 "This should be executed" &&
+pop0 "This should not be executed" -o
+:OUTPUT:
+Zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by && where the second command
+exits with non-zero, followed by a fourth command
+:EXPECTING:
+the third command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" &&
+pop0 -o -x 1 "This should be executed" &&
+pop0 "This should not be executed" -o
+pop0 "This should be executed" -o
+:OUTPUT:
+Zero exit value
+This should be executed
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by && where the first
+command exits with non-zero
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+256
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+pop0 "This should not be executed" -o &&
+pop0 "This should not be executed" -o
+:OUTPUT:
+Non-zero exit value
+:EOT:
+
+:TESTING:
+three simple commands separated by && where the first
+command exits with non-zero, followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -x 1 "Non-zero exit value" -o &&
+pop0 "This should not be executed" -o &&
+pop0 "This should not be executed" -o
+pop0 "This should be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with non-zero
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+pop0 "This should not be executed" -o ||
+pop0 "This should be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with non-zero, followed by a fourth command
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+pop0 "This should not be executed" -o ||
+pop0 "This should be executed" -o
+pop0 "This should be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with non-zero
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+256
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+( pop0 "This should not be executed" -o ||
+	pop0 "This should not be executed" -o )
+:OUTPUT:
+Non-zero exit value
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with non-zero, followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+( pop0 "This should not be executed" -o ||
+	pop0 -o "This should not be executed" -o )
+pop0 "This should be executed" -o
+:OUTPUT:
+Non-zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with zero
+:EXPECTING:
+the third command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" &&
+pop0 -o -x 0 "This should be executed" ||
+pop0 "This should not be executed" -o
+:OUTPUT:
+Zero exit value
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with zero, followed by a fourth command
+:EXPECTING:
+the third command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" &&
+pop0 -o -x 0 "This should be executed" ||
+pop0 "This should not be executed" -o
+pop0 "This should be executed" -o
+:OUTPUT:
+Zero exit value
+This should be executed
+This should be executed
+:EOT:
+
+:TESTING:
+three simple commands separated by || where the first command
+exits with zero executed asynchronously, followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" ||
+pop0 "This should not be executed" -o ||
+pop0 "This should not be executed" -o &
+pop0 -o -t 10 "This should execute last"
+:OUTPUT:
+Zero exit value
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by || where the first command
+exits with zero executed asynchronously, followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 -t 5 "Zero exit value" ||
+pop0 "This should not be executed" -o ||
+pop0 "This should not be executed" -o &
+pop0 "This should execute first" -o
+pop0 -o -t 15 "This should execute last"
+:OUTPUT:
+This should execute first
+Zero exit value
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by || where the first
+command exits with non-zero, and the second exits with zero, executed 
+asynchronously, followed by a fourth command
+:EXPECTING:
+the third command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" ||
+pop0 -o -x 0 "This should be executed" ||
+pop0 "This should not be executed" -o &
+pop0 -o -t 10 "This should execute last"
+:OUTPUT:
+Non-zero exit value
+This should be executed
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by || where the first
+command exits with non-zero, and the second exits with zero, executed 
+asynchronously, followed by a fourth command
+:EXPECTING:
+the third command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 -t 5 "Non-zero exit value" ||
+pop0 -o -x 0 "This should be executed" ||
+pop0 "This should not be executed" -o &
+pop0 "This should execute first" -o
+pop0 -o -t 15 "This should execute last"
+:OUTPUT:
+This should execute first
+Non-zero exit value
+This should be executed
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && where the second command
+exits with non-zero executed asynchronously, followed by a fourth command
+:EXPECTING:
+the third command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" &&
+pop0 -o -x 1 "This should be executed" &&
+pop0 "This should not be executed" -o &
+pop0 -o -t 10 "This should execute last"
+:OUTPUT:
+Zero exit value
+This should be executed
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && where the second command
+exits with non-zero executed asynchronously, followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 -t 5 "Zero exit value" &&
+pop0 -o -x 1 "This should be executed" &&
+pop0 "This should not be executed" -o &
+pop0 "This should execute first" -o
+pop0 -t 15 "This should execute last" -o
+
+:OUTPUT:
+This should execute first
+Zero exit value
+This should be executed
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && where the first
+command exits with non-zero executed asynchronously,
+followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+pop0 "This should not be executed" -o &&
+pop0 "This should not be executed" -o &
+pop0 -o -t 10 "This should execute last"
+:OUTPUT:
+Non-zero exit value
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && where the first
+command exits with non-zero executed asynchronously,
+followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 -t 5 "Non-zero exit value" &&
+pop0 "This should not be executed" -o &&
+pop0 "This should not be executed" -o &
+pop0 "This should execute first" -o
+pop0 -o -t 15 "This should execute last"
+:OUTPUT:
+This should execute first
+Non-zero exit value
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with non-zero executed asynchronously, followed by a
+fourth command
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+pop0 "This should not be executed" -o ||
+pop0 "This should be executed" -o &
+pop0 -o -t 10 "This should execute last"
+:OUTPUT:
+Non-zero exit value
+This should be executed
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with non-zero executed asynchronously, followed by a
+fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 "Non-zero exit value" &&
+( pop0 "This should not be executed" -o ||
+pop0 "This should not be executed" -o ) &
+pop0 -o -t 10 "This should execute last"
+:OUTPUT:
+Non-zero exit value
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with non-zero executed asynchronously, followed by a
+fourth command
+:EXPECTING:
+the second command not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 -t 5 "Non-zero exit value" &&
+pop0 "This should not be executed" -o ||
+pop0 "This should be executed" -o &
+pop0 "This should execute first" -o
+pop0 -o -t 15 "This should execute last"
+:OUTPUT:
+This should execute first
+Non-zero exit value
+This should be executed
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with non-zero executed asynchronously, followed by a
+fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 1 -t 5 "Non-zero exit value" &&
+( pop0 "This should not be executed" -o ||
+	pop0  "This should not be executed" -o ) &
+pop0 "This should execute first" -o
+pop0 -o -t 15 "This should execute last"
+:OUTPUT:
+This should execute first
+Non-zero exit value
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with zero asynchronously, followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 "Zero exit value" &&
+pop0 -o -x 0 "This should be executed" ||
+pop0 "This should not be executed" -o &
+pop0 -o -t 10 "This should execute last"
+:OUTPUT:
+Zero exit value
+This should be executed
+This should execute last
+:EOT:
+
+:TESTING:
+three simple commands separated by && and || respectively, where the first
+command exits with zero asynchronously, followed by a fourth command
+:EXPECTING:
+the second and third commands not to be run
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -o -x 0 -t 5 "Zero exit value" &&
+pop0 -o -x 0 "This should be executed" ||
+pop0 "This should not be executed" -o &
+pop0 "This should execute first" -o
+pop0 -t 15 "This should execute last" -o
+:OUTPUT:
+This should execute first
+Zero exit value
+This should be executed
+This should execute last
+:EOT:
+:TESTING:
+parameter substitution of keyword parameter with no value
+:EXPECTING:
+keyword parameter PARAM to have no value
+:RETVAL:
+0
+:POPEN,"R":
+pop0 $PARAM -o
+:OUTPUT:
+:EOT:
+
+:TESTING:
+parameter substitution of keyword parameter with a value set via =
+:EXPECTING:
+keyword parameter PARAM to have the value: Value
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=Value
+pop0 $PARAM -o
+:OUTPUT:
+Value
+:EOT:
+
+:TESTING:
+parameter substitution of keyword parameter with no value
+:EXPECTING:
+keyword parameter PARAM to have no value, (not carried from prev test)
+:RETVAL:
+0
+:POPEN,"R":
+pop0 $PARAM -o
+:OUTPUT:
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter with a name starting with
+an underscore
+:EXPECTING:
+keyword parameter _PARAM to have the value: Value
+:RETVAL:
+0
+:POPEN,"R":
+_PARAM=Value
+pop0 $_PARAM -o
+:OUTPUT:
+Value
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter with a name composed
+of lower case letters
+:EXPECTING:
+keyword parameter param to have the value: Value
+:RETVAL:
+0
+:POPEN,"R":
+param=Value
+pop0 $param -o
+:OUTPUT:
+Value
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter with a name composed of 
+an underscore, upper and lowercase letters, and digits
+:EXPECTING:
+keyword parameter _pArAm_01 to have the value: Value
+:RETVAL:
+0
+:POPEN,"R":
+_pArAm_01=Value
+pop0 $_pArAm_01 -o
+:OUTPUT:
+Value
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter from another 
+keyword parameter
+:EXPECTING:
+keyword parameters PARAM1 and PARAM2 to have the value: Value
+:RETVAL:
+0
+:POPEN,"R":
+PARAM1=Value
+PARAM2=$PARAM1
+pop0 $PARAM1 $PARAM2 -o
+:OUTPUT:
+Value
+Value
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter inside double quotes
+:EXPECTING:
+keyword parameter PARAM to have the value: Value
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=Value
+pop0 "$PARAM" -o
+:OUTPUT:
+Value
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter inside single quotes
+:EXPECTING:
+no parameter substitution
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=Value
+pop0 '$PARAM' -o
+:OUTPUT:
+$PARAM
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter enclosed in
+braces ({) and (})
+:EXPECTING:
+parameter to have the value: Value
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=Value
+pop0 ${PARAM} -o
+:OUTPUT:
+Value
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter enclosed in
+braces ({) and (}) concatenated with a tag
+:EXPECTING:
+parameter to have the value: Value_Tag
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=Value_
+pop0 ${PARAM}Tag -o
+:OUTPUT:
+Value_Tag
+:EOT:
+
+:TESTING:
+parameter substitution of a keyword parameter enclosed in
+braces ({) and (}) concatenated with a tag
+:EXPECTING:
+parameter to have the value: Value_Tag
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=Value_
+pop0 ${PARAM}Tag -o
+:OUTPUT:
+Value_Tag
+:EOT:
+
+:TESTING:
+re-assignment to a keyword parameter
+:EXPECTING:
+parameter to have the value: New_Value
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=Old_Value
+PARAM=New_Value
+pop0 $PARAM -o
+:OUTPUT:
+New_Value
+:EOT:
+
+:TESTING:
+re-assignment to a keyword parameter
+:EXPECTING:
+parameter to first have the value: Old_Value and then have the
+value: New_Value
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=Old_Value
+pop0 $PARAM -o
+PARAM=New_Value
+pop0 $PARAM -o
+:OUTPUT:
+Old_Value
+New_Value
+:EOT:
+
+:TESTING:
+execution of a keyword parameter
+:EXPECTING:
+file content to reflect execution of param
+:RETVAL:
+0
+:POPEN,"R":
+PARAM="pop0 This command should be saved in PARAM -o"
+$PARAM
+:OUTPUT:
+This
+command
+should
+be
+saved
+in
+PARAM
+:EOT:
+
+:TESTING:
+keyword parameter to catch stdout from command substitution and pass
+single argument to a subsequent command
+:EXPECTING:
+file content to reflect substituted argument
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=`pop0 Argument -o`
+pop0 $PARAM -o
+:OUTPUT:
+Argument
+:EOT:
+
+:TESTING:
+keyword parameter to catch stdout from command substitution and pass
+multiple arguments argument to a subsequent command
+:EXPECTING:
+file content to reflect substituted argument
+:RETVAL:
+0
+:POPEN,"R":
+PARAM=`pop0 This argument list should be saved in PARAM -o`
+pop0 $PARAM -o
+:OUTPUT:
+This
+argument
+list
+should
+be
+saved
+in
+PARAM
+:EOT:
+
+:TESTING:
+command substitution containing keyword parameter
+:EXPECTING:
+file content to reflect substituted argument
+:RETVAL:
+0
+:POPEN,"R":
+PARAM1="pop0 This command should be saved in PARAM1 -o"
+pop0 `$PARAM1` -o
+:OUTPUT:
+This
+command
+should
+be
+saved
+in
+PARAM1
+:EOT:
+
+:TESTING:
+keyword parameter to catch stdout from command substitution containing 
+keyword parameter, and pass argument to a subsequent command
+:EXPECTING:
+file content to reflect substituted argument
+:RETVAL:
+0
+:POPEN,"R":
+PARAM1="pop0 This command should be saved in PARAM1 -o"
+PARAM2=`$PARAM1`
+pop0 $PARAM2 -o
+:OUTPUT:
+This
+command
+should
+be
+saved
+in
+PARAM1
+:EOT:
+:TESTING:
+return values via $?
+:EXPECTING:
+return value from previous command to be available to next
+command and reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -x 0 
+pop0 -x 1 "Exit val from first command" $? -o
+pop0 -x 2 "Exit val from second command" $? -o
+pop0 -x 3 "Exit val from third command" $? -o
+pop0 -x 4 "Exit val from fourth command" $? -o
+pop0 -x 5 "Exit val from fifth command" $? -o
+pop0 -x 6 "Exit val from sixth command" $? -o
+pop0 -x 7 "Exit val from seventh command" $? -o
+pop0 -x 8 "Exit val from eigth command" $? -o
+pop0 -x 9 "Exit val from ninth command" $? -o
+pop0 -x 10 "Exit val from tenth command" $? -o
+pop0 -x -1 "Exit val from eleventh command" $? -o
+pop0 -x -2 "Exit val from twelvth command" $? -o
+pop0 -x -3 "Exit val from thirteenth command" $? -o
+pop0 -x -4 "Exit val from fourteenth command" $? -o
+pop0 -x -5 "Exit val from fifteenth command" $? -o
+pop0 -x -6 "Exit val from sixteenth command" $? -o
+pop0 -x -7 "Exit val from seventeenth command" $? -o
+pop0 -x -8 "Exit val from eighteenth command" $? -o
+pop0 -x -9 "Exit val from nineteenth command" $? -o
+pop0 -x -10 "Exit val from twentieth command" $? -o
+pop0 "Exit val from twentyfirst command" $? -o
+:OUTPUT:
+Exit val from first command
+0
+Exit val from second command
+1
+Exit val from third command
+2
+Exit val from fourth command
+3
+Exit val from fifth command
+4
+Exit val from sixth command
+5
+Exit val from seventh command
+6
+Exit val from eigth command
+7
+Exit val from ninth command
+8
+Exit val from tenth command
+9
+Exit val from eleventh command
+10
+Exit val from twelvth command
+255
+Exit val from thirteenth command
+254
+Exit val from fourteenth command
+253
+Exit val from fifteenth command
+252
+Exit val from sixteenth command
+251
+Exit val from seventeenth command
+250
+Exit val from eighteenth command
+249
+Exit val from nineteenth command
+248
+Exit val from twentieth command
+247
+Exit val from twentyfirst command
+246
+:EOT:
+
+:TESTING:
+exit values due to signals via $?
+:EXPECTING:
+exit value from previous command to be available to next command
+and reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -x 0 
+pop0 -s %SIGHUP "Exit val from first command" $? -o
+pop0 -s %SIGINT "Exit val from second command" $? -o
+pop0 -s %SIGQUIT "Exit val from third command" $? -o
+pop0 -s %SIGILL "Exit val from fourth command" $? -o
+pop0 -s %SIGTRAP "Exit val from fifth command" $? -o
+pop0 -s %SIGFPE "Exit val from sixth command" $? -o
+pop0 -s %SIGKILL "Exit val from seventh command" $? -o
+pop0 -s %SIGSYS "Exit val from eigth command" $? -o
+pop0 -s %SIGPIPE "Exit val from ninth command" $? -o
+pop0 -s %SIGALRM "Exit val from tenth command" $? -o
+pop0 -s %SIGTERM "Exit val from eleventh command" $? -o
+pop0 -s %SIGUSR1 "Exit val from twelvth command" $? -o
+pop0 -s %SIGUSR2 "Exit val from thirteenth command" $? -o
+pop0 "Exit val from fourteenth command" $? -o
+:OUTPUT:
+Exit val from first command
+0
+Exit val from second command
+%SIGHUP0200
+Exit val from third command
+%SIGINT0200
+Exit val from fourth command
+%SIGQUIT0200
+Exit val from fifth command
+%SIGILL0200
+Exit val from sixth command
+%SIGTRAP0200
+Exit val from seventh command
+%SIGFPE0200
+Exit val from eigth command
+%SIGKILL0200
+Exit val from ninth command
+%SIGSYS0200
+Exit val from tenth command
+%SIGPIPE0200
+Exit val from eleventh command
+%SIGALRM0200
+Exit val from twelvth command
+%SIGTERM0200
+Exit val from thirteenth command
+%SIGUSR10200
+Exit val from fourteenth command
+%SIGUSR20200
+:EOT:
+
+:TESTING:
+return values from list separated by semicolons via $?
+:EXPECTING:
+return value from previous command to be available to
+next command and reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -x 0 ; \
+pop0 "Exit val from first command" $? -o -x 1 ; \
+pop0 "Exit val from second command" $? -o -x 2 ; \
+pop0 "Exit val from third command" $? -o -x 3 ; \
+pop0 "Exit val from fourth command" $? -o ;
+:OUTPUT:
+Exit val from first command
+0
+Exit val from second command
+1
+Exit val from third command
+2
+Exit val from fourth command
+3
+:EOT:
+
+:TESTING:
+return values of list separated by newlines via $?
+:EXPECTING:
+return value from previous command to be available to
+next command and reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 
+pop0 "Exit val from first command" $? -x 1 -o
+pop0 "Exit val from second command" $? -x 2 -o
+pop0 "Exit val from third command" $? -x 3 -o
+pop0 "Exit val from fourth command" $? -o
+:OUTPUT:
+Exit val from first command
+0
+Exit val from second command
+1
+Exit val from third command
+2
+Exit val from fourth command
+3
+:EOT:
+
+:TESTING:
+exit values of list separated by semicolons enclosed 
+in parentheses via $?
+:EXPECTING:
+return value from previous command to be available to
+next command and reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+( pop0 -o ; \
+	pop0 "Exit val from first command" $? -o -x 1 ;\
+	pop0 "Exit val from second command" $? -o -x 2;\
+	pop0 "Exit val from third command" $? -o -x 3 ;\
+	pop0 "Exit val from fourth command" $? -o )
+:OUTPUT:
+Exit val from first command
+0
+Exit val from second command
+1
+Exit val from third command
+2
+Exit val from fourth command
+3
+:EOT:
+
+:TESTING:
+exit value from one pipe pipeline via $?
+:EXPECTING:
+exit value to match exit value from last command in pipeline
+and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a one pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2
+pop0 "One pipe pipeline exit val" $? -o
+:OUTPUT:
+Testing a one pipe pipeline exit val
+One pipe pipeline exit val
+2
+:EOT:
+
+:TESTING:
+exit value from two pipe pipeline via $?
+:EXPECTING:
+exit value to match exit value from last command in pipeline
+and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a two pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3
+pop0 "Two pipe pipeline exit val" $? -o
+:OUTPUT:
+Testing a two pipe pipeline exit val
+Two pipe pipeline exit val
+3
+:EOT:
+
+:TESTING:
+exit value from three pipe pipeline via $?
+:EXPECTING:
+exit value to match exit value from last command in pipeline
+and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a three pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3 \
+	| pop0 -i -o -x 4
+pop0 "Three pipe pipeline exit val" $? -o
+:OUTPUT:
+Testing a three pipe pipeline exit val
+Three pipe pipeline exit val
+4
+:EOT:
+
+:TESTING:
+exit value from four pipe pipeline via $?
+:EXPECTING:
+exit value to match exit value from last command in pipeline
+and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a four pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3 \
+	| pop0 -i -o -x 4 \
+	| pop0 -i -o -x 5
+pop0 "Four pipe pipeline exit val" $? -o
+:OUTPUT:
+Testing a four pipe pipeline exit val
+Four pipe pipeline exit val
+5
+:EOT:
+
+:TESTING:
+exit value from five pipe pipeline via $?
+:EXPECTING:
+exit value to match exit value from last command in pipeline
+and be reflected in output file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "Testing a five pipe pipeline exit val" -x 1 -o \
+	| pop0 -i -o -x 2 \
+	| pop0 -i -o -x 3 \
+	| pop0 -i -o -x 4 \
+	| pop0 -i -o -x 5 \
+	| pop0 -i -o -x 6
+pop0 "Five pipe pipeline exit val" $? -o
+:OUTPUT:
+Testing a five pipe pipeline exit val
+Five pipe pipeline exit val
+6
+:EOT:
+:TESTING:
+explicit null argument from double quotes
+:EXPECTING:
+a null arg
+:RETVAL:
+0
+:POPEN,"R":
+pop0 This string is followed by a null argument "" -o
+:OUTPUT:
+This
+string
+is
+followed
+by
+a
+null
+argument
+
+:EOT:
+
+:TESTING:
+explicit null argument from single quotes
+:EXPECTING:
+a null arg
+:RETVAL:
+0
+:POPEN,"R":
+pop0 This string is followed by a null argument '' -o
+:OUTPUT:
+This
+string
+is
+followed
+by
+a
+null
+argument
+
+:EOT:
+
+:TESTING:
+implicit null argument from empty grave accents
+:EXPECTING:
+no null arg
+:RETVAL:
+0
+:POPEN,"R":
+pop0 This string is not followed by a null argument `` -o
+:OUTPUT:
+This
+string
+is
+not
+followed
+by
+a
+null
+argument
+:EOT:
+
+:TESTING:
+implicit null argument from command substitution with no output
+:EXPECTING:
+no null arg
+:RETVAL:
+0
+:POPEN,"R":
+pop0 This string is not followed by a null argument `pop0` -o
+:OUTPUT:
+This
+string
+is
+not
+followed
+by
+a
+null
+argument
+:EOT:
+
+:TESTING:
+implicit null arguments from keyword parameters
+:EXPECTING:
+no null argument
+:RETVAL:
+0
+:POPEN,"R":
+pop0 This string is not followed by a null argument $NOT_A_PARAM -o
+:OUTPUT:
+This
+string
+is
+not
+followed
+by
+a
+null
+argument
+:EOT:
+:TESTING:
+command substitution
+:EXPECTING:
+output of command available as argument to another command
+:RETVAL:
+0
+:POPEN,"R":
+pop0 `pop0 This is a nested command -o` -o
+:OUTPUT:
+This
+is
+a
+nested
+command
+:EOT:
+
+:TESTING:
+command substitution
+:EXPECTING:
+output of command available as argument to another command
+:RETVAL:
+0
+:POPEN,"R":
+pop0 `pop0 "This is a nested command" -o` -o
+:OUTPUT:
+This
+is
+a
+nested
+command
+:EOT:
+
+:TESTING:
+command substitution
+:EXPECTING:
+output of command available as argument to another command
+:RETVAL:
+0
+:POPEN,"R":
+pop0 `pop0 'This is a nested command' -o` -o
+:OUTPUT:
+This
+is
+a
+nested
+command
+:EOT:
+
+:TESTING:
+testing that $! is the process id of the last background command invoked
+:EXPECTING:
+killed command
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This command should be killed before writing to the output file" -o \
+	%TEMPsysout -t 15 & pop0 -t 5 -p $! ; pop0 -t 15
+:OUTPUT:
+:EOT:
+
+:TESTING:
+testing that a background command cannot be killed with SIGINT
+:EXPECTING:
+un-killed command
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This command should not be killed before writing to the output file"\
+	-o -t 15 & pop0 -t 5 -s %SIGINT -p $! ; pop0 -t 15
+:OUTPUT:
+This command should not be killed before writing to the output file
+:EOT:
+
+:TESTING:
+testing that a background command cannot be killed with SIGQUIT
+:EXPECTING:
+un-killed command
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This command should not be killed before writing to the output file"\
+	-o -t 15 & pop0 -t 5 -s %SIGQUIT -p $! ; pop0 -t 15
+:OUTPUT:
+This command should not be killed before writing to the output file
+:EOT:
+
+:TESTING:
+$$ is the process id of this process.
+:EXPECTING:
+output of first command, which will kill the process, and hence
+no output from the second command
+:RETVAL:
+%SIGKILL
+:POPEN,"R":
+pop0 -s %SIGKILL -p $$ "This should be in output file" -o
+pop0 "This should not be in output file" -o
+:OUTPUT:
+This should be in output file
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command via <
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o < %DATAdata0
+:OUTPUT:
+This is data0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to output file via > available to subsequent command
+via <
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This should appear in output file" -o > %TEMPsysout2
+pop0 -i -o < %TEMPsysout2
+:OUTPUT:
+This should appear in output file
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command via %STDIN<
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o %STDIN< %DATAdata1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command via %IFILE0<
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE0 -o %IFILE0< %DATAdata1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command via %IFILE1<
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE1 -o %IFILE1< %DATAdata0
+:OUTPUT:
+This is data0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command via %IFILE2<
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE2 -o %IFILE2< %DATAdata1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command via <&%IFILE0
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o <&%IFILE0
+:OUTPUT:
+This is data0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command via <&%IFILE1
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o <&%IFILE1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command via <&%IFILE2
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o <&%IFILE2
+:OUTPUT:
+This is data2
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %STDIN redirected from stdin
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This came from stdin thru fd %STDIN" -o | 
+pop0 -i -o %STDIN<&%STDIN
+:OUTPUT:
+This came from stdin thru fd %STDIN
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE0 redirected from stdin
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This came from stdin thru fd %IFILE0" -o | 
+pop0 -i%IFILE0 -o %IFILE0<&%STDIN
+:OUTPUT:
+This came from stdin thru fd %IFILE0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE1 redirected from stdin
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This came from stdin thru fd %IFILE1" -o | 
+pop0 -i%IFILE1 -o %IFILE1<&%STDIN
+:OUTPUT:
+This came from stdin thru fd %IFILE1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE2 redirected from stdin
+:RETVAL:
+0
+:POPEN,"R":
+pop0 "This came from stdin thru fd %IFILE2" -o |
+pop0 -i%IFILE2 -o %IFILE2<&%STDIN
+:OUTPUT:
+This came from stdin thru fd %IFILE2
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %STDIN redirected from another input file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o %STDIN<&%IFILE0
+:OUTPUT:
+This is data0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE0 redirected from another input file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE0 -o %IFILE0<&%IFILE1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE1 redirected from another input file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE1 -o %IFILE1<&%IFILE0
+:OUTPUT:
+This is data0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE2 redirected from another input file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE2 -o %IFILE2<&%IFILE1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+order of redirection to be left to right, stdin to be associated with
+file from fd %IFILE0
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o <&%IFILE0 %IFILE0<&%IFILE1
+:OUTPUT:
+This is data0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+order of redirection to be left to right, fd %IFILE0 to be associated with
+file from fd %IFILE1
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE0 -o <&%IFILE0 %IFILE0<&%IFILE1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+left to right order of evaluation, fd %IFILE0 to be associated with file 
+from fd %IFILE2
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE0 -o %IFILE0<&%IFILE2 <&%IFILE0
+:OUTPUT:
+This is data2
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+double redirected stdin
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o %IFILE0<&%IFILE1 <&%IFILE0
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE2 redirected from another input file
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE2 -o %IFILE2<&%IFILE1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+order of redirection to be left to right, stdin to be associated with
+file from fd %IFILE0
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o %STDIN<&%IFILE0 %IFILE0<&%IFILE1
+:OUTPUT:
+This is data0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+order of redirection to be left to right, fd %IFILE0 to be associated with
+file from fd %IFILE1
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE0 -o %STDIN<&%IFILE0 %IFILE0<&%IFILE1
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+left to right order of evaluation, fd %IFILE0 to be associated with file 
+from fd %IFILE2
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i%IFILE0 -o %IFILE0<&%IFILE2 %STDIN<&%IFILE0
+:OUTPUT:
+This is data2
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+double redirected stdin
+:RETVAL:
+0
+:POPEN,"R":
+pop0 -i -o %IFILE0<&%IFILE1 %STDIN<&%IFILE0
+:OUTPUT:
+This is data1
+:EOT:
+
+:TESTING:
+io redirection, <&- closes stdin
+:EXPECTING:
+fstat of stdin to fail, if this fails, will also cause
+unexpected ret val from pclose
+:RETVAL:
+0
+:POPEN,"R":
+pop2 %STDIN <&-
+:EOT:
+
+:TESTING:
+io redirection, %STDIN<&- closes stdin
+:EXPECTING:
+fstat of stdin to fail, if this fails, will also cause
+unexpected ret val from pclose
+:RETVAL:
+0
+:POPEN,"R":
+pop2 %STDIN %STDIN<&-
+:EOT:
+
+:TESTING:
+io redirection, %IFILE0<&- closes fd %IFILE0
+:EXPECTING:
+fstat of fd %IFILE0 to fail, if this fails, will also cause
+unexpected ret val from pclose
+:RETVAL:
+0
+:POPEN,"R":
+pop2 %IFILE0 %IFILE0<&-
+:EOT:
+
+:TESTING:
+io redirection, %IFILE1<&- closes fd %IFILE1
+:EXPECTING:
+fstat of fd %IFILE1 to fail, if this fails, will also cause
+unexpected ret val from pclose
+:RETVAL:
+0
+:POPEN,"R":
+pop2 %IFILE1 %IFILE1<&-
+:EOT:
+
+:TESTING:
+io redirection, %IFILE2<&- closes fd %IFILE2
+:EXPECTING:
+fstat of fd %IFILE2 to fail, if this fails, will also cause
+unexpected ret val from pclose
+:RETVAL:
+0
+:POPEN,"R":
+pop2 %IFILE2 %IFILE2<&-
+:EOT:
+
+:TESTING:
+io redirection, %OFILE0>&- closes fd %OFILE0
+:EXPECTING:
+fstat of fd %OFILE0 to fail, if this fails, will also cause
+unexpected ret val from pclose
+:RETVAL:
+0
+:POPEN,"R":
+pop2 %OFILE0 %OFILE0>&-
+:EOT:
+
+:TESTING:
+io redirection, %OFILE1>&- closes fd %OFILE1
+:EXPECTING:
+fstat of fd %OFILE1 to fail, if this fails, will also cause
+unexpected ret val from pclose
+:RETVAL:
+0
+:POPEN,"R":
+pop2 %OFILE1 %OFILE1>&-
+:EOT:
+
+:TESTING:
+io redirection, %OFILE2>&- closes fd %OFILE2
+:EXPECTING:
+fstat of fd %OFILE2 to fail, if this fails, will also cause
+unexpected ret val from pclose
+:RETVAL:
+0
+:POPEN,"R":
+pop2 %OFILE2 %OFILE2>&-
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to output file via > available to subsequent command
+via <
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o > %TEMPsysout2
+pop0 -i -o %TEMPsysout < %TEMPsysout2
+:INPUT:
+This should appear in output file
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to output file via > available to subsequent command
+via < and output via >
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o > %TEMPsysout2
+pop0 -i -o < %TEMPsysout2 > %TEMPsysout
+:INPUT:
+This should appear in output file
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to output file via > available to subsequent command
+via < and output via >, changing order of < and > for second command
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o > %TEMPsysout2
+pop0 -i -o > %TEMPsysout < %TEMPsysout2
+:INPUT:
+This should appear in output file
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to output file via %STDOUT> 
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o %STDOUT> %TEMPsysout
+:INPUT:
+This was written on fd %STDOUT
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to output file via %OFILE0> 
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE0 %OFILE0> %TEMPsysout
+:INPUT:
+This was written on fd %OFILE0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to output file via %OFILE1> 
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE1 %OFILE1> %TEMPsysout
+:INPUT:
+This was written on fd %OFILE1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to output file via %OFILE2> 
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE2 %OFILE2> %TEMPsysout
+:INPUT:
+This was written on fd %OFILE2
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to new output file via %STDOUT>>
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o %STDOUT>> %TEMPsysout
+:INPUT:
+This was written on fd %STDOUT via >>
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to new output file via %OFILE0>>
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE0 %OFILE0>> %TEMPsysout
+:INPUT:
+This was written on fd %OFILE0 via >>
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to new output file via %OFILE1>>
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE1 %OFILE1>> %TEMPsysout
+:INPUT:
+This was written on fd %OFILE1 via >>
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output of command to new output file via %OFILE2>>
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE2 %OFILE2>> %TEMPsysout
+:INPUT:
+This was written on fd %OFILE2 via >>
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output from command to fd %STDOUT redirected to another output file
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o %STDOUT>%TEMPsysout
+:INPUT:
+This was written on fd %STDOUT
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output from command to fd %OFILE0 redirected to another output file
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE0 %OFILE0>%TEMPsysout
+:INPUT:
+This was written on fd %OFILE0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output from command to fd %OFILE1 redirected to another output file
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE1 %OFILE1>%TEMPsysout
+:INPUT:
+This was written on fd %OFILE1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+output from command to fd %OFILE2 redirected to another output file
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o%OFILE2 %OFILE2>%TEMPsysout
+:INPUT:
+This was written on fd %OFILE2
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %STDIN redirected from stdin
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i -o > %TEMPsysout %STDIN<&%STDIN
+:INPUT:
+This came from stdin thru fd %STDIN
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE0 redirected from stdin
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i%IFILE0 -o > %TEMPsysout %IFILE0<&%STDIN
+:INPUT:
+This came from stdin thru fd %IFILE0
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE1 redirected from stdin
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i%IFILE1 -o > %TEMPsysout %IFILE1<&%STDIN
+:INPUT:
+This came from stdin thru fd %IFILE1
+:EOT:
+
+:TESTING:
+io redirection
+:EXPECTING:
+input to command on fd %IFILE2 redirected from stdin
+:RETVAL:
+0
+:POPEN,"W":
+pop0 -i%IFILE2 -o > %TEMPsysout %IFILE2<&%STDIN
+:INPUT:
+This came from stdin thru fd %IFILE2
+:EOT:
+
+:TESTING:
+stdin for a background command is /dev/null
+:EXPECTING:
+matching stat buffers for stdin and /dev/null
+:RETVAL:
+0
+:POPEN,"R":
+pop3 &
+# wait for previous command to finish
+pop0 -t 15
+:OUTPUT:
+:EOT:

@@ -1,0 +1,21 @@
+#
+# Area clear test, test deleteln.
+#
+# @(#)deleteln	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: deleteln");
+start
+	testing("fill, then deleteln stdscr, line by line");
+	start
+	for ( i = 0 ; i < LINES - 1 ; i++ )
+	{
+		move(0,0);
+		wbarber(stdscr,LINES,COLS,'a');
+		move(0,0);
+		for ( j = 0 ; j <= i ; j++ )
+			deleteln();
+		refresh();
+		expect();
+	}
+	finis
+finis

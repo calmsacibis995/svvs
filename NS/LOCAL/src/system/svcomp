@@ -1,0 +1,24 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% sys0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/sys0 sys0.o %SVLIBS% %LIBS%
+rm sys0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% sys1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/sys1 sys1.o %SVLIBS% %LIBS%
+rm sys1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% sys2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/sys2 sys2.o %SVLIBS% %LIBS%
+rm sys2.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% sys3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/sys3 sys3.o %SVLIBS% %LIBS%
+rm sys3.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% system.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/system system.o %SVLIBS% %LIBS%
+rm system.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% system0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/system0 system0.o %SVLIBS% %LIBS%
+rm system0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% system1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/system1 system1.o %SVLIBS% %LIBS%
+rm system1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% system2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/system2 system2.o %SVLIBS% %LIBS%
+rm system2.o

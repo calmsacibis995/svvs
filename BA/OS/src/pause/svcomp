@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% pause.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/pause pause.o %SVLIBS% %LIBS%
+rm pause.o

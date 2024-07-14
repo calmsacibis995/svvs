@@ -1,0 +1,54 @@
+#
+# @(#)delwin	3.1 (SVVS) 12/1/86
+#
+# insert/delete line, delwin
+#
+
+abstract("delline: delwin");
+start
+	# mainw will contain three smaller windows
+
+	prep("create a full sized window");
+	start
+	mainw = newwin(LINES, COLS, 0, 0);
+	finis
+
+	# create three small windows and fill them.  then
+	# delete the first and third windows.
+	testing("create three small filled windows over the main window.");
+	testing("then delete the first and third windows.");
+	start
+	for (i = 1; i <= 10; i++)
+	{
+		wclear(mainw);
+		wrefresh(mainw);
+		
+		win1 = newwin(LINES / 10, COLS / 8, i, i * 2);
+		wmove(win1, 0, 0);
+		wbarber(win1, LINES / 10, COLS / 8, 'a');
+		wrefresh(win1);
+		
+		win2 = newwin(LINES / 10, COLS / 8, i + 5, i * 4);
+		wmove(win2, 0, 0);
+		wbarber(win2, LINES / 10, COLS / 8, 'A');
+		wrefresh(win2);
+		
+		win3 = newwin(LINES / 10, COLS / 8, i + 9, i);
+		wmove(win3, 0, 0);
+		wbarber(win3, LINES / 10, COLS / 8, 'A');
+		wrefresh(win3);
+		expect();
+
+		delwin(win1);
+		delwin(win3);
+
+		# touch and refresh the main window to clear the
+		# deleted windows from the screen.
+
+		touchwin(mainw);
+		wrefresh(mainw);
+		wrefresh(win2);
+		expect();
+	}
+	finis
+finis

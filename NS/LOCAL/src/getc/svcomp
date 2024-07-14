@@ -1,0 +1,3 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% getc.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/getc getc.o %SVLIBS% %LIBS%
+rm getc.o

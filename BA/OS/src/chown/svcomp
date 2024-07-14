@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% chown.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/chown chown.o %SVLIBS% %LIBS%
+rm chown.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% chown0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/chown0 chown0.o %SVLIBS% %LIBS%
+rm chown0.o
+rm -f %DEST%/BA/OS/bin/chown1 %DEST%/BA/OS/bin/chown2
+ln %DEST%/BA/OS/bin/chown0 %DEST%/BA/OS/bin/chown1
+ln %DEST%/BA/OS/bin/chown0 %DEST%/BA/OS/bin/chown2

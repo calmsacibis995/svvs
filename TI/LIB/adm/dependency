@@ -1,0 +1,16 @@
+TI/LIB basiccap
+TI/LIB paramstrings
+TI/LIB tparm
+TI/LIB areaclear
+TI/LIB delline
+TI/LIB errors
+TI/LIB highlight
+TI/LIB insert
+TI/LIB keypad
+TI/LIB motion
+TI/LIB slk
+TI/LIB strings
+TI/LIB tabs
+TI/LIB windows
+TI/LIB input
+TI/LIB pads

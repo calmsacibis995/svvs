@@ -1,0 +1,6 @@
+*#ident	"@(#)lmode	1.1"
+*
+* LMODE   stream loopback bottom module for error return
+*
+*FLAG	#VEC	PREFIX	SOFT	#DEV	IPL	DEPENDENCIES/VARIABLES
+om	-	lme	-	-	-

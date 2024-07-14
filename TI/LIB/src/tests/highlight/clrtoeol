@@ -1,0 +1,59 @@
+#
+# @(#)clrtoeol	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - clrtoeol and wclrtoeol
+#
+
+abstract("highlight: clrtoeol");
+start
+	prep("fill stdscr in standout mode");
+	start
+	move(0, 0);
+	standout();
+	barber('p');
+	refresh();
+	expect();
+	standend();
+	finis
+	# clrtoeol for each line, leaving characters at left margin
+	testing("move down stdscr, doing a clrtoeol on each line");
+	start
+	for (x = 0; x < LINES; x++)
+	{
+		move(x, x);
+		clrtoeol();
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("move down a window, clearing 20 characters at a time");
+	start
+	for (y = 1; y < 5; y++)
+	{
+		win = newwin(5, COLS, LINES - (5 * y), 0);
+		wmove(win, 0, 0);
+		wattron(win, A_STANDOUT);
+		wbarber(win, 5, COLS, 'A');
+		wrefresh(win);
+		wattroff(win, A_STANDOUT);
+		expect();
+
+		# clear the lines of win from the right, clearing
+		# 20 chars at a time
+		for (z = 0; z < 5; z++)
+		{
+			for (x = COLS - 1; x >= 0; x -= 20)
+			{
+				wmove(win, z, x);
+				wclrtoeol(win);
+				wrefresh(win);
+				expect();
+			}
+		}
+		delwin(win);
+	}
+	finis
+finis

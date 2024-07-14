@@ -1,0 +1,27 @@
+#
+# @(#)mvwin	3.1 (SVVS) 12/1/86
+# error - mvwin
+# NOCHECK
+abstract("errors: mvwin");
+start
+	prep("creating a window");
+	start
+		win = newwin(LINES, COLS, 0, 0);
+	finis
+
+	testing("Use mvwin to attempt to move a window COMPLETELY");
+	testing("off the screen.  This should return an error.");
+	start
+		if ( mvwin(win, LINES + 3, COLS + 3) != ERR )
+			error("mvwin did not return ERR when attempting to move a window COMPLETELY off the screen.");
+		expect_flush();
+	finis
+
+	testing("Use mvwin to attempt to move a window PARTIALLY");
+	testing("off the screen.  This should return an error.");
+	start
+		if ( mvwin(win, LINES - 3, COLS - 3) != ERR )
+			warning("mvwin did not return ERR when attempting to move a window PARTIALLY off the screen.");
+		expect_flush();
+	finis
+finis

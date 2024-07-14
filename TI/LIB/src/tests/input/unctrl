@@ -1,0 +1,23 @@
+#
+# @(#)unctrl	3.1 (SVVS) 12/1/86
+#
+# input: unctrl
+#
+
+abstract("input: unctrl");
+start
+	# convert the first 128 characters to printable
+	# strings and put them to the stdscr
+	move(0, 0);
+	testing("convert first 128 characters to printable strings and");
+	testing("addstr them to stdscr");
+	start
+	for (i = 0; i < 128; i++)
+	{
+		str = unctrl(i);
+		addstr(str);
+		refresh();
+		expect();
+	}
+	finis
+finis

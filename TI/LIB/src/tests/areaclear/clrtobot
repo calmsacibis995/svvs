@@ -1,0 +1,20 @@
+#
+# Area clear tests, test clrtobot
+#
+# @(#)clrtobot	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: clrtobot");
+start
+	testing("filling, and successively clearing more of stdscr");
+	start
+	for ( i = 0 ; i < LINES ; i++ )
+	{
+		move(0, 0);
+		barber('a');
+		move(i,0);
+		clrtobot();
+		refresh();
+		expect();
+	}
+	finis
+finis

@@ -1,0 +1,50 @@
+#
+# @(#)subpad	3.1 (SVVS) 12/1/86
+#
+# pads - subpad
+#
+
+abstract("pads - subpad");
+start
+	prep("create, fill a pad and prefresh it to show the center portion.");
+	start
+		h = 2 * LINES;
+		w = 2 * COLS;
+		pad = newpad(h, w);
+		wmove(pad, 0, 0);
+		wbarber(pad, h, w, 'A');
+		prefresh(pad, h / 4, w / 4, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+
+	# make a subpad and do printw's to it
+	testing("create a subpad and a printw to each line of it.");
+	testing("then prefresh to show the subpad on the screen");
+	start
+		for (i = 0; i < 10; i++)
+		{
+			pad1 = subpad(pad, LINES, COLS, h / 4, w / 4);
+			werase(pad1);
+			for (j = 0; j < LINES; j++)
+				mvwprintw(pad1, j, 0,
+					"%4d %4d abcdefghijklmnopqrstuvwxyz", j, i);
+			touchwin(pad);
+			prefresh(pad, h / 4, w / 4, 0, 0, LINES - 1, COLS - 1);
+			touchwin(pad1);
+			prefresh(pad1, 0, 0, 0, 0, LINES - 1, COLS - 1);
+			expect();
+			delwin(pad1);
+		}
+	finis
+
+	# now delete the lines in pad using deleteln
+	testing("start at the top of a pad and do deleteln");
+	testing("on each line of the pad.");
+	start
+		wmove(pad, 0, 0);
+		for (i = 0; i < h; i++)
+			wdeleteln(pad);
+		prefresh(pad, 0, 0, 0, 0, LINES - 1, COLS - 1);
+		expect();
+	finis
+finis

@@ -1,0 +1,6 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% semctl.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/semctl semctl.o %SVLIBS% %LIBS%
+rm semctl.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% semctl1.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/semctl1 semctl1.o %SVLIBS% %LIBS%
+rm semctl1.o

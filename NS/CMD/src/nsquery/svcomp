@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% nsquery.c
+%COMP% %OPTS% -o %DEST%/NS/CMD/bin/nsquery nsquery.o %SVLIBS% %LIBS%
+rm nsquery.o

@@ -1,0 +1,10 @@
+*#ident "@(#)lo	1.2"
+* LO   stream loopback driver
+*
+*FLAG	#VEC	PREFIX	SOFT	#DEV	IPL	DEPENDENCIES/VARIABLES
+ofs	-	lo		-	-
+						lo_lo[NLO] (%i%l)
+						locnt (%i) ={NLO}
+$$$
+NLO = 4
+

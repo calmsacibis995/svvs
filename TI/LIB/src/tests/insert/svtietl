@@ -1,0 +1,3 @@
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/insert.dir/delch delch
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/insert.dir/delwin delwin
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/insert.dir/inch inch

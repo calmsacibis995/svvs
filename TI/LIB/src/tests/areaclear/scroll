@@ -1,0 +1,82 @@
+#
+# Area clear tests, scroll.
+#
+# @(#)scroll	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: scroll");
+start
+	prep("turn on scrolling");
+	start
+	scrollok(stdscr, TRUE);
+	finis
+
+	testing("scroll filled stdscr up");
+	start
+	for ( i = 1 ; i < LINES ; i++ )
+	{
+		move(0,0);
+		barber('a');
+		for ( j = 1 ; j <= i ; j++ )
+		{
+			scroll(stdscr);
+		}
+		refresh();
+		expect();
+	}
+	finis
+
+	#
+	# Same scroll tests not on stdscr.
+	#
+
+	prep("create and turn on scrolling in a window");
+	start
+	mainw = newwin(LINES,COLS,0,0);
+	scrollok(mainw, TRUE);
+	finis
+
+	testing("scroll filled main window up");
+	start
+	for ( i = 1 ; i < LINES ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw,LINES,COLS,'a');
+		for ( j = 1 ; j <= i ; j++ )
+		{
+			scroll(mainw);
+		}
+		wrefresh(mainw);
+		expect();
+	}
+	finis
+
+	#
+	# Now try on a smaller window.
+	#
+
+	prep("fill mainw. create and turn on scrolling in a small window");
+	start
+	scrollok(mainw, TRUE);
+	wmove(mainw,0,0);
+	wbarber(mainw,LINES,COLS,'a');
+	wrefresh(mainw);
+	lines = LINES / 2;
+	small = newwin(lines, COLS, 0, 0);
+	scrollok(small, TRUE);
+	finis
+
+	testing("fill, and scroll a small window");
+	start
+	for ( i = 1 ; i < lines ; i++ )
+	{
+		wmove(small,0,0);
+		wbarber(small,lines,COLS,'a');
+		for ( j = 1 ; j <= i ; j++ )
+		{
+			scroll(small);
+		}
+		wrefresh(small);
+		expect();
+	}
+	finis
+finis

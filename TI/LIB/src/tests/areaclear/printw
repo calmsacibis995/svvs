@@ -1,0 +1,24 @@
+#
+# Area clear test, test printw.
+#
+# @(#)printw	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: printw");
+start
+	iterations = 12;
+	colnum = 0;
+
+	testing("printw newline diagonally on filled stdscr");
+	start
+		for ( i = 0 ; i < iterations ; i++ )
+		{
+			move(0, 0);
+			barber('a');
+			move(i * 2, colnum);
+			printw("\n");
+			colnum = colnum + 2;
+			refresh();
+			expect();
+		}
+	finis
+finis

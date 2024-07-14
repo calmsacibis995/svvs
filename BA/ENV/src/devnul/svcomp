@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% devnul.c
+%COMP% %OPTS% -o %DEST%/BA/ENV/bin/devnul devnul.o %SVLIBS% %LIBS%
+rm devnul.o

@@ -1,0 +1,8 @@
+BA/ENV devcon
+BA/ENV devnul
+BA/ENV devtty
+BA/ENV envvar
+BA/ENV filsys
+BA/ENV header
+BA/ENV passwd
+BA/ENV termio

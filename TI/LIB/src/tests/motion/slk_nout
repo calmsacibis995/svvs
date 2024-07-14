@@ -1,0 +1,24 @@
+#
+# @(#)slk_nout	3.1 (SVVS) 12/1/86
+#
+# cursor motion: slk_noutrefres
+#
+#NOINITSCR
+abstract("cursor motion - slk_nout");
+start
+	slk_init(0);
+	initscr();
+	label = "foobar";
+
+	testing("put a string in each label with slk_set, then do");
+	testing("slk_noutrefresh and a refresh.");
+	start
+		for (i = 1; i < 9; i++)
+		{
+			slk_set(i, label:i, 1);
+		}
+		slk_noutrefresh();
+		refresh();
+		expect();
+	finis
+finis

@@ -1,0 +1,31 @@
+#
+# @(#)delwin	3.1 (SVVS) 12/1/86
+#
+# windows - delwin
+#
+
+abstract("windows: delwin");
+start
+	h = LINES / 8;
+	w = COLS / 20;
+
+	testing("create, fill and delete small windows, placing them");
+	testing("in various positions on the screen.");
+	start
+	for (i = 0; i <= LINES - h; i += h)
+	{
+		for (j = 0; j <= COLS - w; j += w)
+		{
+			win = newwin(h, w, i, j);
+			wbarber(win, h, w, 'a');
+			touchwin(win);
+			wrefresh(win);
+			expect();
+			delwin(win);
+			touchwin(stdscr);
+			refresh();
+			expect();
+		}
+	}
+	finis
+finis

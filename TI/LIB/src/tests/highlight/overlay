@@ -1,0 +1,43 @@
+#
+# @(#)overlay	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - overlay
+#
+
+abstract("highlight: overlay");
+start
+	win2 = newwin(3, COLS / 2, LINES - 4, COLS / 4);
+
+	# fill win2 with BLINKING ^'s
+	prep("fill window with blinking ^'s");
+	start
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < COLS / 2; j++)
+		{
+			if (j % 2) wattron(win2, A_BLINK);
+			waddch(win2, '^');
+			wrefresh(win2);
+			wattroff(win2, A_BLINK);
+		}
+		expect();
+	}
+	finis
+
+	# overlay each win1 with win2
+	testing("overlay filled window with blinking ^'s window");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		win1 = newwin(LINES - (i * 2), (i + 1) * 8, 0, 0);
+		wmove(win1, 0, 0);
+		wbarber(win1, LINES - (i * 2), (i + 1) * 8, 'A');
+		wrefresh(win1);
+		expect();
+		overlay(win2, win1);
+		wrefresh(win1);
+		expect();
+		delwin(win1);
+	}
+	finis
+finis

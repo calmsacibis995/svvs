@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% printf.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/printf printf.o %SVLIBS% %LIBS%
+rm printf.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% printf1.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/printf1 printf1.o %SVLIBS% %LIBS%
+rm printf1.o
+rm -f %DEST%/BA/LIB/bin/printf2 %DEST%/BA/LIB/bin/printf3
+ln %DEST%/BA/LIB/bin/printf1 %DEST%/BA/LIB/bin/printf2
+ln %DEST%/BA/LIB/bin/printf1 %DEST%/BA/LIB/bin/printf3

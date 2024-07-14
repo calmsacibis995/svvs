@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% link.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/link link.o %SVLIBS% %LIBS%
+rm link.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% link0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/link0 link0.o %SVLIBS% %LIBS%
+rm link0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% link1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/link1 link1.o %SVLIBS% %LIBS%
+rm link1.o

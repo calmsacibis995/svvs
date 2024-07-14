@@ -1,0 +1,7 @@
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/input.dir/flushinp flushinp
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/input.dir/getch getch
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/input.dir/getstr getstr
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/input.dir/inch inch
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/input.dir/scanw scanw
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/input.dir/unctrl unctrl
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/input.dir/ungetch ungetch

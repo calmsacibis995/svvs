@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% strtol.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/strtol strtol.o %SVLIBS% %LIBS%
+rm strtol.o

@@ -1,0 +1,2 @@
+%COMP% %OPTS% %REL% -I%DEST%/include report.c %SVLIBS% %LIBS% -o%DEST%/bin/report
+rm -f report.o

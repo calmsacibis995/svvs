@@ -1,0 +1,3 @@
+ar -cr sv_kext.a z_acct.o z_chroot.o z_msgctl.o z_msgget.o z_msgrcv.o z_msgsnd.o z_nice.o z_plock.o z_profil.o z_ptrace.o z_semctl.o z_semget.o z_semop.o z_shmat.o z_shmctl.o z_shmdt.o z_shmget.o
+cp sv_kext.a %DEST%/lib/sv_kext.a
+rm sv_kext.a *.o

@@ -1,0 +1,19 @@
+#
+# @(#)erase	3.1 (SVVS) 12/1/86
+#
+# cursor motion: erase
+#
+abstract("cursor motion - erase");
+start
+	testing("fill stdscr and erase it 15 times.");
+	start
+	for ( i = 0 ; i < 15 ; i++ )
+	{
+		move(0,0);
+		barber('a');
+		erase();
+		refresh();
+		expect();
+	}
+	finis
+finis

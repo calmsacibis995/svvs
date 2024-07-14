@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% header.c
+%COMP% %OPTS% -o %DEST%/KE/ENV/bin/header header.o %SVLIBS% %LIBS%
+rm header.o

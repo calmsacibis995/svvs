@@ -1,0 +1,10 @@
+#
+# @(#)initscr	3.1 (SVVS) 12/1/86
+#
+# tabs: initscr
+#
+#NOINITSCR
+abstract("initscr");
+start
+	initscr();
+finis

@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% swab.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/swab swab.o %SVLIBS% %LIBS%
+rm swab.o

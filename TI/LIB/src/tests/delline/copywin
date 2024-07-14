@@ -1,0 +1,37 @@
+#
+# @(#)copywin	3.1 (SVVS) 12/1/86
+#
+# insert/delete line, copywin
+#
+abstract("delline: copywin");
+start
+	# win2 will be a line of blanks.
+	prep("create and erase a window");
+	start
+	win2 = newwin(1, COLS, LINES - 1, 0);
+	wmove(win2, 0, 0);
+	werase(win2);
+	wrefresh(win2);
+	finis
+
+	# win1 is created each time, becoming one line larger.
+	# the blank line of win2 is copied to the last line of
+	# win1 for each instance of win1.
+
+	testing("copying blank window to last line of new window");
+	start
+	 	for (i = 1; i <= LINES - 2; i++)
+ 		{
+			win1 = newwin(i, COLS, 0, 0);
+			wmove(win1, 0, 0);
+			wbarber(win1, i, COLS, 'a');
+			wrefresh(win1);
+			expect();
+			wmove(win1, i - 1, 0);
+			copywin(win2, win1, 0, 0, i - 1, 0, i - 1, COLS - 1, 0);
+			wrefresh(win1);
+			expect();
+ 			delwin(win1);
+ 		}
+	finis
+finis

@@ -1,0 +1,2 @@
+
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/errors.dir/mvwin mvwin

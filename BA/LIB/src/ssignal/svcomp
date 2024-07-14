@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ssignal.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/ssignal ssignal.o %SVLIBS% %LIBS%
+rm ssignal.o

@@ -1,0 +1,60 @@
+#
+# @(#)insertln	3.1 (SVVS) 12/1/86
+#
+# highlighting - insertln and winsertln
+#
+
+abstract("highlight: insertln");
+start
+	# barber pole to stdscr, then insert a line
+	# between alternate lines
+	testing("fill stdscr in blink mode, then add alternate normal lines");
+	start
+	for (i = 0; i < 5; i++)
+	{
+		move(0, 0);
+		attron(A_BLINK);
+		barber('a');
+		refresh();
+		expect();
+		attroff(A_BLINK);
+
+		for (j = 0; j < LINES; j += 2)
+		{
+			move(j, 0);
+			insertln();
+			refresh();
+			expect();
+		}
+	}
+	finis
+
+	clear();
+	refresh();
+
+	# create a window and barber pole it, then
+	# clear it by inserting a line at each line
+	testing("create a window and fill it in blinking mode.");
+	testing("then clear it by adding blank lines at each line.");
+	start
+	for (i = 1; i < 6; i++)
+	{
+		win = newwin(i * 2, i * 2, 0, 0);
+		wmove(win, 0, 0);
+		wattron(win, A_BLINK);
+		wbarber(win, i * 2, i * 2, 'a');
+		wrefresh(win);
+		expect();
+		wattroff(win, A_BLINK);
+		lim = i * 2;
+		for (j = 0; j < lim; j++)
+		{
+			wmove(win, j, 0);
+			winsertln(win);
+			wrefresh(win);
+			expect();
+		}
+		delwin(win);
+	}
+	finis
+finis

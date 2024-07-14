@@ -1,0 +1,6 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% rmdir.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/rmdir rmdir.o %SVLIBS% %LIBS%
+rm rmdir.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% rmdir1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/rmdir1 rmdir1.o %SVLIBS% %LIBS%
+rm rmdir1.o

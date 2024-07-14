@@ -1,0 +1,36 @@
+#
+# @(#)slkclear	3.1 (SVVS) 12/1/86
+#
+# soft labels - slk_clear
+#
+#NOINITSCR
+
+abstract("soft label keys:slkclear");
+start
+	# labels are arranged in 4-4 format
+	prep("call slk_init, then initscr.");
+	start
+	slk_init(1);
+	initscr();
+	finis
+
+	# put all labels (centered) then do a slk_clear
+	# do this five times
+
+	label = "L";
+	testing("put labels in 4-4 format, then clear. repeat five times.");
+	start
+		for (j = 1; j <=5; j++)
+		{
+			for (i = 8; i > 0; i--)
+			{
+				slk_set(i, i:j:label, 1);
+				slk_noutrefresh();
+			}
+			doupdate();
+			expect();
+			slk_clear();
+			expect();
+		}
+	finis
+finis

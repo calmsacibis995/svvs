@@ -1,0 +1,27 @@
+tielib.a  catcher.a bless.a sv_tools.a sv_base.a sv_tie.a sv_sys.a 
+LIB/src/bless svcomp
+LIB/src/bless svar
+LIB/src/expector svcomp
+LIB/src/expector svar
+LIB/src/paramstrings svcomp
+LIB/src/all svcomp
+LIB/src/tparm svcomp
+LIB/src/basic svcomp
+LIB/src/tietli svcomp
+LIB/src/tietlx svcomp
+LIB/src/terminals svtic
+LIB/src/tests/areaclear svtietl
+LIB/src/tests/delline svtietl
+LIB/src/tests/errors svtietl
+LIB/src/tests/highlight svtietl
+LIB/src/tests/input svtietl
+LIB/src/tests/insert svtietl
+LIB/src/tests/keypad svtietl
+LIB/src/tests/motion svtietl
+LIB/src/tests/pads svtietl
+LIB/src/tests/slk svtietl
+LIB/src/tests/strings svtietl
+LIB/src/tests/tabs svtietl
+LIB/src/tests/windows svtietl
+CMD/src/testtput svcomp
+ENV/src/directory svcomp

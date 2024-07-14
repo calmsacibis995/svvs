@@ -1,0 +1,6 @@
+*#ident	"@(#)lmodr	1.1"
+*
+* LMODR   stream loopback bottom module for error return
+*
+*FLAG	#VEC	PREFIX	SOFT	#DEV	IPL	DEPENDENCIES/VARIABLES
+om	-	lmr	-	-	-

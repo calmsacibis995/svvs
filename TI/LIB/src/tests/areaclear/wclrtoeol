@@ -1,0 +1,79 @@
+#
+# Area clear test, test clrtoeol.
+#
+# @(#)wclrtoeol	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: wclrtoeol");
+start
+	prep("create and fill background window");
+	start
+	iterations = LINES / 2;
+	columns = COLS;
+	background = newwin(LINES, COLS, 0, 0);
+	wmove(background,0,0);
+	wbarber(background,LINES,COLS,'a');
+	finis
+
+	#
+	# Do the test twice, first for a full width screen, then
+	# for a half width screen.
+	#
+	for ( j = 0 ; j < 2 ; j++ )
+	{
+		colnum = 0;
+		mainw = newwin(LINES, columns, 0, 0);
+
+		#
+		# Clear to EOL on a diagonal down the screen. Replace
+		# the characters each time.
+		#
+		testing("clear to end-of-line, on a diagonal down the screen.");
+		testing("refill the screen after each clear");
+		start
+		for ( i = 0 ; i < iterations ; i++ )
+		{
+			wmove(mainw,0,0);
+			wbarber(mainw, LINES, columns, 'a');
+			wmove(mainw,i * 2, colnum);
+			wclrtoeol(mainw);
+			colnum = colnum + 2;
+			if ( colnum > columns )
+				colnum = 1;
+			wrefresh(mainw);
+			expect();
+		}
+		finis
+
+		#
+		# Clear to EOL on a diagonal down the screen.
+		#
+		prep("fill main window");
+		start
+		wmove(mainw,0,0);
+		wbarber(mainw, LINES, columns, 'a');
+		colnum = 0;
+		finis
+
+		testing("clear to end-of-line, on a diagonal down the screen.");
+		start
+		for ( i = 0 ; i < iterations ; i++ )
+		{
+			wmove(mainw,i * 2, colnum);
+			wclrtoeol(mainw);
+			colnum = colnum + 2;
+			if ( colnum > columns )
+				colnum = 1;
+			wrefresh(mainw);
+			expect();
+		}
+		finis
+
+		cleanup("delete main window. refresh backgound.");
+		start
+		delwin(mainw);
+		columns = columns / 2;
+		wrefresh(background);
+		finis
+
+	}
+finis

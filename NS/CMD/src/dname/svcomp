@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% dname.c
+%COMP% %OPTS% -o %DEST%/NS/CMD/bin/dname dname.o %SVLIBS% %LIBS%
+rm dname.o

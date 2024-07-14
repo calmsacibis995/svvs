@@ -1,0 +1,27 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fseek.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fseek fseek.o %SVLIBS% %LIBS%
+rm fseek.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fseek0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fseek0 fseek0.o %SVLIBS% %LIBS%
+rm fseek0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fseek1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fseek1 fseek1.o %SVLIBS% %LIBS%
+rm fseek1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fseek2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fseek2 fseek2.o %SVLIBS% %LIBS%
+rm fseek2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rewind0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/rewind0 rewind0.o %SVLIBS% %LIBS%
+rm rewind0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rewind1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/rewind1 rewind1.o %SVLIBS% %LIBS%
+rm rewind1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rewind2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/rewind2 rewind2.o %SVLIBS% %LIBS%
+rm rewind2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rewind3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/rewind3 rewind3.o %SVLIBS% %LIBS%
+rm rewind3.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rewind4.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/rewind4 rewind4.o %SVLIBS% %LIBS%
+rm rewind4.o

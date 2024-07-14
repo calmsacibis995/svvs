@@ -1,0 +1,25 @@
+#
+# @(#)delch	3.1 (SVVS) 12/1/86
+#
+# tabs: delch
+#
+abstract("tabs: delch");
+start
+	iterations = 12;
+	colnum = 0;
+
+	testing("Adding and removing tabs with delch at various points");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		move(0, 0);
+		barber('a');
+		move(i * 2, colnum);
+		addch('\t');
+		delch();
+		colnum = colnum + 2;
+	}
+	refresh();
+	expect();
+	finis
+finis

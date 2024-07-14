@@ -1,0 +1,28 @@
+#
+# @(#)overwrite	3.1 (SVVS) 12/1/86
+#
+# cursor motion: overwrite
+#
+abstract("cursor motion - overwrite");
+start
+	mainw = newwin(LINES,COLS,0,0);
+
+	testing("fill a window and use overwrite to copy a");
+	testing("small blank window to it");
+	start
+	for ( i = 1 ; i <= LINES ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw,LINES,COLS,'a');
+		touchwin(mainw);
+		wrefresh(mainw);
+		eraser = newwin(i,i,0,0);
+		wclear(eraser);
+		overwrite(eraser,mainw);
+		touchwin(mainw);
+		wrefresh(mainw);
+		delwin(eraser);
+		expect();
+	}
+	finis
+finis

@@ -1,0 +1,3 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% close.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/close close.o %SVLIBS% %LIBS%
+rm close.o

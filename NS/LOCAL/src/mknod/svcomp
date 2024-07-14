@@ -1,0 +1,12 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% mknod.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/mknod mknod.o %SVLIBS% %LIBS%
+rm mknod.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% mknod0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/mknod0 mknod0.o %SVLIBS% %LIBS%
+rm mknod0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% mknod1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/mknod1 mknod1.o %SVLIBS% %LIBS%
+rm mknod1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% mknod2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/mknod2 mknod2.o %SVLIBS% %LIBS%
+rm mknod2.o

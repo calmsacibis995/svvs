@@ -1,0 +1,9 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fclose.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fclose fclose.o %SVLIBS% %LIBS%
+rm fclose.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fclose0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fclose0 fclose0.o %SVLIBS% %LIBS%
+rm fclose0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% fflush0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/fflush0 fflush0.o %SVLIBS% %LIBS%
+rm fflush0.o

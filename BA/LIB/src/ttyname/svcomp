@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ttyname.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/ttyname ttyname.o %SVLIBS% %LIBS%
+rm ttyname.o

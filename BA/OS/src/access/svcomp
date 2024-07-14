@@ -1,0 +1,12 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% access.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/access access.o %SVLIBS% %LIBS%
+rm access.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% access0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/access0 access0.o %SVLIBS% %LIBS%
+rm access0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% access1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/access1 access1.o %SVLIBS% %LIBS%
+rm access1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% access2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/access2 access2.o %SVLIBS% %LIBS%
+rm access2.o

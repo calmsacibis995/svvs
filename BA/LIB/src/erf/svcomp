@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% erf.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/erf erf.o %SVLIBS% %LIBS%
+rm erf.o

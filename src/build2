@@ -1,0 +1,6 @@
+sv_cmd.a  sv_sys.a
+clraccess svcomp
+driver svcomp
+report svcomp
+setaccess svcomp
+svvs svcomp

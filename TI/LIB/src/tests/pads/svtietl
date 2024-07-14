@@ -1,0 +1,7 @@
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/pads.dir/misc misc
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/pads.dir/newpad newpad
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/pads.dir/padinput padinput
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/pads.dir/pechochar pechochar
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/pads.dir/pnoutrefresh pnoutrefresh
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/pads.dir/prefresh prefresh
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/pads.dir/subpad subpad

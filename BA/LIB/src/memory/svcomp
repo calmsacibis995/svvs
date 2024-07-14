@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% memory.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/memory memory.o %SVLIBS% %LIBS%
+rm memory.o

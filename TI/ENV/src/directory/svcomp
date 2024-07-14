@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% directory.c
+%COMP% %OPTS% -o %DEST%/TI/ENV/bin/directory directory.o %SVLIBS% %LIBS%
+rm directory.o

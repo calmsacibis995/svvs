@@ -1,0 +1,45 @@
+#
+# @(#)slktouch	3.1 (SVVS) 12/1/86
+#
+# soft labels - slk_touch
+#
+#NOINITSCR
+
+abstract("soft label keys: slktouch");
+start
+	# arrange labels in 3-2-3 format
+	prep("slk_init, the initscr");
+	start
+	slk_init(0);
+	initscr();
+	finis
+
+	testing("set labels,  then touch them");
+	start 
+
+		label = "penguin";
+
+		# put all labels, do a slk_touch
+
+		for (i = 8; i > 0; i--)
+		{
+			slk_set(i, label, 1);
+		}
+		slk_noutrefresh();
+		slk_touch();
+		doupdate();
+		expect();
+	finis
+
+	# put a couple of more labels and do slk_touch
+
+	testing("set labels again, then touch them");
+	start
+		label = "seal";
+		slk_set(4, label, 1);
+		slk_set(5, label, 1);
+		slk_touch();
+		slk_refresh();
+		expect();
+	finis
+finis

@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% umount.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/umount umount.o %SVLIBS% %LIBS%
+rm umount.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% umount0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/umount0 umount0.o %SVLIBS% %LIBS%
+rm umount0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% umount1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/umount1 umount1.o %SVLIBS% %LIBS%
+rm umount1.o

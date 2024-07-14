@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ulimit.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/ulimit ulimit.o %SVLIBS% %LIBS%
+rm ulimit.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ulimit0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/ulimit0 ulimit0.o %SVLIBS% %LIBS%
+rm ulimit0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% ulimit1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/ulimit1 ulimit1.o %SVLIBS% %LIBS%
+rm ulimit1.o

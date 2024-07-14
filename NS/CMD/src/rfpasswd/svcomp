@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rfpasswd.c
+%COMP% %OPTS% -o %DEST%/NS/CMD/bin/rfpasswd rfpasswd.o %SVLIBS% %LIBS%
+rm rfpasswd.o

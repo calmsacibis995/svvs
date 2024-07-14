@@ -1,0 +1,15 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% creat.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/creat creat.o %SVLIBS% %LIBS%
+rm creat.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% creat0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/creat0 creat0.o %SVLIBS% %LIBS%
+rm creat0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% creat1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/creat1 creat1.o %SVLIBS% %LIBS%
+rm creat1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% creat2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/creat2 creat2.o %SVLIBS% %LIBS%
+rm creat2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% creat3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/creat3 creat3.o %SVLIBS% %LIBS%
+rm creat3.o

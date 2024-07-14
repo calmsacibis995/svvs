@@ -1,0 +1,47 @@
+#
+# @(#)insertln	3.1 (SVVS) 12/1/86
+#
+# insert/delete line, insertln
+#
+abstract("delline: insertln");
+start
+	# fill stdscr and insert a line at the bottom 
+	# do this ten times
+
+	testing("fill stdscr, and insert a line at the bottom ten times");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		move(0, 0);
+		barber('a');
+		refresh();
+		expect();
+		move(LINES - 1, 0);
+		insertln();
+		refresh();
+		expect();
+	}
+	finis
+	erase();
+	refresh();
+
+	smwin = newwin(LINES / 4, COLS / 2, 0, 0);
+
+	# fill the small window and insert a line at
+	# the bottom ten times.
+
+	testing("fill a small window, and insert lines at the bottom.");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		wmove(smwin, 0, 0);
+		wbarber(smwin, LINES / 4, COLS / 2, 't');
+		wrefresh(smwin);
+		expect();
+		wmove(smwin, (LINES / 4) - 1, 0);
+		winsertln(smwin);
+		wrefresh(smwin);
+		expect();
+	}
+	finis
+finis

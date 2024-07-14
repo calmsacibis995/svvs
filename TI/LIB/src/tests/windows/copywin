@@ -1,0 +1,35 @@
+#
+# @(#)copywin	3.1 (SVVS) 12/1/86
+#
+# windows - copywin
+#
+
+abstract("windows: copywin");
+start
+	prep("creat and fill a small window");
+	start
+	h = LINES / 3;
+	w = COLS / 8;
+	k = 0;
+	win = newwin(h, w, 0, 0);
+	wbarber(win, h, w, 'a');
+	touchwin(win);
+	wrefresh(win);
+	finis
+
+	testing("create a new window, and copy them onto the first window");
+	start
+	for (i = 0; i <= LINES - h; i += h)
+	{
+		for (j = 0; j <= COLS - w; j += w)
+		{
+			smwin[k] = newwin(h, w, i, j);
+			copywin(win, smwin[k], 0, 0, 0, 0, h - 1, w - 1, 0);
+			touchwin(smwin[k]);
+			wrefresh(smwin[k]);
+			expect();
+			k++;
+		}
+	}
+	finis
+finis

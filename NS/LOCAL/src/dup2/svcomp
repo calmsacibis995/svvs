@@ -1,0 +1,3 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% dup2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/dup2 dup2.o %SVLIBS% %LIBS%
+rm dup2.o

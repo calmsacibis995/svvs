@@ -1,0 +1,22 @@
+#
+# @(#)deleteln	3.2 (SVVS) 12/30/86
+#
+# cursor motion: deleteln
+#
+abstract("cursor motion - deleteln");
+start
+	testing("in a loop, fill stdscr then remove successive");
+	testing("numbers of lines with deleteln.");
+	start
+	for ( i = 0 ; i < LINES - 1 ; i++ )
+	{
+		move(0,0);
+		barber('a');
+		move(0,0);
+		for ( j = 0 ; j <= i ; j++ )
+			deleteln();
+		refresh();
+		expect();
+	}
+	finis
+finis

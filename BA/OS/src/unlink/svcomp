@@ -1,0 +1,12 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% unlink.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/unlink unlink.o %SVLIBS% %LIBS%
+rm unlink.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% unlink0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/unlink0 unlink0.o %SVLIBS% %LIBS%
+rm unlink0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% unlink1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/unlink1 unlink1.o %SVLIBS% %LIBS%
+rm unlink1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% unlink2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/unlink2 unlink2.o %SVLIBS% %LIBS%
+rm unlink2.o

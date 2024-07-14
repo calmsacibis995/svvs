@@ -1,0 +1,53 @@
+#
+# @(#)scroll	3.1 (SVVS) 12/1/86
+#
+# insert/delete line, scroll
+#
+abstract("delline: scroll");
+start
+	# have to allow scrolling or this won't work
+	prep("turn scrolling on");
+	start
+		scrollok(stdscr, 1);
+	finis
+
+	# fill stdscr and scroll it.  creates a blank line
+	# at the bottom.  do this ten times.
+
+	testing("fill and scroll stdscr, creating a blank line at the bottom");
+	start
+		for (i = 0; i < 10; i++)
+		{
+			move(0, 0);
+			barber('1');
+			refresh();
+			expect();
+			scroll(stdscr);
+			refresh();
+			expect();
+		}
+	finis
+
+	clear();
+	refresh();
+
+	win = newwin(LINES / 2, COLS / 3, LINES / 4, COLS / 6);
+	scrollok(win, 1);
+
+	# fill the small window and scroll it ten times.
+
+	testing("fill and scroll a small window,");
+	testing("creating a blank line at the bottom");
+	start
+		for (i = 0; i < 10; i++)
+		{
+			wmove(win, 0, 0);
+			wbarber(win, LINES / 2, COLS / 3, '1');
+			wrefresh(win);
+			expect();
+			scroll(win);
+			wrefresh(win);
+			expect();
+		}
+	finis
+finis

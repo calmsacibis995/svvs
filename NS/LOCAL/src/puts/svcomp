@@ -1,0 +1,3 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% puts.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/puts puts.o %SVLIBS% %LIBS%
+rm puts.o

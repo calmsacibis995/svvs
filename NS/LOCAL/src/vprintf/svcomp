@@ -1,0 +1,9 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% vprintf.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/vprintf vprintf.o %SVLIBS% %LIBS%
+rm vprintf.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% vprintf1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/vprintf1 vprintf1.o %SVLIBS% %LIBS%
+rm vprintf1.o
+rm -f %DEST%/NS/LOCAL/bin/vprintf2 %DEST%/NS/LOCAL/bin/vprintf3
+ln %DEST%/NS/LOCAL/bin/vprintf1 %DEST%/NS/LOCAL/bin/vprintf2
+ln %DEST%/NS/LOCAL/bin/vprintf1 %DEST%/NS/LOCAL/bin/vprintf3

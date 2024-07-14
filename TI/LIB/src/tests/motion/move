@@ -1,0 +1,29 @@
+#
+# @(#)move	3.1 (SVVS) 12/1/86
+#
+# cursor motion: move
+#
+abstract("cursor motion - move");
+start
+	testing("move the cursor down the screen diagonally.");
+	start
+	for ( i = 0 ; i <= LINES - 1; i++ )
+	{
+		move(i, i);
+		refresh();
+		expect();
+	}
+	finis
+
+	win = newwin(LINES, COLS, 0, 0);
+
+	testing("move the cursor down a window diagonally.");
+	start
+	for ( i = 0 ; i <= LINES - 1; i++ )
+	{
+		wmove(win, i, i);
+		wrefresh(win);
+		expect();
+	}
+	finis
+finis

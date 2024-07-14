@@ -1,0 +1,26 @@
+#
+# @(#)slk_refresh	3.1 (SVVS) 12/1/86
+#
+# cursor motion: slk_refresh
+#
+#NOINITSCR
+abstract("cursor motion - slk_refresh");
+start
+	prep("setup labels in 3-2-3 format.");
+	start
+	slk_init(0);
+	initscr();
+	label = "foobar";
+	finis
+
+	testing("put a string in each label with slk_set");
+	testing("then refresh with slk_refresh.");
+	start
+		for (i = 1; i < 9; i++)
+		{
+			slk_set(i, label:i, 1);
+		}
+		slk_refresh();
+		expect();
+	finis
+finis

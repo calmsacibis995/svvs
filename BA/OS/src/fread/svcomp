@@ -1,0 +1,18 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fread.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fread fread.o %SVLIBS% %LIBS%
+rm fread.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fread0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fread0 fread0.o %SVLIBS% %LIBS%
+rm fread0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% freadwrit0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/freadwrit0 freadwrit0.o %SVLIBS% %LIBS%
+rm freadwrit0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% freadwrit1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/freadwrit1 freadwrit1.o %SVLIBS% %LIBS%
+rm freadwrit1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fwrite0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fwrite0 fwrite0.o %SVLIBS% %LIBS%
+rm fwrite0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fwrite1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fwrite1 fwrite1.o %SVLIBS% %LIBS%
+rm fwrite1.o

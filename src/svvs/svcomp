@@ -1,0 +1,2 @@
+%COMP% %OPTS% %REL% -I%DEST%/include svvs.c %SVLIBS% %LIBS% -o%DEST%/bin/svvs
+rm -f svvs.o

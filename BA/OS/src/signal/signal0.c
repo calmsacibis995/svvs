@@ -1,0 +1,102 @@
+#include <sv_base.h> /*replacement macros */
+
+#ifndef	SYSVR_2
+#include	<sys/types.h>
+#endif
+
+#include	<errno.h>
+#include	<signal.h>
+#include	<svvs.h>
+#include	<sv_env.h>
+#include	<sv_macro.h>
+
+#ident	"@(#)signal0.c	1.5"
+
+/*
+** signal0
+**	Test the signal function - normal cases, child catches SIG_DFL.
+**
+*/
+# define	SIGNAL_ME_0	"signal_me0"
+
+
+struct	acttab{
+	int	signo;
+	char	*signam;
+	int	exp;
+};
+
+struct	acttab	sigs[] = {
+	{SIGHUP,"SIGHUP",1},
+	{SIGINT,"SIGINT",1},
+	{SIGQUIT,"SIGQUIT",1},
+	{SIGTRAP,"SIGTRAP",1},
+	{SIGFPE,"SIGFPE",1},
+	{SIGSYS,"SIGSYS",1},
+	{SIGPIPE,"SIGPIPE",1},
+	{SIGALRM,"SIGALRM",1},
+	{SIGTERM,"SIGTERM",1},
+	{SIGUSR1,"SIGUSR1",1},
+	{SIGUSR2,"SIGUSR2",1},
+#ifndef SYSVR_2
+	{SIGABRT,"SIGABRT",1},
+#endif
+};
+
+# define	NSIGS	(sizeof(sigs)/sizeof(struct acttab))
+
+main()
+{
+	int		sts;
+	int		cpid;
+	int		i;
+	ttime		t;
+	ttime		time();
+
+	setup("signal");
+	funct("signal");
+
+	exit_on ( SEVERR );
+	for(i=0;i<NSIGS;i++ )
+	{
+		abstract("Signal with %s, SIG_DFL",sigs[i].signam);
+		abstract("Expect 0 return value, killed child");
+		start
+			prep("Fork off a child.");
+			start
+				expecting ( SUCCESS );
+				cpid = fork();
+			finis
+			if ( cpid == 0 )
+			{
+				testing("Child does an exec which should signal it.");
+				start
+					expecting ( VOID );
+					(void) execlp(  SIGNAL_ME_0,  SIGNAL_ME_0, (char *)0 );
+					severr( "signal0: cannot exec" );
+				finis
+			}
+			prep("Parent waits 5 seconds before sending signal.");
+			start
+				expecting ( VOID );
+				t = time( (ttime *)0) + 5;
+				expecting ( VOID );
+				while( time( (ttime *)0 )  < t );
+			finis
+			testing("Signal the child process and determine that it terminated");
+			testing("from the correct signal.");
+			start
+				expecting ( 0 );
+				sts = kill(cpid, sigs[i].signo);
+				expecting ( cpid );
+				wait(&sts);
+				if ( (sts & ~0200) != sigs[i].signo )
+				{
+					error( "Child did not terminate as expected.\nThe expected wait value was %d.\nThe actual wait value was %d.\n", sigs[ i ].signo, (sts & ~0200));
+				}
+			finis
+		finis
+	}
+	done();
+/*NOTREACHED*/
+}

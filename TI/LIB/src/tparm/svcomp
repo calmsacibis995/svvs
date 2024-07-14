@@ -1,0 +1,7 @@
+%COMP% %OPTS% -I%DEST%/include -I%SOURCE%/TI/LIB/src/include %REL% %EXT% -c tparm.c
+%COMP% %OPTS% -I%DEST%/include -I%SOURCE%/TI/LIB/src/include %REL% %EXT% -c pushpop.c
+%COMP% %OPTS% -I%DEST%/include -I%SOURCE%/TI/LIB/src/include %REL% %EXT% -c arith.c
+%COMP% %OPTS% -I%DEST%/include -I%SOURCE%/TI/LIB/src/include %REL% %EXT% -c unary.c
+%COMP% %OPTS% -I%DEST%/include -I%SOURCE%/TI/LIB/src/include %REL% %EXT% -c logical.c
+%COMP% %OPTS% -o %DEST%/TI/LIB/bin/tparm tparm.o pushpop.o arith.o unary.o logical.o %SVLIBS% %LIBS%
+rm -f tparm.o pushpop.o arith.o unary.o logical.o

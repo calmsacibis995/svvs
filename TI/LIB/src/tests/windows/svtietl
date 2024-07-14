@@ -1,0 +1,6 @@
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/windows.dir/copywin copywin
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/windows.dir/delwin delwin
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/windows.dir/mvwin mvwin
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/windows.dir/newwin newwin
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/windows.dir/subwin subwin
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/windows.dir/touchwin touchwin

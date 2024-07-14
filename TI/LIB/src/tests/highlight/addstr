@@ -1,0 +1,105 @@
+#
+# @(#)addstr	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - addstr, waddstr etc.
+#
+
+abstract("highlight: addstr");
+start
+	prep("fill stdscr");
+	start
+	move(0, 0);
+	barber('A');
+	refresh();
+	expect();
+	finis
+	
+	word = "zyxwvutsrq";
+	# add word to stdscr 4 times on each line
+	# alternate words in STANDOUT mode
+	testing("adding strings to stdscr in standout mode with addstr");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		for (j = 0; j < 4; j++)
+		{
+			move(i, j * (COLS / 4));
+			if (j % 2)
+				attron(A_STANDOUT);
+			addstr(word);
+			attroff(A_STANDOUT);
+		}
+		refresh();
+		expect();
+	}
+	finis
+	
+	clear();
+	refresh();
+
+	# add word to stdscr twice on each line
+	# all words in BOLD mode
+	testing("adding strings to stdscr in bold mode with mvaddstr");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		for (j = 0; j < 2; j++)
+		{
+			attron(A_BOLD);
+			mvaddstr(i, j * (COLS / 2), word);
+			attroff(A_BOLD);
+		}
+		refresh();
+		expect();
+	}
+	finis
+
+	clear();
+	refresh();
+
+	prep("create a full sized window");
+	start
+	win = newwin(LINES, COLS, 0, 0);
+	word1 = "abcdefghij";
+	word2 = "klmnopqrst";
+	finis
+
+	# add word1 and word2 to win, alternate words UNDERLINEd
+	testing("adding strings to window, alternate strings in");
+	testing("underline mode, with waddstr");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		for (j = 0; j < (COLS / 20); j++)
+		{
+			move(i, j * 10);
+			if (j % 2) wattron(win, A_UNDERLINE);
+			waddstr(win, word1);
+			waddstr(win, word2);
+			wattroff(win, A_UNDERLINE);
+		}
+		wrefresh(win);
+		expect();
+	}
+	finis
+
+	wclear(win);
+	wrefresh(win);
+
+	# add words 1 and 2 to win in REVERSE mode
+	testing("adding strings to window, in reverse mode with mvwaddstr");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		for (j = 0; j < (COLS / 20); j +=2)
+		{
+			wattron(win, A_REVERSE);
+			mvwaddstr(win, i, j * 20, word1);
+			mvwaddstr(win, i, j * 20 + 10, word2);
+			wattroff(win, A_REVERSE);
+		}
+		wrefresh(win);
+		expect();
+	}
+	finis
+finis

@@ -1,0 +1,81 @@
+#
+# @(#)vidattr	3.1 (SVVS) 12/1/86
+#
+# put various attribute combinations to screen using vidattr
+#
+#NOFINALEXPECT
+#NOXON
+
+abstract("strings: vidattr");
+start
+	# single attributes - must be turned off
+	# before another is turned on.
+	testing("turning on then off each video attribute");
+	start
+		vidattr(A_DIM);
+		expect_vidattr(A_DIM);
+		vidattr(0);
+		expect_flush();
+		vidattr(A_REVERSE);
+		expect_vidattr(A_REVERSE);
+		vidattr(0);
+		expect_flush();
+		vidattr(A_UNDERLINE);
+		expect_vidattr(A_UNDERLINE);
+		vidattr(0);
+		expect_flush();
+		vidattr(A_BOLD);
+		expect_vidattr(A_BOLD);
+		vidattr(0);
+		expect_flush();
+		vidattr(A_STANDOUT);
+		expect_vidattr(A_STANDOUT);
+		vidattr(0);
+		expect_flush();
+		vidattr(A_BLINK);
+		expect_vidattr(A_BLINK);
+		vidattr(0);
+		expect_flush();
+	finis
+
+	testing("turning on then off each 2 attribute combination");
+	start
+		# two attributes
+
+		a[0] = A_STANDOUT;
+		a[1] = A_UNDERLINE;
+		a[2] = A_REVERSE;
+		a[3] = A_BLINK;
+		a[4] = A_DIM;
+		a[5] = A_BOLD;
+
+		for (i = 0; i < 6; i++)
+		{
+			for (j = i + 1; j < 6; j++)
+			{
+				vidattr(a[i] | a[j]);
+				expect_vidattr(a[i] | a[j]);
+				vidattr(0);
+				expect_flush();
+			}
+		}
+	finis
+
+	# three attributes
+	testing("turning on then off each 3 attribute combination");
+	start
+		for (i = 0; i < 6; i++)
+		{
+			for (j = i + 1; j < 6; j++)
+			{
+				for (k = j + 1; k < 6; k++)
+				{
+					vidattr(a[i] | a[j] | a[k]);
+					expect_vidattr(a[i] | a[j] | a[k]);
+					vidattr(0);
+					expect_flush();
+				}
+			}
+		}
+	finis
+finis

@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_cmdcom.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_menus.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_sort.c

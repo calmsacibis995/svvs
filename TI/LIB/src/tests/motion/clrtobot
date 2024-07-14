@@ -1,0 +1,21 @@
+#
+# @(#)clrtobot	3.1 (SVVS) 12/1/86
+#
+# cursor motion: clrtobot
+#
+abstract("cursor motion - clrtobot");
+start
+	testing("fill the screen, then, starting from the bottom,");
+	testing("clrtobot at successively higher lines.");
+	start
+	for ( i = 0 ; i < LINES ; i++ )
+	{
+		move(0, 0);
+		barber('a');
+		move(i,0);
+		clrtobot();
+		refresh();
+		expect();
+	}
+	finis
+finis

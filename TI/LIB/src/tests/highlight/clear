@@ -1,0 +1,49 @@
+#
+# @(#)clear	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - clear and wclear
+#
+
+abstract("clear");
+start
+	# BOLD barber pole to stdscr, then clear stdscr
+	testing("fill stdscr in bold mode, then clear stdscr");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		move(0, 0);
+		attron(A_BOLD);
+		barber('a' + i);
+		refresh();
+		expect();
+		clear();
+		refresh();
+		expect();
+	}
+	finis
+	attrset(0);
+	clear();
+	refresh();
+
+	# create long, narrow window.  REVERSE barber pole to it.
+	# then clear window and do it again.  windows move across
+	# the screen from the right
+	testing("create a long, narrow window, then fill it with a reverse");
+	testing("barber pole. move the window to the right each time");
+	start
+	for (i = 1; i < 9; i++)
+	{
+		win = newwin(LINES, COLS / 8, 0, COLS - ((COLS / 8) * i));
+		wmove(win, 0, 0);
+		wattron(win, A_REVERSE);
+		wbarber(win, LINES, COLS / 8, 'z');
+		wrefresh(win);
+		expect();
+		wclear(win);
+		wrefresh(win);
+		expect();
+		wattroff(win, A_REVERSE);
+		delwin(win);
+	}
+	finis
+finis

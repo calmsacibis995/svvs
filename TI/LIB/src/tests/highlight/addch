@@ -1,0 +1,118 @@
+#
+# @(#)addch	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining, addch
+#
+
+abstract("highlight: addch");
+start
+	ch = 'a';
+	# add chars to stdscr in REVERSE mode
+	# every other line is blank
+	testing("adding characters in reverse mode with addch");
+	start
+	for (j = 0; j < LINES; j += 2)
+	{
+		for (i = 10; i < COLS - 10; i++)
+		{
+			move(j, i);
+			addch((ch + j) | A_REVERSE);
+		}
+		refresh();
+	}
+	finis
+	expect();
+
+	clear();
+	refresh();
+
+	attron(A_STANDOUT);
+	lim = COLS - 10;
+
+	# add X's to stdscr in STANDOUT mode, alternate
+	# lines will be blank
+	testing("adding X's to stdscr in standout mode with waddch");
+	start
+	for (j = 0; j < LINES; j += 2)
+	{
+		for (i = 10; i < lim; i++)
+		{
+			move(j, i);
+			waddch(stdscr, 'X');
+		}
+		refresh();
+	}
+	finis
+	expect();
+
+	clear();
+	refresh();
+	attroff(A_STANDOUT);
+	attroff(A_STANDOUT);
+
+	# add REVERSE video O's on alternate lines of stdscr
+	lim = COLS - 10;
+	testing("adding O's to stdscr in reverse with addch");
+	start
+	for (j = 0; j < LINES; j += 3)
+	{
+		for (i = 10; i < lim; i++)
+		{
+			move(j,i);
+			addch('O' | A_REVERSE);
+		}
+		{
+			move(j,i);
+			addch('O' | A_REVERSE);
+		}
+		refresh();
+	}
+	finis
+	expect();
+
+	clear();
+	refresh();
+
+	win = newwin(LINES / 2, COLS / 4, 0, 0);
+	limj = LINES / 2;
+	limi = COLS / 4;
+
+	# fill win with BOLD UNDERLINEd *'s
+	testing("adding *'s to window in bold and underlined modes, w/waddch.");
+	start
+	for (j = 0; j < limj; j++)
+	{
+		for (i = 0; i < limi; i++)
+		{
+			wmove(win, j, i);
+			waddch(win, '*' | A_BOLD | A_UNDERLINE);
+		}
+		wrefresh(win);
+		wattrset(win, 0);
+	}
+	finis
+	expect();
+
+	delwin(win);
+	refresh();
+
+	win = newwin(LINES / 2, COLS / 4, 0, 0);
+
+	# fill win with +'s - lines will alternate DIM and BLINK
+	testing("all -'s to window, alternating dim and blink modes,");
+	testing("using mvwaddch");
+	start
+	for (j = 0; j < limj; j++)
+	{
+		if (j % 2)
+			wattron(win, A_DIM);
+		else
+			wattron(win, A_BLINK);
+		for (i = 0; i < limi; i++)
+			mvwaddch(win, j, i, '+');
+		wrefresh(win);
+		wattrset(win, 0);
+	}
+	finis
+	expect();
+finis

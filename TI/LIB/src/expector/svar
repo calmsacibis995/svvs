@@ -1,0 +1,5 @@
+ar -rcl catcher.a c_addch.o c_addstr.o c_newwin.o c_delch.o c_deleteln.o c_clrtobot.o c_clrtoeol.o c_refresh.o c_overlay.o c_scroll.o c_mvwin.o c_subwin.o c_delwin.o c_erase.o c_initscr.o c_endwin.o c_clear.o c_clearok.o c_leaveok.o c_scrollok.o c_box.o
+ar -rcl catcher.a c_move.o c_touchwin.o c_stscrg.o c_insertln.o c_insch.o c_slk_init.o c_slk_set.o c_slk_refr.o c_slk_lbl.o c_slk_cl.o c_slk_rest.o c_slk_tch.o c_getch.o c_getstr.o c_inch.o c_unctrl.o c_scr_rest.o c_echo.o c_noecho.o c_copywin.o c_printw.o c_scanw.o c_getyx.o 
+ar -rcl catcher.a c_echochar.o c_ungetch.o c_barber.o c_scr_dump.o c_flushinp.o c_attrs.o c_scr_init.o c_beep.o c_flash.o c_keypad.o c_newpad.o c_subpad.o c_prefresh.o c_pecho.o c_mvcur.o
+mv catcher.a %DEST%/lib/catcher.a
+rm -f *.o

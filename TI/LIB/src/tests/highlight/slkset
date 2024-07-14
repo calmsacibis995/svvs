@@ -1,0 +1,31 @@
+#
+# @(#)slkset	3.1 (SVVS) 12/1/86
+#
+# soft labels - slk_set()
+#
+#NOINITSCR
+
+# put all labels out and then refresh the line
+abstract("highlight: slkset");
+start
+	prep("turn on soft labels, and initscr");
+	start
+	slk_init(0);
+	initscr();
+	label = "ho";
+	finis
+	# the outer loop varies the adjustment of the labels
+	testing("set labels according to position");
+	start
+	for (j = 0; j <= 2; j++)
+	{
+		for (i = 1; i < 9; i++)
+		{
+			slk_set(i, label:i:j, j);
+		}
+		slk_touch();
+		slk_refresh();
+		expect();
+	}
+	finis
+finis

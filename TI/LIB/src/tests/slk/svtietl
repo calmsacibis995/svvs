@@ -1,0 +1,5 @@
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/slk.dir/slkclear slkclear
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/slk.dir/slklabel slklabel
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/slk.dir/slkrestore slkrestore
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/slk.dir/slkset slkset
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/slk.dir/slktouch slktouch

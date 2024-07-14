@@ -1,0 +1,58 @@
+#
+# @(#)deleteln	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining, deleteln and wdeleteln
+#
+
+abstract("highlight: deleteln");
+start
+	testing("delete each line in stdscr, from the bottom up");
+	start
+	for (i = 0; i < 1; i++)
+	{
+		move(0, 0);
+		attrset(A_STANDOUT);
+		barber('A');
+		refresh();
+		attrset(0);
+
+		# delete all the lines from stdscr starting at the bottom
+		for (j = LINES - 1; j >= 0; j--)
+		{
+			move(j, 0);
+			deleteln();
+			refresh();
+			expect();
+		}
+	}
+	finis
+
+	clear();
+	refresh();
+
+	prep("create a small window");
+	start
+	win = newwin(LINES - 8, COLS - 20, 4, 10);
+	finis
+
+	testing("delete each line of the window, from the top down");
+	start
+	for (i = 0; i < 5; i++)
+	{
+		wmove(win, 0, 0);
+		wattrset(win, A_DIM);
+		wbarber(win, LINES - 8, COLS - 20, 'a');
+		wrefresh(win);
+		wattrset(win, 0);
+
+		# delete all the lines from win, starting from the top
+		for (j = 0; j < LINES - 8; j++)
+		{
+			wmove(win, 0, 0);
+			wdeleteln(win);
+			wrefresh(win);
+			expect();
+		}
+	}
+	finis
+finis

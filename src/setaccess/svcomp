@@ -1,0 +1,2 @@
+%COMP% %OPTS% %REL% -I%DEST%/include setaccess.c %SVLIBS% %LIBS% -o%DEST%/bin/setaccess
+rm -f setaccess.o

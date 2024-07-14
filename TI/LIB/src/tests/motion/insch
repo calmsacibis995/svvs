@@ -1,0 +1,88 @@
+#
+# @(#)insch	3.1 (SVVS) 12/1/86
+#
+# cursor motion: insch
+#
+abstract("cursor motion - insch");
+start
+	testing("fill stdscr and insert '*' at different columns and rows.");
+	start
+
+	ch = 'a';
+	move(0, 0);
+	barber(ch);
+	refresh();
+
+	for (i = 0; i < LINES ; i++)
+	{
+		move(i, i * 2);
+		insch('*');
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("fill stdscr and insert '*' at different columns and rows.");
+	start
+
+	ch = 'A';
+	move(0, 0);
+	barber(ch);
+	refresh();
+
+	for (i = 0; i < LINES ; i++)
+	{
+		move(0, 0);
+		barber(ch);
+		mvinsch(i, i * 2, '*');
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("fill a window and insert '*' at different columns and rows.");
+	start
+
+	ch = 'a';
+	win1 = newwin(LINES / 2, COLS / 2, 0, 0);
+	wmove(win1, 0, 0);
+	wbarber(win1, LINES / 2, COLS / 2, ch);
+	wrefresh(win1);
+
+	for (i = 0; i < (LINES / 2) ; i++)
+	{
+		wmove(win1, i, i * 2);
+		winsch(win1, '*');
+		wrefresh(win1);
+		expect();
+	}
+	finis
+	touchwin(stdscr);
+	clear();
+	refresh();
+
+	testing("fill a window and insert '*' at different columns and rows.");
+	start
+	ch = 'A';
+	win2 = newwin(LINES, COLS, 0, 0);
+	wmove(win2, 0, 0);
+	wbarber(win2, LINES, COLS, ch);
+	wrefresh(win2);
+
+	for (i = 0; i < LINES ; i++)
+	{
+		wmove(win2, 0, 0);
+		wbarber(win2, LINES, COLS, ch);
+		mvwinsch(win2, i, i * 2, '*');
+		wrefresh(win2);
+		expect();
+	}
+	finis
+	touchwin(stdscr);
+	clear();
+	refresh();
+finis

@@ -1,0 +1,6 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rmdir.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/rmdir rmdir.o %SVLIBS% %LIBS%
+rm rmdir.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% rmdir1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/rmdir1 rmdir1.o %SVLIBS% %LIBS%
+rm rmdir1.o

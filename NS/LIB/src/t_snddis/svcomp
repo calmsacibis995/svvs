@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% t_snddis.c
+%COMP% %OPTS% -o %DEST%/NS/LIB/bin/t_snddis t_snddis.o %SVLIBS% %LIBS%
+rm t_snddis.o

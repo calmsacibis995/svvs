@@ -1,0 +1,30 @@
+#
+# @(#)copywin	3.1 (SVVS) 12/1/86
+#
+# cursor motion: copywin
+#
+abstract("cursor motion - copywin");
+start
+	prep("create a window the size of the screen and a smaller one that overlaps the first.");
+	start
+	mainw = newwin(LINES, COLS, 0, 0);
+
+	win1 = newwin(LINES / 4, COLS / 4, 0, 0);
+	wmove(win1, 0, 0);
+	wbarber(win1, LINES / 4, COLS / 4, 'a');
+	touchwin(win1);
+	wrefresh(win1);
+	finis
+
+	testing("copy the small window to various places in the main window.");
+	start
+ 	for (i = 1; i < 4; i++)
+ 	{
+		wmove(win1, 0, 0);
+		copywin(win1, mainw, 0, 0, (i * 3), (i * 3), 
+			(LINES / 4), (COLS / 4), 0);
+		wrefresh(mainw);
+		expect();
+ 	}
+	finis
+finis

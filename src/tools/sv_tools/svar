@@ -1,0 +1,3 @@
+ar -cr sv_tools.a chk_stdout.o clr_buf.o cmp_file.o cmp_stat.o datafopen.o dataopen.o derofs.o erofs.o find.o find_limit.o get_file.o grp_stdout.o init_buf.o pshpop.o put_file.o sv_cmd.o set_stdout.o subtest.o tempcreat.o tempfopen.o tempopen.o tie_error.o waitfor.o
+cp sv_tools.a %DEST%/lib/sv_tools.a
+rm sv_tools.a *.o

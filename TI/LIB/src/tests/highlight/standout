@@ -1,0 +1,59 @@
+#
+# @(#)standout	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining, standout and standend
+#
+
+abstract("highlight: standout");
+start
+	prep("fill stdscr");
+	start
+	move(0, 0);
+	barber('a');
+	refresh();
+	finis
+
+	# even numbered lines are displayed in standout mode
+	testing("display even numbered lines in standout");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		if (i % 2)
+			standout();
+		move(i, 0);
+		for (j = 0; j < COLS; j++)
+			waddch(stdscr, '0');
+		refresh();
+		expect();
+		standend();
+	}
+	finis
+
+	clear();
+	refresh();
+	expect();
+
+	prep("create a half-width window");
+	start
+	win = newwin(LINES, COLS / 2, 0, COLS / 4);
+	finis
+
+	# even numbered lines, and even numbered characters
+	# on that line, are displayed in standout mode
+	testing("display even numbered chars on even lines in standout");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		wmove(win, i, 0);
+		for (j = 0; j < COLS / 2; j++)
+		{
+			if (i % 2 && j % 2)
+				wstandout(win);
+			waddch(win, '.');
+			wstandend(win);
+		}
+		wrefresh(win);
+		expect();
+	}
+	finis 
+finis

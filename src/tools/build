@@ -1,0 +1,12 @@
+sv_sys.a
+sv_abort svcomp
+sv_cmd svcomp
+sv_cmd svar
+sv_sys svcomp
+sv_sys svar
+sv_tools svcomp
+sv_tools svar
+z_base svcomp
+z_base svar
+z_kext svcomp
+z_kext svar

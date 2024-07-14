@@ -1,0 +1,81 @@
+#
+# @(#)scroll	3.1 (SVVS) 12/1/86
+#
+# cursor motion: scroll
+#
+abstract("cursor motion - scroll");
+start
+	scrollok(stdscr, TRUE);
+
+	testing("in a loop, fill stdscr and scroll i times");
+	testing("where i varies from 1 to LINES.");
+	start
+	for ( i = 1 ; i < LINES ; i++ )
+	{
+		move(0,0);
+		barber('a');
+		for ( j = 1 ; j <= i ; j++ )
+		{
+			scroll(stdscr);
+		}
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	prep("create a window the size of the screen and allow scrolling.");
+	start
+	mainw = newwin(LINES,COLS,0,0);
+
+	scrollok(mainw, TRUE);
+	finis
+
+	testing("in a loop, fill a window and scroll it i times.");
+	testing("where i varies from 1 to LINES.");
+	start
+	for ( i = 1 ; i < LINES ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw,LINES,COLS,'a');
+		for ( j = 1 ; j <= i ; j++ )
+		{
+			scroll(mainw);
+		}
+		wrefresh(mainw);
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+
+	prep("create two windows, the smaller overlapping the larger.");
+	start
+	scrollok(mainw, TRUE);
+
+	wmove(mainw,0,0);
+	wbarber(mainw,LINES,COLS,'a');
+	wrefresh(mainw);
+
+	small = newwin(LINES / 2, COLS / 2, 0, 0);
+	scrollok(small, TRUE);
+	finis
+
+	testing("in a loop, fill and scroll a small window i");
+	testing("times where i varies from 1 to LINES.");
+	start
+	for ( i = 1 ; i < (LINES / 2) ; i++ )
+	{
+		wmove(small,0,0);
+		wbarber(small,LINES / 2,COLS / 2,'a');
+		for ( j = 1 ; j <= i ; j++ )
+		{
+			scroll(small);
+		}
+		wrefresh(small);
+		expect();
+	}
+	finis
+finis

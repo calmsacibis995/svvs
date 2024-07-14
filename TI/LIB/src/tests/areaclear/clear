@@ -1,0 +1,19 @@
+#
+# Area clear test, test clear.
+#
+# @(#)clear	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: clear");
+start
+	testing("fill and clear stdscr 15 times");
+	start
+	for ( i = 0 ; i < 15 ; i++ )
+	{
+		move(0,0);
+		barber('a');
+		clear();
+		refresh();
+		expect();
+	}
+	finis
+finis

@@ -1,0 +1,59 @@
+#
+# @(#)clrtobot	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - clrtobot
+#
+
+abstract("highlight: clrtobot");
+start
+	prep("fill stdscr with underlined and dimmed *'s");
+	start
+	move(0, 0);
+	attron(A_UNDERLINE | A_DIM);
+	barber('*');
+	refresh();
+	expect();
+	attroff(A_UNDERLINE | A_DIM);
+	j = 0;
+	finis
+
+	# start at bottom of stdout and clrtobot for each line
+	# chars are left on the lines cleared...
+	testing("move up stdscr, doing a clrtobot for each line");
+	start
+	for (i = LINES - 1; i >= 0; i--)
+	{
+		move(i, j);
+		clrtobot();
+		refresh();
+		expect();
+		j += 1;
+	}
+	finis
+	clear();
+	refresh();
+
+	prep("create a small window in the middle of the screen");
+	start
+	win = newwin(LINES / 2, COLS / 2, LINES / 4, COLS / 4);
+	finis
+
+	# barber pole to win and clrtobot from the top
+	# one more char is left in win each time the clear is done
+	testing("fill window, the clrtobot moving from the top down.");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		wmove(win, 0, 0);
+		wattron(win, A_REVERSE);
+		wbarber(win, LINES / 2, COLS / 2, 'Z' - i);
+		wrefresh(win);
+		expect();
+		wattroff(win, A_REVERSE);
+		wmove(win, 0, i);
+		wclrtobot(win);
+		wrefresh(win);
+		expect();
+	}
+	finis
+finis

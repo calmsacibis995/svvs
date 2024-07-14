@@ -1,0 +1,50 @@
+#
+# @(#)slkrestore	3.1 (SVVS) 12/1/86
+#
+# soft labels: slk_restore
+#
+#NOINITSCR
+abstract("soft labels - slk_restore");
+start
+	prep("setup labels in 3-2-3 format.");
+	start
+		slk_init(0);
+		initscr();
+	finis
+
+	testing("put a string to each label with slk_set, slk_clear");
+	testing("them and then restore the labels with slk_restore.");
+	start
+		prep("put a string to each label with slk_set");
+		start
+			for (i = 8; i > 0; i--)
+			{
+				sprintf(label, "WOW%d%d", i, j);
+				slk_set(i, label, 1);
+				slk_noutrefresh();
+			}
+			doupdate();
+			expect();
+		finis
+
+		prep("clear the labels with slk_clear");
+		start
+			slk_clear();
+			slk_refresh();
+			expect();
+		finis
+
+		testing("restore the labels with slk_restore");
+		start
+			slk_restore();
+			slk_refresh();
+			expect(WARNING);
+		finis
+
+		testing("call refresh to insure soft label keys are displayed");
+		start
+			refresh();
+			expect();
+		finis
+	finis
+finis

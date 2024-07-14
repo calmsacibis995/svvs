@@ -1,0 +1,34 @@
+#
+# Area clear tests, testing overlay.
+#
+# @(#)mvwin	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: mvwin");
+start
+	height = 10;
+
+	prep("create main and eraser windows. clear eraser window");
+	start
+		mainw = newwin(LINES,COLS,0,0);
+		eraser = newwin(height,10,0,0);
+		wclear(eraser);
+	finis
+
+	#
+	# Move the eraser down the diagonal.
+	#
+	testing("move eraser window down filled main window");
+	start
+		for ( i = 0 ; i < LINES - height ; i++ )
+		{
+			wmove(mainw,0,0);
+			wbarber(mainw,LINES,COLS,'a');
+			mvwin(eraser,i,i);
+			touchwin(mainw);
+			touchwin(eraser);
+			wrefresh(mainw);
+			wrefresh(eraser);
+			expect();
+		}
+	finis
+finis

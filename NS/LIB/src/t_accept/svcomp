@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% t_accept.c
+%COMP% %OPTS% -o %DEST%/NS/LIB/bin/t_accept t_accept.o %SVLIBS% %LIBS%
+rm t_accept.o

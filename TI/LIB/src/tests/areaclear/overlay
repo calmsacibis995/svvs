@@ -1,0 +1,31 @@
+#
+# Area clear tests, testing overlay.
+#
+# @(#)overlay	3.2 (SVVS) 12/30/86
+#
+abstract("areaclear: overlay");
+start
+	prep("create a full-size window");
+	start
+	mainw = newwin(LINES,COLS,0,0);
+	finis
+
+	#
+	# Succesively overlay more and more of the screen.
+	#
+	testing("overlay main window with eraser window");
+	start
+	for ( i = 1 ; i <= LINES ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw,LINES,COLS,'a');
+		wrefresh(mainw);
+		eraser = newwin(i,i,0,0);
+		wclear(eraser);
+		overlay(eraser,mainw);
+		wrefresh(mainw);
+		delwin(eraser);
+		expect();
+	}
+	finis
+finis

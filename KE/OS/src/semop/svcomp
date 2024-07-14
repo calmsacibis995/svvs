@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% semop.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/semop semop.o %SVLIBS% %LIBS%
+rm semop.o

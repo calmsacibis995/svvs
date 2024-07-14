@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% setjmp.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/setjmp setjmp.o %SVLIBS% %LIBS%
+rm setjmp.o

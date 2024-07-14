@@ -1,0 +1,2 @@
+%COMP% %OPTS% %REL% -I%DEST%/include clraccess.c %SVLIBS% %LIBS% -o%DEST%/bin/clraccess
+rm -f clraccess.o

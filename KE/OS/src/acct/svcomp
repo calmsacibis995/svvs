@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% acct.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/acct acct.o %SVLIBS% %LIBS%
+rm acct.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% acct1.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/acct1 acct1.o %SVLIBS% %LIBS%
+rm acct1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% acct2.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/acct2 acct2.o %SVLIBS% %LIBS%
+rm acct2.o

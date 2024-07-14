@@ -1,0 +1,7 @@
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% mvcur.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% tie_error.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% wbarber.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% pvtest.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% cfprintf.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% show.c
+%COMP% %OPTS% -c -I%SOURCE%/TI/LIB/src/include -I%DEST%/include %REL% %EXT% trace.c

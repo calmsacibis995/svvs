@@ -1,0 +1,85 @@
+#
+# @(#)addstr	3.1 (SVVS) 12/1/86
+#
+# cursor motion: addstr
+#
+abstract("cursor motion - addstr");
+start
+	iterations = LINES / 2;
+	colnum = 0;
+
+	testing("adding newlines to a filled stdscr at");
+	testing ("different columns and rows");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		move(0, 0);
+		barber('a');
+		move(i * 2, colnum);
+		addstr('\n');
+  		colnum = colnum + 2;
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("on a blank screen, adding characters at");
+	testing("all the right edge positions");
+	start
+	for ( i = 0 ; i < LINES - 1 ; i++ )
+	{
+		move(i, COLS - 1);
+		refresh();
+		addstr('a');
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("on a blank screen, adding characters at");
+	testing("all the left edge positions");
+	start
+	for ( i = 0 ; i < LINES ; i++ )
+	{
+		move(i, 0);
+		refresh();
+		addstr('a');
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("on a blank screen, adding characters at");
+	testing("all the top edge positions");
+	start
+	for ( i = 0 ; i < COLS ; i++ )
+	{
+		move(0, i);
+		refresh();
+		addstr('a');
+		refresh();
+		expect();
+	}
+	finis
+	clear();
+	refresh();
+
+	testing("on a blank screen, adding characters at");
+	testing("all the bottom edge positions");
+	start
+	for ( i = 0 ; i < COLS ; i++ )
+	{
+		move(LINES - 1, i);
+		refresh();
+		addstr('a');
+		refresh();
+		expect();
+	}
+	finis
+finis

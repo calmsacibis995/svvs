@@ -1,0 +1,27 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek lseek.o %SVLIBS% %LIBS%
+rm lseek.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek0 lseek0.o %SVLIBS% %LIBS%
+rm lseek0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek1 lseek1.o %SVLIBS% %LIBS%
+rm lseek1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek2 lseek2.o %SVLIBS% %LIBS%
+rm lseek2.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek3.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek3 lseek3.o %SVLIBS% %LIBS%
+rm lseek3.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek4.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek4 lseek4.o %SVLIBS% %LIBS%
+rm lseek4.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek5.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek5 lseek5.o %SVLIBS% %LIBS%
+rm lseek5.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek6.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek6 lseek6.o %SVLIBS% %LIBS%
+rm lseek6.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% lseek7.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/lseek7 lseek7.o %SVLIBS% %LIBS%
+rm lseek7.o

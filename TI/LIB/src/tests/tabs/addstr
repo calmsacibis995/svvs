@@ -1,0 +1,24 @@
+#
+# @(#)addstr	3.1 (SVVS) 12/1/86
+#
+# tabs: addstr
+#
+abstract("tabs: addstr");
+start
+	iterations = LINES / 2;
+	colnum = 0;
+
+	testing("putting tabs with addstr at various columns and lines");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		move(0, 0);
+		barber('a');
+		move(i * 2, colnum);
+		addstr("\t");
+		colnum = colnum + 2;
+	}
+	refresh();
+	expect();
+	finis
+finis

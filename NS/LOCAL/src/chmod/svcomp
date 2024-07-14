@@ -1,0 +1,12 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% chmod.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/chmod chmod.o %SVLIBS% %LIBS%
+rm chmod.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% chmod0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/chmod0 chmod0.o %SVLIBS% %LIBS%
+rm chmod0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% chmod1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/chmod1 chmod1.o %SVLIBS% %LIBS%
+rm chmod1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% chmod2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/chmod2 chmod2.o %SVLIBS% %LIBS%
+rm chmod2.o

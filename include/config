@@ -1,0 +1,486 @@
+/*
+**	@(#)config	1.19
+*/
+/*
+** SVVSPATH is the pathname of the target directory where the executable
+** SVVS is to reside.  This value is used throughout the tests and commands
+** to locate files associated with SVVS.
+*/
+SVVSPATH "/usr/svvs"
+/*
+** ROOT_UID, ROOT_GID, BIN_UID, BIN_GID are the user and group
+** identification numbers for ROOT and BIN respectively.
+** These values may be determined by examining "/etc/passwd" and
+** "/etc/group" on the target system.
+*/
+ROOT_UID 0
+ROOT_GID 0
+BIN_UID	 2
+BIN_GID	 2
+/*
+** UID and GID are the user and group identification numbers for the
+** tester as they exist on the target system.  This tester will be the 
+** only user who may run SVVS tests reliably, since certain tests test
+** results against these values. 
+*/
+UID	 100
+GID	 101
+/*
+** ARG_MAX is the maximum length of the argument to exec in characters.
+** It is used to evoke the E2BIG errno in the exec(BA_OS) test.  This
+** value is described in the implementation specific constants section
+** of the System V Interface Definition.  It is also referred to on the
+** exec(BA_OS) page of the System V Interface Definition.
+*/
+ARG_MAX  5120
+/*
+** PROC_LIMIT is the per-process file size limit on the target
+** system, measured in 512 byte blocks.  This value is returned
+** by ulimit(BA_OS) when its command is 1 (get the ulimit).
+*/
+PROC_LIMIT	 2048
+/*
+** PURETEXT is a flag which indicates whether the target system uses
+** pure procedure (shared text) files.  If the system supports pure
+** procedures, this value should be 1; otherwise it should be 0.  For
+** more information on pure procedures, see ACCESS(BA_OS) and
+** PTRACE(KE_OS) in the SVID.
+*/
+PURETEXT	 1
+/*
+** SYSNAME is the system name of the target system as returned by
+** uname(BA_OS).  This value can be obtained by using the 'uname -s'
+** command.
+*/
+SYSNAME	 "sfsvvsa"
+/*
+** NODENAME is the target system node name as returned by
+** uname(BA_OS).  This value can be obtained by using the 'uname -n'
+** command.
+*/
+NODENAME "sfsvvsa"
+/*
+** RELEASE is the target operating system release number as returned
+** by uname(BA_OS).  This value can be obtained by using the 'uname -r'
+** command. 
+*/
+RELEASE	 "3.0"
+/*
+** VERSION is the target operating system version as returned by
+** uname(BA_OS).  This value can be obtained by using the 'uname -v'
+** command.
+*/
+VERSION	 "2"
+/*
+** MACHINE is the target hardware name as returned by uname(BA_OS).
+** This value can be obtained by using the 'uname -m' command.
+*/
+MACHINE	 "3B2"
+/*
+** SVVS_ROOT is the device name of the root device on the target
+** system.  This value can be obtained using the df command.
+*/
+SVVS_ROOT "/dev/dsk/c1d0s0"
+/*
+** FSYSNAME is the name of the root file system on the target
+** system.  This value can be obtained using the labelit command.
+** You may need to be the super-user to execute this command.
+*/
+FSYSNAME  "root"
+/*
+** PACKNAME is the disk pack name of the root file system on the
+** target system.  This value can be obtained using the labelit
+** command. You may need to be the super-user to execute this
+** command.
+*/
+PACKNAME  "3.0"
+/*
+** SVVS_FS is the device on which you will mount a file system with at
+** least 100 free blocks which SVVS tests will mount, unmount, write to
+** and read from.  This should be a spare filesystem with no important
+** files on it, since unexpected results from certain tests could
+** damage it.  This device need not be mounted when the tests are run,
+** but it must be available for mounting.
+*/
+SVVS_FS	  "/dev/SA/diskette1"
+/*
+** MOUNT_POINT is a directory on which SVVS_FS will be mounted. 
+** Attempts will be made to unlink this directory as well as mount
+** and unmount SVVS_FS there.  The 'SVVSPATH/mnt' directory is
+** provided for this purpose, but you may wish to specify some other
+** path.
+*/
+MOUNT_POINT "/usr/svvs/mnt"
+/*
+** OFF_LINE_DEV is the device number of a device which does not
+** exist on the target system.  This device MUST NOT EXIST!  The
+** tests will attempt to do a variety of operations, some of which
+** may be destructive to this device.  If it exists, these tests
+** will fail and strange things may happen to the device.  Ask your
+** system administrator for this value.
+*/
+OFF_LINE_DEV	 077577
+/*
+** CDEV and BDEV are the device numbers of a character and block
+** special device respectively.  These devices MUST exist on the
+** target system.  These values should be provided in the form that
+** is used by the mknod system call on the target system.  Ask your
+** system administrator for these values. 
+*/
+CDEV		0
+BDEV		4352
+/*
+** CHAR_BIT is the number of bits in a character on your target
+** system.  Normally this value will be 8, but on some systems this 
+** will change.  Ask a programmer for this value.
+*/
+CHAR_BIT	8
+/*
+** UID_MAX is the smallest UNATTAINABLE value for a User
+** Identification Number on the target system.  In other words, if
+** the maximum UID on the target system were 59999, UID_MAX would be
+** 60000.  Ask your system administrator for this value.
+*/
+UID_MAX		60000
+/*
+** PID_MAX is the smallest UNATTAINABLE value for a Process
+** Identification Number on the target system.  In other words, if
+** the maximum PID on the target system were 29999, PID_MAX would be
+** 30000.  Ask your system administrator for this value.
+*/
+PID_MAX		30000
+/*
+** NAME_MAX is the maximum number of characters in a file name on
+** the target system.  Ask your system administrator for this value.
+*/
+NAME_MAX	14
+/*
+** SYS_NMLN is the number of characters in the strings returned from
+** uname(BA_OS).  Ask your system administrator or a programmer for
+** this value.
+*/
+SYS_NMLN	9
+/*
+** LINK_MAX is the maximum number of links allowed to a single file.
+** Ask your system administrator for this value.
+*/
+LINK_MAX	1000
+/*
+** USI_MAX is the maximum value of an unsigned integer on the target
+** system.  Ask a programmer for this value.
+*/
+USI_MAX		4294967295
+/*
+** USHRT_MAX is the maximum value of an unsigned short on the target
+** system.  Ask a programmer for this value.
+*/
+USHRT_MAX	65535
+/*
+** SHRT_MAX is the maximum value of a short on the target system. 
+** Ask a programmer for this value. 
+*/
+SHRT_MAX	32767
+/*
+** LONG_MAX is the maximum value of a long on the target system. 
+** Ask a programmer for this value. 
+*/
+LONG_MAX	2147483647
+/*
+** INT_MAX is the maximum value of an integer on the target
+** system.  Ask a programmer for this value.
+*/
+INT_MAX		2147483647
+/*
+** INT_MIN is the minimum value of an integer on the target
+** system.  Ask a programmer for this value.
+*/
+INT_MIN		-2147483648
+/*
+** LONG_MIN is the minimum value of a long on the target system. 
+** Ask a programmer for this value. 
+*/
+LONG_MIN	-2147483648
+/*
+** SHRT_MIN is the minimum value of a short on the target system. 
+** Ask a programmer for this value. 
+*/
+SHRT_MIN	-32768
+/*
+** AMAXLEN is the maximum length of a transport provider address 
+*/
+AMAXLEN		256
+/*
+** The following parameters apply only to Network Services tests.  The
+** description which follows is directed toward a reader with a solid
+** understanding of Network Services as it is described in the SVID.
+** The values used here should be reviewed by a programmer or system
+** administrator familiar with NS and your installation.
+**
+**
+** The following set of parameter names are constructed as follows:
+**
+**	The prefix for the parameter is one of:
+**
+**		TPDG	"Transport Provider Data Gram", a connectionless
+**			mode provider.
+**		TPVC	"Transport Provider Virtual Circuit", a connection
+**			mode provider.
+**		SEMA	A connection mode provider used for semaphore
+**			operations when performing point to point tests.
+**
+**	The suffix for each parameter is a number between 0 and 3.  This
+**	number denotes a "logical node number".  All entries with the 
+**	same prefix and "logical node number" are treated as referring to
+**	a single transport endpoint by the tests.  There are four "logical
+**	nodes" used by the connection mode tests, and two "logical nodes"
+**	used by the connectionless mode tests.  If point to point testing
+**	is being performed, two more "logical nodes" are used for 
+**	semaphore operations.  If SEMAADDR0 and SEMACONN0 are identical
+**	then the virtual circuit semaphore link is not used, and loop
+**	back testing is assumed.  This is discussed in more detail below.
+**	Note that point to point testing is unsupported, and is provided
+**	strictly for diagnostic purposes.
+**	
+**	The infix for each parameter is one of:
+**
+**		FILE	The name of a device to be used as a transport
+**			provider.
+**		MINOR	The number of minor devices associated with this
+**			device.
+**		ADDR	The address at which this "logical node" will bind.
+**			This must be an address which is local to the 
+**			system on which the test is being run.  This value
+**			is entered as a 'C' language string.  Use '\nnn'
+**			to enter special characters and null characters.
+			'\nnn' will be interpreted as an octal value.
+**		CONN	The address to which other "logical nodes" will
+**			establish connections or send datagrams.  If CONN
+**			is the same as ADDR, this indicates that the tests
+**			are being run in loop back mode.  If CONN is 
+**			different from ADDR, then point to point testing
+**			is indicated.  For point to point testing, two
+**			copies of a test must be executed, one on each
+**			end of a transport layer interface link.  (Note
+**			that this may or may not be on different machines.)
+**			The configuration file for the other test must
+**			have corresponding values for ADDR and CONN at each
+**			"logical node", such that the ADDR entry for each
+**			"logical node" is identical to the CONN entry for
+**			the other configuration file.  Since CONN is used
+**			locally to establish connections / route packets
+**			to a "logical node", this causes the local test 
+**			to communicate with the corresponding "logical
+**			node" from the other test.  For the SEMA entries,
+**			the first ADDR/CONN pair ("logical node" 0) are
+**			examined to determine if a virtual circuit should 
+**			be initialized for use as a semaphore mechanism.
+**			If SEMAADDR0 and SEMACONN0 are identical and of the
+**			same length, loop back testing is indicated.  
+**			If these addresses are entered incorrectly, or 
+**			(in the case of point to point testing), do
+**			not match endpoints where another copy of the test
+**			will be concurrently executed, the tests will
+**			not function correctly.
+**		ALEN	The length of the ADDR for this "logical node".
+**		CLEN	The length of the CONN for this "logical node".
+**		WAIT	A timeout period.  Note that there is
+**			no suffix for this parameter, it applies to
+**			all logical nodes with the same generic kind of
+**			provider.  This can probably be left as it is.
+**		TYPE	The type of the service, as returned by t_open
+**			or t_getinfo.  For connectionless mode service,
+**			this must be "T_CLTS", for connection mode service,
+**			this is either "T_COTS" or "T_COTS_ORD".
+**		
+**
+*/
+TPDGTYPE	"T_CLTS"
+TPDGWAIT	0
+
+TPDGFILE0	"/dev/tidg"
+TPDGMINOR0	12
+TPDGADDR0	"\0\0\0\1"
+TPDGALEN0	4
+TPDGCONN0	"\0\0\0\1"
+TPDGCLEN0	4
+
+TPDGFILE1	"/dev/tidg"
+TPDGMINOR1	12
+TPDGADDR1	"\0\0\0\2"
+TPDGALEN1	4
+TPDGCONN1	"\0\0\0\2"
+TPDGCLEN1	4
+
+TPVCTYPE	"T_COTS_ORD"
+TPVCWAIT	0
+TPVCFILE0	"/dev/tivc"
+TPVCMINOR0	12
+TPVCADDR0	"\0\0\0\1"
+TPVCALEN0	4
+TPVCCONN0	"\0\0\0\1"
+TPVCCLEN0	4
+
+TPVCFILE1	"/dev/tivc"
+TPVCMINOR1	12
+TPVCADDR1	"\0\0\0\2"
+TPVCALEN1	4
+TPVCCONN1	"\0\0\0\2"
+TPVCCLEN1	4
+
+TPVCFILE2	"/dev/tivc"
+TPVCMINOR2	12
+TPVCADDR2	"\0\0\0\3"
+TPVCALEN2	4
+TPVCCONN2	"\0\0\0\3"
+TPVCCLEN2	4
+
+TPVCFILE3	"/dev/tivc"
+TPVCMINOR3	12
+TPVCADDR3	"\0\0\1\0"
+TPVCALEN3	4
+TPVCCONN3	"\0\0\1\0"
+TPVCCLEN3	4
+
+SEMAFILE0	"/dev/tivc"
+SEMAADDR0	"\0\0\2\0"
+SEMAALEN0	4
+SEMACONN0	"\0\0\2\0"
+SEMACLEN0	4
+
+SEMAFILE1	"/dev/tivc"
+SEMAADDR1	"\0\0\3\0"
+SEMAALEN1	4
+SEMACONN1	"\0\0\3\0"
+SEMACLEN1	4
+/*
+**	Structure elements, as returned by t_open and t_getinfo.
+**	
+**	ADDR 	maximum length of an address for this provider
+**	OPTIONS	maximum length of options for this provider
+**	TSDU	maximum length of tsdu for this provider
+**	ETSDU	maximum length of etsdu for this provider
+**	CONNECT	maximum length of data sent with a connect request
+**	DISCON	maximum length of data sent with a disconnect request
+*/
+TPDGINFO_ADDR   4
+TPDGINFO_OPTIONS   4
+TPDGINFO_TSDU   1024
+TPDGINFO_ETSDU   -2
+TPDGINFO_CONNECT  -2
+TPDGINFO_DISCON   -2
+
+TPVCINFO_ADDR   4
+TPVCINFO_OPTIONS   4
+TPVCINFO_TSDU   4096
+TPVCINFO_ETSDU   64
+TPVCINFO_CONNECT   16
+TPVCINFO_DISCON   16
+/*
+** An invalid address and its length
+*/
+TPBADADDR 	"\0\0\0\f"
+TPBADLEN	4
+/*
+** An invalid option set, and its length
+*/
+BADOPTIONS	"fdakslfj"
+BADOPTLEN	8
+/*
+** OMAXLEN and DMAXLEN are Driver dependent values.  If you are using
+** the drivers supplied with the SVVS, the values given here are
+** correct.  For other drivers, ask a System Programmer.
+*/
+/*
+** maximum length of the options for t_optmgmt
+*/
+OMAXLEN		8
+/*
+** maximum length of data
+*/
+DMAXLEN		16
+/*
+** The RFS domain of the machine under test.
+*/
+RF_DOMAIN	"svvs"
+/*
+** A domain name, different from RF_DOMAIN to which the tests may
+** change the domain name of the machine under test.
+*/
+RF_NEWDOMAIN	"newsvvs"
+/*
+** The RFS node name of the machine under test.
+*/
+RF_NODENAME	"sfsvvsa"
+/*
+** The RFS nodename of the remote system
+*/
+RF_CLIENT	"sfsvvsb"
+/*
+** The RFS nodename of the primary domain name server.
+*/
+RF_PRIMARY	"sfsvvse"
+/*
+** The RFS nodename of the secondary domain name server.
+*/
+RF_SECONDARY	"sfsvvsa"
+/*
+** The name by which a read/write RFS resource may be advertised by
+** the machine under test.
+*/
+RF_RESOURCE	"SVVSA_RFS"
+/*
+** The name by which a read only RFS resource may be advertised by
+** the machine under test.
+*/
+RF_RD_RESOURCE	"SVVSA_RFS_RD"
+/*
+** The name by which a remote RFS resource will be advertised by
+** the second machine.
+*/
+RF_REMOTE_RESOURCE	"SVVSB_RFS"
+/*
+** Data for the description fields of advertised resources
+*/
+RF_DESCRIPTION	"svvsa rfs"
+RF_RD_DESCRIPTION	"rdonly svvsa rfs"
+/*
+** Paths to files used to provide authorization, uid and gid translation
+** rules on the machine under test.  These MUST BE THE FILES CURRENTLY
+** IN USE.  Failure to use the correct files can cause corruption of your
+** RFS environment.
+*/
+RF_IDLOAD_DIR	"/usr/nserve/auth.info"
+RF_U_RULES	"/usr/nserve/auth.info/uid.rules"
+RF_G_RULES	"/usr/nserve/auth.info/gid.rules"
+/*
+** A block special device which may be remotely mounted.
+*/
+RF_BLK_SPEC		"/dev/dsk/c1d0s0"
+/*
+** RF_SLEEP is the amount of time required for the network to stabilize
+** after either an 'rfstart' or 'adv' command has been invoked.
+** This is the elapsed time between advertising a resource and actually
+** having the resource mounted by a client system.  The 'fusage', 
+** 'nsquery', and 'rmntstat' tests will wait 'RF_SLEEP' seconds before
+** starting their respective tests.  If these tests encounter problems
+** detecting the presence of the client system, this value may need to 
+** be increased.
+*/
+RF_SLEEP		90
+/*
+** SVVS_RFS is a remote resource on which you will mount a file system 
+** with at least 100 free blocks which SVVS tests will mount, unmount, 
+** write to and read from.  This should be a spare file system with no 
+** important files on it, since unexpected results from certain tests 
+** could damage it.
+*/
+SVVS_RFS		"SVVS_SPARE"
+/*
+** The Terminal Interface Extension tests require two tty ports to be 
+** connected together, such that data written to one can be read from
+** the other.  DEFAULT_PITCH_DEV is the device to which data will be
+** written, and DEFAULT_CATCH_DEV is the device from which data will
+** be read.
+*/
+DEFAULT_PITCH_DEV	"/dev/tty13"
+DEFAULT_CATCH_DEV	"/dev/tty14"

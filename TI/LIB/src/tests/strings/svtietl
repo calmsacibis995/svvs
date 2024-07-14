@@ -1,0 +1,3 @@
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/strings.dir/putp1 putp1
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/strings.dir/putp2 putp2
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/strings.dir/vidattr vidattr

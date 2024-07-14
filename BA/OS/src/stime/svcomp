@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% stime.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/stime stime.o %SVLIBS% %LIBS%
+rm stime.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% stime0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/stime0 stime0.o %SVLIBS% %LIBS%
+rm stime0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% stime1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/stime1 stime1.o %SVLIBS% %LIBS%
+rm stime1.o

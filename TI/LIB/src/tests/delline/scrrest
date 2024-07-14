@@ -1,0 +1,41 @@
+#
+# @(#)scrrest	3.1 (SVVS) 12/1/86
+#
+# insert/delete line, scr_restore and scr_dump
+#
+abstract("scrrest");
+start
+	prep("create and fill a full sized window");
+	start
+		sprintf(file, "%s%s", temp_path(), "Dumpfile");
+		win = newwin(LINES, COLS, 0, 0);
+		wmove(win, 0, 0);
+		wbarber(win, LINES, COLS, 'a');
+		wrefresh(win);
+	finis
+
+	# start at the bottom of win and delete all the
+	# lines, one at a time. this is done by deleting
+	# the line and dumping screen to a file.  the
+	# screen is then restored from the file and will
+	# show that a line has been deleted.
+
+	testing("delete a line from the window, use scr_dump to dump ");
+	testing("to a file, and then restore the file to the window.");
+	start
+		for (i = LINES - 1; i >= 0; i--)
+		{
+			wmove(win, i, 0);
+			wrefresh(win);
+			expect();
+			wdeleteln(win);
+			scr_dump(file);
+			clear();
+			refresh();
+			scr_restore(file);
+			doupdate();
+			expect();
+		}
+	finis
+	endwin();
+finis

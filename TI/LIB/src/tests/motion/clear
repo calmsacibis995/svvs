@@ -1,0 +1,20 @@
+#
+# @(#)clear	3.1 (SVVS) 12/1/86
+#
+# cursor motion: clear
+#
+abstract("cursor motion - clear");
+start
+	testing("fill the screen, then clear the screen 15 times");
+	start
+	for ( i = 0 ; i < 15 ; i++ )
+	{
+		move(0,0);
+		barber('a' + i);
+		refresh();
+		clear();
+		refresh();
+		expect();
+	}
+	finis
+finis

@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% nice.c
+%COMP% %OPTS% -o %DEST%/KE/OS/bin/nice nice.o %SVLIBS% %LIBS%
+rm nice.o

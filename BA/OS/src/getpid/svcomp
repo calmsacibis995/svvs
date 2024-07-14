@@ -1,0 +1,12 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getpgrp.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/getpgrp getpgrp.o %SVLIBS% %LIBS%
+rm getpgrp.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getpid.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/getpid getpid.o %SVLIBS% %LIBS%
+rm getpid.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getpid0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/getpid0 getpid0.o %SVLIBS% %LIBS%
+rm getpid0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% getppid.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/getppid getppid.o %SVLIBS% %LIBS%
+rm getppid.o

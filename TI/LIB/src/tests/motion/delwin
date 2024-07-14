@@ -1,0 +1,28 @@
+#
+# @(#)delwin	3.1 (SVVS) 12/1/86
+#
+# cursor motion: delwin
+#
+abstract("cursor motion - delwin");
+start
+	mainw = newwin(LINES,COLS,0,0);
+	wclear(mainw);
+	iterations = 5;
+
+	testing("create a smaller overlapping window on a larger window, ");
+	testing("then fill the small window and delete it.  repeat 5 times.");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		stuff = newwin(LINES / 5, COLS / 5, 0, 0);
+		wmove(stuff, 0, 0);
+		wbarber(stuff,LINES / 5,COLS / 5,'a');
+		wrefresh(mainw);
+		wrefresh(stuff);
+		delwin(stuff);
+		touchwin(mainw);
+		wrefresh(mainw);
+		expect();
+	}
+	finis 
+finis

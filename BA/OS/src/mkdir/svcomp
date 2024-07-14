@@ -1,0 +1,6 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mkdir.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mkdir mkdir.o %SVLIBS% %LIBS%
+rm mkdir.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% mkdir1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/mkdir1 mkdir1.o %SVLIBS% %LIBS%
+rm mkdir1.o

@@ -1,0 +1,46 @@
+#
+# @(#)clrtobot	3.1 (SVVS) 12/1/86
+#
+# insert/delete line, clrtobot and wclrtobot
+#
+abstract("delline: clrtobot");
+start
+	# fill the screen.  starting at the bottom line and 
+	# for each line, clear the screen to the bottom.
+	prep("fill stdscr");
+	start
+	move(0, 0);
+	barber('f');
+	refresh();
+	expect();
+	finis
+
+	testing("clear to the bottom of the screen, from the bottom up");
+	start
+	for (i = LINES - 1; i >= 0; i--)
+	{
+		move(i, 0);
+		clrtobot();
+		refresh();
+		expect();
+	}
+	finis
+
+	smwin = newwin(LINES / 2, COLS / 9, 0, 0);
+	# fill the new window with a barber pole and clear
+	# the bottom line.  do this 10 times.
+	testing("fill and clear to the bottom of the screen, in a window");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		wmove(smwin, 0, 0);
+		wbarber(smwin, LINES / 2, COLS / 9, 'A');
+		wrefresh(smwin);
+		expect();
+		wmove(smwin, LINES / 2 - 1, 0);
+		wclrtobot(smwin);
+		wrefresh(smwin);
+		expect();
+	}
+	finis
+finis

@@ -1,0 +1,2 @@
+sv_tools.a sv_nse.a sv_base.a sv_sys.a
+src/streams svcomp

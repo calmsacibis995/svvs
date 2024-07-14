@@ -1,0 +1,3 @@
+ar -cr sv_cmd.a sv_cmdcom.o sv_menus.o sv_sort.o
+cp sv_cmd.a %DEST%/lib/sv_cmd.a
+rm sv_cmd.a *.o

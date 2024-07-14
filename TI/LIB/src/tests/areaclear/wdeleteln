@@ -1,0 +1,26 @@
+#
+# Area clear test, test wdeleteln.
+#
+# @(#)wdeleteln	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: wdeleteln");
+start
+	prep("create a full sized window");
+	start
+	mainw = newwin(LINES,COLS,0,0);
+	finis
+	
+	testing("wdelete main window, moving down the screen");
+	start
+	for ( i = 0 ; i < LINES - 1 ; i++ )
+	{
+		wmove(mainw, 0, 0);
+		wbarber(mainw,LINES,COLS,'a');
+		wmove(mainw,0,0);
+		for ( j = 0 ; j <= i ; j++ )
+			wdeleteln(mainw);
+		wrefresh(mainw);
+		expect();
+	}
+	finis
+finis

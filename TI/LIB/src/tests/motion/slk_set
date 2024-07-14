@@ -1,0 +1,54 @@
+#
+# @(#)slk_set	3.1 (SVVS) 12/1/86
+#
+# cursor motion: slk_set
+#
+#NOINITSCR
+abstract("cursor motion - slk_set");
+start
+	prep("setup labels in 4-4 format.");
+	start
+	slk_init(1);
+	initscr();
+	label = "ho";
+	finis
+
+	testing("in a loop, set each label to a string and refresh.");
+	start
+	for (j = 0; j <= 2; j++)
+	{
+
+		for (i = 1; i < 9; i++)
+		{
+			slk_set(i, label:i:j, j);
+		}
+		slk_refresh();
+		expect();
+	}
+	finis
+
+	label = "bigstuff";
+	testing("set each label with an eight character string.");
+	start
+		for (i = 1; i < 9; i++)
+		{
+			slk_set(i, label, 0);
+			slk_noutrefresh();
+		}
+		doupdate();
+		expect();
+	finis
+
+	label = "";
+	testing("set each label to a null string and do");
+	testing("slk_noutrefresh and doupdate.");
+	start
+		for (i = 1; i < 9; i++)
+		{
+			slk_set(i, label, 0);
+			slk_noutrefresh();
+		}
+		doupdate();
+		expect();
+	finis
+finis

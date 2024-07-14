@@ -1,0 +1,15 @@
+*#ident "@(#)tmux	1.2"
+* TMUX - Streams test multiplexor
+*
+*FLAG	#VEC	PREFIX	SOFT	#DEV	IPL	DEPENDENCIES/VARIABLES
+ofs	-	tmx		-	-
+						tmx_tmx[NTMX] (%i%l)
+						tmxcnt (%i) ={NTMX}
+						tmx_low[NTMXL] (%i%l%l)
+						tmxlcnt (%i) ={NTMXL}
+$$$
+* count of upper streams - same of number of minor devices
+NTMX = 4
+* count of lower streams
+NTMXL = 3
+

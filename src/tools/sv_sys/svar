@@ -1,0 +1,3 @@
+ar -cr sv_sys.a sv_act.o sv_config.o sv_datapth.o sv_dcmp.o sv_env.o sv_errlook.o sv_errno.o sv_error.o sv_eval.o sv_expect.o sv_ipc.o sv_malloc.o sv_mode.o sv_printf.o sv_setup.o sv_temppth.o
+cp sv_sys.a %DEST%/lib/sv_sys.a
+rm sv_sys.a *.o

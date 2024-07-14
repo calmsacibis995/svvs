@@ -1,0 +1,37 @@
+#
+# @(#)slktouch	3.1 (SVVS) 12/1/86
+#
+# soft labels - slk_touch
+#
+#NOINITSCR
+
+# put all labels, do a slk_touch
+abstract("highlight: slktouch");
+start
+	prep("turn on soft labels, initscr, and turn on scrolling");
+	start
+	slk_init(1);
+	initscr();
+	scrollok(stdscr, 1);
+	finis
+
+	testing("set and touch labels. then reset two labels and touch again");
+	start
+	label = "penguin";
+	for (i = 8; i > 0; i--)
+	{
+		slk_set(i, label, 1);
+	}
+	slk_noutrefresh();
+	slk_touch();
+	doupdate();
+	expect();
+
+	label = "seal";
+	slk_set(4, label, 1);
+	slk_set(5, label, 1);
+	slk_touch();
+	slk_refresh();
+	expect();
+	finis
+finis

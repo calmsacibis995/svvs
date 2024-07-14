@@ -1,0 +1,6 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% t_getstate.c
+%COMP% %OPTS% -o %DEST%/NS/LIB/bin/t_getstate t_getstate.o %SVLIBS% %LIBS%
+rm t_getstate.o
+rm -f %DEST%/NS/LIB/bin/t_look %DEST%/NS/LIB/bin/t_sync 
+ln %DEST%/NS/LIB/bin/t_getstate %DEST%/NS/LIB/bin/t_look 
+ln %DEST%/NS/LIB/bin/t_getstate %DEST%/NS/LIB/bin/t_sync 

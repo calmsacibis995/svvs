@@ -1,0 +1,26 @@
+#
+# @(#)prefresh	3.1 (SVVS) 12/1/86
+#
+# pads - prefresh
+#
+
+abstract("pads - prefresh");
+start
+	prep("create and fill a pad");
+	start
+		h = LINES * 3;
+		w = COLS * 4;
+		pad = newpad(h, w);
+		wbarber(pad, h, w, 'a');
+	finis
+
+	testing("prefresh a pad to show columns of 10 characters");
+	testing("that start at row 0 of the pad.");
+	start
+		for (i = COLS - 10; i >= 0; i -= 10)
+		{
+			prefresh(pad, 0, i, 0, i, LINES - 1, i + 9);
+			expect();
+		}
+	finis
+finis

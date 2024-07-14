@@ -1,0 +1,88 @@
+#
+# Area clear test, test wdelch.
+#
+# @(#)wdelch	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: wdelch");
+start
+	prep("create two full sized windows. fill background one.");
+	start
+	iterations = LINES / 2;
+	colnum = 0;
+	mainw = newwin(LINES,COLS,0,0);
+
+	background = newwin(LINES,COLS,0, 0);
+	wmove(background, 0, 0);
+	wbarber(background,LINES,COLS,'a');
+	columns = COLS;
+	finis
+
+	#
+	# Do the test twice, first for a full width screen, then
+	# for a half width screen.
+	#
+	for ( j = 0 ; j < 2 ; j++ )
+	{
+		colnum = 0;
+		mainw = newwin(LINES, columns, 0, 0);
+
+		#
+		# Emulate a clrtoeol.
+		#
+		testing("use wdelch to emulate a clear-to-end-of-line");
+		testing("refill window after each clear.");
+		start
+		for ( i = 0 ; i < iterations ; i++ )
+		{
+			wmove(mainw, 0, 0);
+			wbarber(mainw, LINES, columns, 'a');
+			wmove(mainw,i * 2, colnum);
+			for ( j = columns - 1; j >= colnum ; j-- )
+			{
+				wmove(mainw,i * 2,j);
+				wdelch(mainw);
+			}
+			colnum = colnum + 2;
+			if ( colnum > columns )
+				colnum = 1;
+			wrefresh(mainw);
+			expect();
+		}
+		finis
+
+		#
+		# Clear to EOL on a diagonal down the screen.
+		#
+		prep("fill main window");
+		start
+		wmove(mainw, 0, 0);
+		wbarber(mainw, LINES, columns, 'a');
+		colnum = 0;
+		finis
+
+		testing("use wdelch to emulate a clear-to-end-of-line");
+		start
+		for ( i = 0 ; i < iterations ; i++ )
+		{
+			wmove(mainw,i * 2, colnum);
+			for ( j = columns - 1; j >= colnum ; j-- )
+			{
+				wmove(mainw,i * 2,j);
+				wdelch(mainw);
+			}
+			colnum = colnum + 2;
+			if ( colnum > columns )
+				colnum = 1;
+			wrefresh(mainw);
+			expect();
+		}
+		finis
+
+		cleanup("delete main window. refresh background");
+		start
+		delwin(mainw);
+		columns = columns / 2;
+		wrefresh(background);
+		finis
+	}
+finis

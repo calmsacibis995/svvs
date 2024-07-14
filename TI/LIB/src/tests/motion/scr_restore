@@ -1,0 +1,26 @@
+#
+# @(#)scr_restore	3.1 (SVVS) 12/1/86
+#
+# cursor motion: scr_restore
+#
+abstract("cursor motion - scr_restore");
+start
+	sprintf(file, "%s%s", temp_path(), "Dumpfile2");
+
+	prep("fill stdscr and dump its contents to a file");
+	start
+	barber('A');
+	refresh();
+	scr_dump(file);
+	clear();
+	refresh();
+	expect();
+	finis
+
+	testing("restore stdscr from the file previously dumped.");
+	start
+	scr_restore(file);
+	refresh();
+	expect();
+	finis
+finis

@@ -1,0 +1,160 @@
+#
+# @(#)scanw	3.1 (SVVS) 12/1/86
+#
+# input: scanw, wscanw, mvscanw, mvwscanw
+#
+
+abstract("abstract: scanw");
+start
+	d = 12349;
+	s = "some-text";
+	c = 'c';
+
+	# put a character, a number and a string in keyboard buffer
+	# then do scanw for those three types of things and compare
+	# to expected values
+
+	testing("put a character, number, and string into the keyboard");
+	testing("buffer and then do a scanw for them");
+	start
+		for (i = 0; i < LINES / 2; i++)
+		{
+			keyboard("%c%d%s\n", c, d + i, s);
+
+			move(i, 0);
+			scanw("%c%d%s", x, y, z);
+			touchwin(stdscr);
+			refresh();
+			expect();
+
+			if ((x != c) || (y != d + i) || (z != s))
+			{
+				error("[%c]: Input != Output\n", SideType);
+				break;;
+			}
+		}
+	finis
+
+	clear();
+	refresh();
+	expect();
+
+	# put a character, a number and a string in keyboard buffer
+	# then do scanw for those three types of things and compare
+	# to expected values - use mvscanw instead of scanw.
+	testing("put a character, number, and string into the keyboard");
+	testing("buffer and then do a mvscanw for them");
+	start
+		for (i = 0; i < LINES / 2; i++)
+		{
+			keyboard("%c%d%s\n", c, d - i, s);
+			mvscanw(i, 0, "%c%d%s", x, y, z);
+			touchwin(stdscr);
+			refresh();
+			expect();
+			
+			if ((x != c) || (y != d - i) || (z != s))
+			{
+				error("[%c]: Input != Output\n", SideType);
+				break;;
+			}
+		}
+	finis
+
+	cleanup("clear and refresh");
+	start
+		clear();
+		refresh();
+	finis
+
+	prep("create two small windows");
+	start
+		win1 = newwin(LINES / 3, COLS, 0, 0);
+		win2 = newwin(LINES / 3, COLS, LINES - (LINES / 3), 0);
+	finis
+
+	# for win1 and win2, put a char, a number and a string
+	# into keyboard buffer and then do wscanw's for those
+	# types of things
+	testing("put a character, number, and string into the keyboard");
+	testing("buffer for win1 and win2 and then do a wscanw for them");
+	start
+		for (i = 0; i < LINES / 3; i++)
+		{
+			keyboard("%c%d%s\n", c, d, s);
+
+			wmove(win1, i, 0);
+			wscanw(win1, "%c%d%s", x, y, z);
+
+			touchwin(win1);
+			wrefresh(win1);
+			expect();
+
+			if ((x != c) || (y != d) || (z != s))
+			{
+				error(win1, "[%c]: Input != Output\n", SideType);
+				break;
+			}
+
+			keyboard("%c%d%s\n", c, d, s);
+
+			wmove(win2, i, 0);
+			wscanw(win2, "%c%d%s", x, y, z);
+
+			wrefresh(win2);
+			expect();
+
+			if ((x != c) || (y != d) || (z != s))
+			{
+				error(win2, "[%c]: Input != Output\n", SideType);
+				break;
+			}
+		}
+	finis
+
+	cleanup("clear and refresh");
+	start
+		touchwin(stdscr);
+		clear();
+		refresh();
+		expect();
+	finis
+
+	s = "largerpieceoftextstuff";
+
+	# put a char, string and number into input buffer nad
+	# do mvwscanw's for those things.  do this for win1 
+	# and win2.
+	testing("put a character, number, and string into the keyboard");
+	testing("buffer for win1 and win2 and then do a mvwscanw for them");
+	start
+		for (i = 0; i < LINES / 3; i++)
+		{
+			keyboard("%c%s %d\n", c, s, d);
+
+			mvwscanw(win1, i, 0, "%c%s%d", x, y, z);
+
+			touchwin(win1); 
+			wrefresh(win1);
+			expect();
+			if ((x != c) || (y != s) || (z != d))
+			{
+				error(win1, "[%c]: Input != Output\n", SideType);
+				break;;
+			}
+
+			keyboard("%c%s %d\n", c, s, d);
+
+			mvwscanw(win2, i, 0, "%c%s%d", x, y, z);
+
+			touchwin(win2);
+			wrefresh(win2);
+			expect();
+			if ((x != c) || (y != s) || (z != d))
+			{
+				error(win2, "[%c]: Input != Output\n", SideType);
+				break;;
+			}
+		}
+	finis
+finis

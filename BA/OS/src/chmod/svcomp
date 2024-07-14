@@ -1,0 +1,12 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% chmod.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/chmod chmod.o %SVLIBS% %LIBS%
+rm chmod.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% chmod0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/chmod0 chmod0.o %SVLIBS% %LIBS%
+rm chmod0.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% chmod1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/chmod1 chmod1.o %SVLIBS% %LIBS%
+rm chmod1.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% chmod2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/chmod2 chmod2.o %SVLIBS% %LIBS%
+rm chmod2.o

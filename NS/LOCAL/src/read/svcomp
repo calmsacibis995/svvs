@@ -1,0 +1,11 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% read.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/read read.o %SVLIBS% %LIBS%
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% read0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/read0 read0.o %SVLIBS% %LIBS%
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% read1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/read1 read1.o %SVLIBS% %LIBS%
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% read2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/read2 read2.o %SVLIBS% %LIBS%
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% read3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/read3 read3.o %SVLIBS% %LIBS%
+rm read.o read0.o read1.o read2.o read3.o

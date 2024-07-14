@@ -1,0 +1,12 @@
+ar -cr sv_tie.a z_addch.o z_addstr.o z_attroff.o z_attron.o z_attrset.o z_baudrate.o z_beep.o z_box.o z_cbreak.o z_clear.o z_clearok.o z_clrtoeol.o  z_clrtobot.o z_copywin.o z_def_prog.o z_def_shel.o z_delay_ou.o
+ar -cr sv_tie.a z_delch.o z_deleteln.o z_delwin.o z_doupdate.o z_echo.o z_echochar.o z_endwin.o z_erase.o z_erasecha.o z_fixterm.o z_flash.o z_flushinp.o z_getbegyx.o z_getch.o z_getmaxyx.o z_getstr.o
+ar -cr sv_tie.a z_gettmode.o z_getyx.o z_halfdela.o z_has_ic.o z_has_il.o z_idlok.o z_inch.o z_initscr.o z_insch.o z_insertln.o z_intrflus.o z_keyname.o z_keypad.o z_killchar.o z_leaveok.o z_longname.o
+ar -cr sv_tie.a z_move.o z_mvaddch.o z_mvaddstr.o z_mvcur.o z_mvdelch.o z_mvgetch.o z_mvgetstr.o z_mvinch.o z_mvinsch.o z_mvprintw.o z_mvscanw.o z_mvwaddch.o z_mvwaddst.o z_mvwdelch.o z_mvwgetch.o z_mvwgetst.o
+ar -cr sv_tie.a z_mvwin.o z_mvwinch.o z_mvwinsch.o z_mvwprint.o z_mvwscanw.o z_newpad.o z_newterm.o z_newwin.o z_nl.o z_nocbreak.o z_nodelay.o z_noecho.o z_nonl.o z_noraw.o z_overlay.o z_overwrit.o
+ar -cr sv_tie.a z_pechocha.o z_pnoutref.o z_prefresh.o z_printw.o z_putp.o z_raw.o z_refresh.o z_reset_pr.o z_reset_sh.o z_resetter.o z_resetty.o z_saveterm.o z_savetty.o z_scanw.o z_scr_dump.o
+ar -cr sv_tie.a z_scr_init.o z_scr_rest.o z_scroll.o z_scrollok.o z_set_term.o z_setscrre.o z_setterm.o z_setupter.o z_slk_clea.o z_slk_init.o z_slk_labe.o z_slk_nout.o z_slk_refr.o z_slk_rest.o z_slk_set.o
+ar -cr sv_tie.a z_slk_touc.o z_standend.o z_standout.o z_subpad.o z_subwin.o z_tgetent.o z_tgetflag.o z_tgetnum.o z_tgetstr.o z_tgoto.o z_tigetfla.o z_tigetnum.o z_tigetstr.o z_touchlin.o z_touchwin.o
+ar -cr sv_tie.a z_tparm.o z_tputs.o z_typeahea.o z_unctrl.o z_ungetch.o z_vidattr.o z_vidputs.o z_waddch.o z_waddstr.o z_wattroff.o z_wattron.o z_wattrset.o z_wclear.o z_wclrtobo.o z_wclrtoeo.o z_wdelch.o
+ar -cr sv_tie.a z_wdeletel.o z_wechocha.o z_werase.o z_wgetch.o z_wgetstr.o z_winch.o z_winsch.o z_winsertl.o z_wmove.o z_wnoutref.o z_wprintw.o z_wrefresh.o z_wscanw.o z_wsetscrr.o z_wstanden.o z_wstandou.o
+cp sv_tie.a %DEST%/lib/sv_tie.a
+rm sv_tie.a *.o

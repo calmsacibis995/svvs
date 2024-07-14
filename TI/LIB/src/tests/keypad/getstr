@@ -1,0 +1,36 @@
+#
+# @(#)getstr	3.1 (SVVS) %G
+#
+# keypad: getstr
+#
+abstract("keypad: getstr");
+start
+	string1 = "this is a short line of text";
+
+	testing("reading in text and a function key simultaneously w/getstr");
+	start
+		for (i = 1; i < 64 ; i++)
+		{
+			seq = fkeyseq(KEY_F(i));
+			if (seq != "")
+			{
+				keyboard("%s%s\n",string1,seq);
+				getstr(string);
+				refresh();
+				expect();
+				if (string1 == string)
+				{
+					error("string == '%s'\n",string);
+					break;
+				}
+			}
+	
+		}
+	finis
+
+	cleanup("cleanup");
+	start
+		clear();
+		refresh();
+	finis
+finis

@@ -1,0 +1,134 @@
+#
+# @(#)delch	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining, delch
+#
+
+abstract("highlight: delch");
+start
+	prep("fill stdscr in standout and underline modes");
+	start
+	attron(A_STANDOUT | A_UNDERLINE);
+	barber('a');
+	refresh();
+	attrset(0);
+	finis
+
+	# delete every eighth character on each line
+	testing("using delch to remove every eighth character on each line");
+	start
+	for (j = 0; j < LINES; j += 2)
+	{
+		for (i = 0; i < COLS; i += 8)
+		{
+			move(j, i);
+			delch();
+			refresh();
+			expect();
+		}
+	}
+	finis
+
+	clear();
+	refresh();
+	attron(A_REVERSE);
+
+	# put string of x's to stdscr and delete them
+	# moving across the lines and down the screen
+	testing("put strings to stdscr, and delete them with mvdelch,");
+	testing("moving across the lines and down the screen.");
+	start
+	for (i = 0; i < LINES; i++)
+	{
+		for (j = 0; j + 5 < COLS; j += 10)
+		{
+			mvaddstr(i, j, "xxxxx");
+			refresh();
+			expect();
+			for (k = 0; k < 5; k++)
+				mvdelch(i, j);
+			refresh();
+			expect();
+		}
+	}
+	finis
+	attroff(A_REVERSE);
+
+	clear();
+	refresh();
+
+	prep("create two windows, the first in dim, the other in underline");
+	start
+	win1 = newwin(LINES / 2, COLS, 0, 0);
+	win2 = newwin(LINES / 2, COLS, LINES / 2, 0);
+	wattron(win1, A_DIM);
+	wattron(win2, A_UNDERLINE);
+	finis
+
+	# put strings of 5 chars to each window and delete 4 of them
+	testing("add 5 character strings to each window, and delete 4 chars.");
+	start
+	for (i = 0; i < LINES / 2; i++)
+	{
+		for (j = 0; j + 5 < COLS; j += 10)
+		{
+			mvwaddstr(win1, i, j, "xxxxx");
+			wrefresh(win1);
+			expect();
+			for (k = 0; k < 4; k++)
+			{
+				wmove(win1, i, j);
+				wdelch(win1);
+			}
+			wrefresh(win1);
+			mvwaddstr(win2, LINES / 2 - 1 - i, j, "zzzzz");
+			wrefresh(win2);
+			expect();
+			for (k = 0; k < 4; k++)
+			{
+				wmove(win2, LINES / 2 - 1 - i, j);
+				wdelch(win2);
+			}
+			wrefresh(win2);
+			expect();
+		}
+	}
+	finis
+
+	prep("clear and refresh each window");
+	start
+	wclear(win1);
+	wclear(win2);
+	wrefresh(win1);
+	wrefresh(win2);
+	finis
+
+	# put strings of 5 chars to each window and delete 4 of them
+	testing("add 5 character strings to each window, and delete 4 chars.");
+	start
+	for (i = 0; i < LINES / 2; i++)
+	{
+		for (j = 0; j + 5 < COLS; j += 10)
+		{
+			for (k = 0; k < 5; k++)
+				mvwaddch(win1, i, j + k, 'a' + i);
+			wrefresh(win1);
+			expect();
+			for (k = 0; k < 4; k++)
+				mvwdelch(win1, i, j);
+			wrefresh(win1);
+			expect();
+			for (k = 0; k < 5; k++)
+			{
+			mvwaddch(win2, (LINES / 2) - 1 - i, j + k, 'z' - i);
+			}
+			wrefresh(win2);
+			expect();
+			for (k = 0; k < 4; k++)
+				mvwdelch(win2, LINES / 2 - 1 - i, j);
+			wrefresh(win2);
+			expect();
+		}
+	}
+	finis
+finis

@@ -1,0 +1,28 @@
+#
+# @(#)overlay	3.1 (SVVS) 12/1/86
+#
+# cursor motion: overlay
+#
+abstract("cursor motion - overlay");
+start
+	mainw = newwin(LINES,COLS,0,0);
+
+	testing("fill a window and use overlay to copy a");
+	testing("smaller blank window on to it."); 
+	start
+	for ( i = 1 ; i <= LINES ; i++ )
+	{
+		wmove(mainw,0,0);
+		wbarber(mainw,LINES,COLS,'a');
+		touchwin(mainw);
+		wrefresh(mainw);
+		eraser = newwin(i,i,0,0);
+		wclear(eraser);
+		overlay(eraser,mainw);
+		touchwin(mainw);
+		wrefresh(mainw);
+		delwin(eraser);
+		expect();
+	}
+	finis
+finis

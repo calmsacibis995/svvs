@@ -1,0 +1,41 @@
+#
+# @(#)slklabel	3.1 (SVVS) 12/1/86
+#
+# soft labels
+#
+#NOINITSCR
+
+abstract("soft label keys: slklabel");
+start
+	# labels are arranged in 3-2-3 format
+	prep("slk_init for 3-2-3 format, then initscr.");
+	start
+	slk_init(0);
+	initscr();
+	finis
+
+	# put labels (left justified) and refresh the screen.
+
+	prep("put labels (left justified) and refresh");
+	start
+	label = "gelato";
+	for (i = 1; i < 9; i++)
+	{
+		slk_set(i, label:i, 1);
+	}
+	slk_refresh();
+	expect();
+	finis
+
+	# then do slk_label for each one 
+
+	testing("get slk_label of each label and compare to expected output.");
+	start
+	for (i = 1; i < 9; i++)
+	{
+		scrlabel = slk_label(i);
+		if (scrlabel != label:i)
+			error("incorrect label returned");
+	}
+	finis
+finis

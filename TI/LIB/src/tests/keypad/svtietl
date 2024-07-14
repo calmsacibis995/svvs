@@ -1,0 +1,3 @@
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/keypad.dir/getch getch
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/keypad.dir/getstr getstr
+%DEST%/TI/LIB/bin/tietli -o %DEST%/TI/LIB/data/keypad.dir/keypad keypad

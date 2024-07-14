@@ -1,0 +1,36 @@
+#
+# @(#)slkclear	3.1 (SVVS) 12/1/86
+#
+# soft labels - slk_clear
+#
+#NOINITSCR
+
+# put all labels then do a slk_clear
+abstract("highlight: slkclear");
+start
+	prep("turn on soft labels, then to an initscr");
+	start
+	slk_init(0);
+	initscr();
+	label = "L";
+	finis
+
+	testing("set labels, then clear them and refresh");
+	start
+	for (j = 1; j <=5; j++)
+	{
+		for (i = 8; i > 0; i--)
+		{
+			slk_set(i, label:i:j, 1);
+			slk_noutrefresh();
+		}
+		slk_touch();
+		doupdate();
+		expect();
+		slk_clear();
+		slk_touch();
+		slk_refresh();
+		expect();
+	}
+	finis
+finis

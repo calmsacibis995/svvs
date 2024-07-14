@@ -1,0 +1,5 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% t_snd.c
+%COMP% %OPTS% -o %DEST%/NS/LIB/bin/t_snd t_snd.o %SVLIBS% %LIBS%
+rm t_snd.o
+rm -f %DEST%/NS/LIB/bin/t_rcv 
+ln %DEST%/NS/LIB/bin/t_snd %DEST%/NS/LIB/bin/t_rcv 

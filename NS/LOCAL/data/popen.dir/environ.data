@@ -1,0 +1,51 @@
+:TESTING:
+environment passing
+:EXPECTING:
+same environment between parent and command, both to have PATH and HOME
+defined
+:RETVAL:
+0
+:POPEN:
+pop0 -e -o
+:FILE:
+:EOT:
+
+:TESTING:
+environment augmentation, adding a parameter to child environment
+:EXPECTING:
+child to inherit augmented parents environment, both to have PATH and HOME
+defined
+:RETVAL:
+0
+:POPEN:
+NOTDEFINEDINPARENT=foo pop0 -e -o
+:FILE:
+NOTDEFINEDINPARENT=foo
+:EOT:
+
+:TESTING:
+environment augmentation, adding two parameters to child environment
+:EXPECTING:
+child to inherit augmented parents environment, both to have PATH and HOME
+defined
+:RETVAL:
+0
+:POPEN:
+ANOTDEFINEDINPARENT=foo BNOTDEFINEDINPARENT=bar pop0 -e -o
+:FILE:
+ANOTDEFINEDINPARENT=foo
+BNOTDEFINEDINPARENT=bar
+:EOT:
+
+:TESTING:
+environment augmentation, changing a parameter the parent has defined
+:EXPECTING:
+child to inherit modified parents environment, both to have PATH and HOME
+defined
+:RETVAL:
+0
+:POPEN:
+HOME=/dev/null pop0 -e -o
+:FILE:
+HOME=/dev/null
+:EOT:

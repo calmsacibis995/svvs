@@ -1,0 +1,54 @@
+#
+# @(#)scrdump	3.1 (SVVS) 12/1/86
+#
+# highlighting - scr_dump and scr_restore
+#
+
+abstract("highlight: scrdump");
+start
+	sprintf(file, "%s%s", temp_path(), "Dumpfile");
+	# do a barber pole to stdscr in BOLD, clear it and restore it
+	testing("fill stdscr in bold, dump it, clear, and restore");
+	start
+	for (i = 0; i < 5; i++)
+	{
+		move(0, 0);
+		attron(A_BOLD);
+		barber('A' + i);
+		refresh();
+		attrset(0);
+		expect();
+		scr_dump(file);
+		clear();
+		refresh();
+		expect();
+		scr_restore(file);
+		refresh();
+		expect();
+	}
+	finis
+
+	clear();
+	touchwin(stdscr);
+	refresh();
+	# do a barber pole to win in DIM clear it and restore it
+	win = newwin(LINES / 4, COLS / 4, LINES / 8, COLS / 8);
+	testing("fill window in dim mode, dump it, clear, and restore it");
+	start
+	for (i = 0; i < 5; i++)
+	{
+		wattron(win, A_DIM);
+		wbarber(win, LINES / 4, COLS / 4, 'z' - i);
+		wrefresh(win);
+		wattroff(win, A_DIM);
+		expect();
+		scr_dump(file);
+		wclear(win);
+		wrefresh(win);
+		expect();
+		scr_restore(file);
+		wrefresh(win);
+		expect();
+	}
+	finis
+finis

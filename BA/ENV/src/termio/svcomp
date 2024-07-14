@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% termio.c
+%COMP% %OPTS% -o %DEST%/BA/ENV/bin/termio termio.o %SVLIBS% %LIBS%
+rm termio.o

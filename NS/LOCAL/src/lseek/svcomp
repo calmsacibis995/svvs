@@ -1,0 +1,27 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek lseek.o %SVLIBS% %LIBS%
+rm lseek.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek0.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek0 lseek0.o %SVLIBS% %LIBS%
+rm lseek0.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek1.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek1 lseek1.o %SVLIBS% %LIBS%
+rm lseek1.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek2.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek2 lseek2.o %SVLIBS% %LIBS%
+rm lseek2.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek3.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek3 lseek3.o %SVLIBS% %LIBS%
+rm lseek3.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek4.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek4 lseek4.o %SVLIBS% %LIBS%
+rm lseek4.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek5.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek5 lseek5.o %SVLIBS% %LIBS%
+rm lseek5.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek6.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek6 lseek6.o %SVLIBS% %LIBS%
+rm lseek6.o
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% lseek7.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/lseek7 lseek7.o %SVLIBS% %LIBS%
+rm lseek7.o

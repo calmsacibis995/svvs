@@ -1,0 +1,13 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fcntl.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fcntl fcntl.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fcntl0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fcntl0 fcntl0.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fcntl1.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fcntl1 fcntl1.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fcntl2.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fcntl2 fcntl2.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fcntl5.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fcntl5 fcntl5.o %SVLIBS% %LIBS%
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% fcntl6.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/fcntl6 fcntl6.o %SVLIBS% %LIBS%
+rm fcntl*.o

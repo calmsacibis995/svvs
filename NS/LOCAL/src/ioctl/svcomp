@@ -1,0 +1,3 @@
+%COMP% -DSV_RFS %OPTS% -c -I%DEST%/include %REL% %EXT% ioctl.c
+%COMP% -DSV_RFS %OPTS% -o %DEST%/NS/LOCAL/bin/ioctl ioctl.o %SVLIBS% %LIBS%
+rm ioctl.o

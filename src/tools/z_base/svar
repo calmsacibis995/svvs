@@ -1,0 +1,15 @@
+ar -cr sv_base.a  z__exit.o z__tolower.o z__toupper.o z_abort.o z_abs.o z_access.o z_acos.o z_advance.o z_alarm.o z_asctime.o z_asin.o z_atan.o z_atan2.o z_atof.o z_atoi.o z_atol.o z_bsearch.o
+ar -cr sv_base.a z_calloc.o z_ceil.o z_chdir.o z_chmod.o z_chown.o z_clearerr.o z_clock.o z_close.o z_closedir.o z_compile.o z_cos.o z_cosh.o z_creat.o z_crypt.o z_ctermid.o z_ctime.o z_drand48.o z_dup.o z_dup2.o
+ar -cr sv_base.a z_encrypt.o z_erand48.o z_erf.o z_erfc.o z_execl.o z_execle.o z_execlp.o z_execv.o z_execve.o z_execvp.o z_exit.o z_exp.o z_fabs.o z_fclose.o z_fcntl.o z_fdopen.o z_feof.o z_ferror.o
+ar -cr sv_base.a z_fflush.o z_fgetc.o z_fgets.o z_fileno.o z_floor.o z_fmod.o z_fopen.o z_fork.o z_fputc.o z_fputs.o z_fread.o z_free.o z_freopen.o z_frexp.o z_fseek.o
+ar -cr sv_base.a z_fstat.o z_ftell.o z_ftw.o z_fwrite.o z_gamma.o z_getc.o z_getchar.o z_getcwd.o z_getegid.o z_getenv.o z_geteuid.o z_getgid.o z_getopt.o z_getpgrp.o z_getpid.o z_getppid.o z_gets.o
+ar -cr sv_base.a z_getuid.o z_getw.o z_gmtime.o z_gsignal.o z_hcreate.o z_hdestroy.o z_hsearch.o z_hypot.o z_ioctl.o z_isalnum.o z_isalpha.o z_isascii.o z_isatty.o z_iscntrl.o z_isdigit.o z_isgraph.o z_islower.o z_isprint.o z_ispunct.o z_isspace.o z_isupper.o z_isxdigit.o
+ar -cr sv_base.a z_j0.o z_j1.o z_jn.o z_jrand48.o z_kill.o z_lcong48.o z_ldexp.o z_lfind.o z_link.o z_localtim.o z_lockf.o z_log.o z_log10.o z_lrand48.o z_lsearch.o z_lseek.o z_malloc.o z_mallopt.o
+ar -cr sv_base.a z_memccpy.o z_memchr.o z_memcmp.o z_memcpy.o z_memset.o z_mkdir.o z_mknod.o z_mktemp.o z_modf.o z_mount.o z_mrand48.o z_nrand48.o z_open.o z_opendir.o z_pause.o z_pclose.o z_perror.o z_pipe.o z_popen.o
+ar -cr sv_base.a z_pow.o z_putc.o z_putchar.o z_putenv.o z_puts.o z_putw.o z_qsort.o z_rand.o z_read.o z_readdir.o z_realloc.o z_rewind.o z_rewinddi.o z_rmdir.o z_seed48.o z_setbuf.o z_setgid.o z_setkey.o z_setpgrp.o
+ar -cr sv_base.a z_setuid.o z_setvbuf.o z_sigigno.o z_sighold.o z_signal.o z_sigrelse.o z_sigset.o z_sin.o z_sinh.o z_sleep.o z_sqrt.o z_srand.o z_srand48.o z_ssignal.o z_stat.o z_step.o z_stime.o 
+ar -cr sv_base.a z_strcat.o z_strchr.o z_strcmp.o z_strcpy.o z_strcspn.o z_strdup.o z_strlen.o z_strncat.o z_strncmp.o z_strncpy.o z_strpbrk.o z_strrchr.o z_strspn.o z_strtod.o z_strtok.o z_strtol.o z_swab.o z_sync.o z_system.o z_tan.o
+ar -cr sv_base.a z_tanh.o z_tdelete.o z_tempnam.o z_tfind.o z_time.o z_times.o z_tmpfile.o z_tmpnam.o z_toascii.o z_tolower.o z_toupper.o z_tsearch.o z_ttyname.o z_twalk.o z_tzset.o z_ulimit.o z_umask.o
+ar -cr sv_base.a z_umount.o z_uname.o z_ungetc.o z_unlink.o z_ustat.o z_utime.o z_vfprintf.o z_vprintf.o z_vsprintf.o z_wait.o z_write.o z_y0.o z_y1.o z_yn.o
+cp sv_base.a %DEST%/lib/sv_base.a
+rm sv_base.a *.o

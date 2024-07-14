@@ -1,0 +1,19 @@
+#
+# Area clear test, test erase.
+#
+# @(#)erase	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: erase");
+start
+	testing("fill, then erase stdscr");
+	start
+	for ( i = 0 ; i < 15 ; i++ )
+	{
+		move(0,0);
+		barber('a');
+		erase();
+		refresh();
+		expect();
+	}
+	finis
+finis

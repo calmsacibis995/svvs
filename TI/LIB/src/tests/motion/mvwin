@@ -1,0 +1,32 @@
+#
+# @(#)mvwin	3.1 (SVVS) 12/1/86
+#
+# cursor motion: mvwin
+#
+abstract("cursor motion - mvwin");
+start
+	prep("create two windows and clear the smaller of the two.");
+	start
+		height = LINES / 2;
+
+		mainw = newwin(LINES,COLS,0,0);
+		eraser = newwin(height,10,0,0);
+		wclear(eraser);
+	finis
+
+	testing("fill the larger window and then move a cleared");
+	testing("window into the filled one at various locations.");
+	start
+		for ( i = 0 ; i < LINES - height ; i++ )
+		{
+			wmove(mainw,0,0);
+			wbarber(mainw,LINES,COLS,'a');
+			mvwin(eraser,i,i);
+			touchwin(mainw);
+			wrefresh(mainw);
+			touchwin(eraser);
+			wrefresh(eraser);
+			expect();
+		}
+	finis
+finis

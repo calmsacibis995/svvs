@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% time.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/time time.o %SVLIBS% %LIBS%
+rm time.o

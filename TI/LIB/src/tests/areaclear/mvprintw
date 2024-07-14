@@ -1,0 +1,23 @@
+#
+# Area clear test, test mvprintw.
+#
+# @(#)mvprintw	3.1 (SVVS) 12/1/86
+#
+abstract("areaclear: mvprintw");
+start
+	iterations = LINES / 2;
+	colnum = 0;
+
+	testing("fill stdscr, then mvprintw a newline on each line.");
+	start
+	for ( i = 0 ; i < iterations ; i++ )
+	{
+		move(0, 0);
+		barber('a');
+		mvprintw((i * 2), colnum,"\n");
+		colnum = colnum + 2;
+		refresh();
+		expect();
+	}
+	finis
+finis

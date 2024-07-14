@@ -1,0 +1,7 @@
+* TIVC  TLI IPC test driver
+*
+*FLAG	#VEC	PREFIX	SOFT	#DEV	IPL	DEPENDENCIES/VARIABLES
+fs	-	tiv	-	-	-
+						ti_tivc[#C] (%0x3c)
+						tivc_cnt (%i) = { #C }
+$$

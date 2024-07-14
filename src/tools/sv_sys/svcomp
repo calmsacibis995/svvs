@@ -1,0 +1,16 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_act.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_config.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_datapth.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_dcmp.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_env.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_errlook.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_errno.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_error.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_eval.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_expect.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_ipc.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_malloc.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_mode.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_printf.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_setup.c
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sv_temppth.c

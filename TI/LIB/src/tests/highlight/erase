@@ -1,0 +1,43 @@
+#
+# @(#)erase	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining - erase and werase
+#
+
+abstract("highlight: erase");
+start
+	# barber pole to stdscr and erase
+	testing("fill and erase stdscr in reverse mode");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		move(0, 0);
+		attron(A_REVERSE);
+		barber('a' + i);
+		refresh();
+		expect();
+		attrset(0);
+		erase();
+		refresh();
+		expect();
+	}
+	finis
+
+	# create a window, barber pole to it, erase and delete it
+	testing("create and fill a window in reverse mode, and werase it");
+	start
+	for (i = 1; i <= 10; i++)
+	{
+		win = newwin(i, i, i, i);
+		wattron(win, A_REVERSE);
+		wbarber(win, i, i, 'A' + i);
+		wrefresh(win);
+		expect();
+		wattrset(win, 0);
+		werase(win);
+		wrefresh(win);
+		expect();
+		delwin(win);
+	}
+	finis
+finis

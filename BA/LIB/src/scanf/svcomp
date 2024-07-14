@@ -1,0 +1,9 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% scanf.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/scanf scanf.o %SVLIBS% %LIBS%
+rm scanf.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% scanf1.c
+%COMP% %OPTS% -o %DEST%/BA/LIB/bin/scanf1 scanf1.o %SVLIBS% %LIBS%
+rm scanf1.o
+rm -f %DEST%/BA/LIB/bin/scanf2 %DEST%/BA/LIB/bin/scanf3
+ln %DEST%/BA/LIB/bin/scanf1 %DEST%/BA/LIB/bin/scanf2
+ln %DEST%/BA/LIB/bin/scanf1 %DEST%/BA/LIB/bin/scanf3

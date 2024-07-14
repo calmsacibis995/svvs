@@ -1,0 +1,15 @@
+KE/OS acct
+KE/OS chroot
+KE/OS msgctl
+KE/OS msgget
+KE/OS msgop
+KE/OS nice
+KE/OS plock
+KE/OS profil
+KE/OS ptrace
+KE/OS semctl
+KE/OS semget
+KE/OS semop
+KE/OS shmctl
+KE/OS shmget
+KE/OS shmop

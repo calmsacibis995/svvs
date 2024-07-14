@@ -1,0 +1,15 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sighold.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sighold sighold.o %SVLIBS% %LIBS%
+rm sighold.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sigignore.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sigignore sigignore.o %SVLIBS% %LIBS%
+rm sigignore.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sigrelse.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sigrelse sigrelse.o %SVLIBS% %LIBS%
+rm sigrelse.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sigset.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sigset sigset.o %SVLIBS% %LIBS%
+rm sigset.o
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% sigset0.c
+%COMP% %OPTS% -o %DEST%/BA/OS/bin/sigset0 sigset0.o %SVLIBS% %LIBS%
+rm sigset0.o

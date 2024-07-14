@@ -1,0 +1,2 @@
+%COMP% %OPTS% %REL% -I%DEST%/include verify.c %SVLIBS% %LIBS% -o%DEST%/bin/verify
+rm -f verify.o

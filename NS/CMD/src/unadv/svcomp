@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% unadv.c
+%COMP% %OPTS% -o %DEST%/NS/CMD/bin/unadv unadv.o %SVLIBS% %LIBS%
+rm unadv.o

@@ -1,0 +1,126 @@
+#
+# @(#)keypad	3.1 (SVVS) %G
+#
+# keypad: keypad functions
+#
+
+abstract("keypad: keypad");
+start
+	# keypad is arranged thusly:
+	#	a1 /\  a3
+	#	<  b2   >
+	#	c1 \/  c3
+
+	testing("testing the keypad keys by typing and reading them");
+	start
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_DOWN);
+	if (seq != "")
+	{
+		keyboard("%s", seq);
+		key = getch();
+		if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_UP);
+	if (seq != "")
+	{
+		keyboard("%s", seq);
+		key = getch();
+		if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_LEFT);
+	if (seq != "") 
+	{
+		keyboard("%s", seq);
+		key = getch();
+	if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_RIGHT);
+	if (seq != "")
+	{
+		keyboard("%s", seq);
+		key = getch();
+		if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_A1);
+	if (seq != "")
+	{
+		keyboard("%s", seq);
+		key = getch();
+		if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_A3);
+	if (seq != "")
+	{
+		keyboard("%s", seq);
+		key = getch();
+		if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_B2);
+	if (seq != "")
+	{
+		keyboard("%s", seq);
+		key = getch();
+		if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_C1);
+	if (seq != "")
+	{
+		keyboard("%s", seq);
+		key = getch();
+		if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	keypad(stdscr, TRUE);
+	seq = fkeyseq(KEY_C3);
+	if (seq != "")
+	{
+		keyboard("%s", seq);
+		key = getch();
+		if (key == "")
+			error("key != seq, key == %o\n", key);
+		refresh();
+		expect();
+	}
+
+	finis
+finis

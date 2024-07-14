@@ -1,0 +1,3 @@
+%COMP% %OPTS% -c -I%DEST%/include %REL% %EXT% t_connect.c
+%COMP% %OPTS% -o %DEST%/NS/LIB/bin/t_connect t_connect.o %SVLIBS% %LIBS%
+rm t_connect.o

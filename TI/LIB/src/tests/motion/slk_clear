@@ -1,0 +1,33 @@
+#
+# @(#)slk_clear	3.1 (SVVS) 12/1/86
+#
+# cursor motion: slk_clear
+#
+#NOINITSCR
+abstract("cursor motion - slk_clear");
+start
+	prep("do slk_init to setup labels in 4-4 format.");
+	start
+	slk_init(1);
+	initscr();
+	finis
+
+	label = "Label";
+	testing("in a loop, put a string in each label,");
+	testing("then clear them all.");
+	start
+	for (j = 1; j <=5; j++)
+	{
+		for (i = 8; i > 0; i--)
+		{
+			sprintf(buf, "%d%d%s", i, j, label);
+			slk_set(i, buf, 1);
+			slk_noutrefresh();
+		}
+		doupdate();
+		expect();
+		slk_clear();
+		expect();
+	}
+	finis
+finis

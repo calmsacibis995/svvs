@@ -1,0 +1,43 @@
+#
+# @(#)beep	3.1 (SVVS) 12/1/86
+#
+# highlighting and underlining, beep
+#
+
+abstract("highlight: beep");
+start
+	ch = 'a';
+	# barber pole to stdscr and beep
+	testing("fill stdscr, and then ring bell");
+	start
+	for (i = 0; i < 10; i++)
+	{
+		move(0, 0);
+		barber(ch + i);
+		refresh();
+		beep();
+		expect();
+	}
+	finis
+
+	clear();
+	refresh();
+
+	prep("create a small window, in the middle of the screen");
+	start
+	win = newwin(LINES / 2, COLS / 2, LINES / 4, COLS / 4);
+	finis
+
+	# barber pole to win and beep
+	testing("fill  window, and then ring bell");
+	start
+	for (i = 0; i < 5; i++)
+	{
+		wmove(win, 0, 0);
+		wbarber(win, LINES / 2, COLS / 2, 'A' + 2 * i);
+		wrefresh(win);
+		beep();
+		expect();
+	}
+	finis
+finis
